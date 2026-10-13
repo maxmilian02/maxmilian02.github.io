@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ViewTransition } from "react";
 import { education, experience, host, profile, rack, repos, stack, totals } from "@/content/profile";
 import { CATEGORIES, caseStudies, getProject, projects, type Project } from "@/content/projects";
-import { month, paths, ui, type Lang } from "@/lib/i18n";
+import { month, paths, ui, type L, type Lang } from "@/lib/i18n";
 import { ProjectIndex } from "./ProjectIndex";
 import { Spectrum } from "./Spectrum";
 
@@ -17,9 +17,12 @@ function Visibility({ p, lang }: { p: Project; lang: Lang }) {
   );
 }
 
+const orgName = (org: string | L, lang: Lang) => (typeof org === "string" ? org : org[lang]);
+
 /** "Netbiis | Data Driven…" → "Netbiis"; "Consultor independente — HG7…" → "Consultor independente". */
-function jobName(id: string) {
-  const org = experience.find((j) => j.id === id)?.org ?? id;
+function jobName(id: string, lang: Lang) {
+  const job = experience.find((j) => j.id === id);
+  const org = job ? orgName(job.org, lang) : id;
   return org.split(" —")[0].split(" |")[0];
 }
 
@@ -152,7 +155,7 @@ export function HomePage({ lang }: { lang: Lang }) {
                 {month(j.from, lang)} – {month(j.to, lang)}
               </span>
               <div>
-                <h3>{j.org}</h3>
+                <h3>{orgName(j.org, lang)}</h3>
                 <p className="tl-role">
                   {j.role[lang]} <span aria-hidden>·</span> {j.where[lang]}
                 </p>
@@ -249,7 +252,7 @@ export function HomePage({ lang }: { lang: Lang }) {
                           })),
                         ...(it.jobs ?? []).map((id) => ({
                           key: id,
-                          node: <Link href="#path">{jobName(id)}</Link>,
+                          node: <Link href="#path">{jobName(id, lang)}</Link>,
                         })),
                       ].map((x, i) => (
                         <span key={x.key}>

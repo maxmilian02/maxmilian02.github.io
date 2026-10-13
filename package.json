@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postbuild": "node -e \"require('fs').copyFileSync('pages-404.html','out/404.html')\""
+    "postbuild": "node -e \"require('fs').copyFileSync('pages-404.html','out/404.html')\"",
+    "cv": "node cv/build.mjs"
   },
   "dependencies": {
     "cmdk": "^1.1.1",
@@ -24,6 +25,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
+    "puppeteer-core": "^24.43.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

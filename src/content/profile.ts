@@ -77,7 +77,7 @@ export const totals = {
 
 export interface Job {
   id: string;
-  org: string;
+  org: string | L;
   role: L;
   from: string; // "YYYY-MM"
   to: string;
@@ -91,48 +91,52 @@ export const experience: Job[] = [
   {
     id: "netbiis",
     org: "Netbiis | Data Driven Technologies",
-    role: { pt: "Engenheiro de Software (Python & Automação)", en: "Software Engineer (Python & Automation)" },
+    role: { pt: "Engenheiro de Software (Python, Backend e Dados)", en: "Software Engineer (Python, Backend & Data)" },
     from: "2024-09",
     to: "2026-05",
-    where: { pt: "Híbrido", en: "Hybrid" },
+    where: { pt: "Remoto", en: "Remote" },
     points: [
       {
-        pt: "Liderei o desenvolvimento full-stack de uma aplicação web (Flask + SQL) para orquestração e validação de dados, reduzindo em 40% o tempo de verificação manual da equipe.",
-        en: "Led the full-stack development of a web app (Flask + SQL) to orchestrate data validation, cutting the team's manual verification time by 40%.",
+        pt: "Criei e mantive uma aplicação web interna (Flask + SQL) que automatizou a validação de dados das campanhas, reduzindo em 40% o tempo de verificação manual da equipe.",
+        en: "Built and owned an internal Flask + SQL web application that automated data validation for campaign operations, cutting the team's manual verification time by 40%.",
       },
       {
-        pt: "Scripts SQL complexos e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
-        en: "Complex SQL scripts and stored procedures to extract and segment high-volume data in Adobe Campaign.",
+        pt: "Escrevi e otimizei consultas SQL complexas e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
+        en: "Wrote and optimized complex SQL queries and stored procedures for high-volume data extraction and audience segmentation in Adobe Campaign.",
       },
       {
-        pt: "Suporte L3 a pipelines de automação críticos: análise de logs, causa raiz e disponibilidade.",
-        en: "L3 support for critical automation pipelines: log analysis, root cause and availability.",
+        pt: "Suporte L3 a pipelines de automação em produção: análise de logs, causa raiz, correção e acompanhamento.",
+        en: "L3 support for production automation pipelines: log-based root-cause analysis, fixes and follow-up.",
       },
     ],
     slugs: ["marketing-ops"],
   },
   {
     id: "consulting",
-    org: "Consultor independente — HG7, Plug, ExportSul",
-    role: { pt: "Engenheiro de Backend & Consultor", en: "Backend Engineer & Consultant" },
-    from: "2021-01",
+    org: { pt: "Consultor independente — HG7, ExportSul", en: "Independent Consultant — HG7, ExportSul" },
+    role: { pt: "Desenvolvedor Backend", en: "Backend Developer" },
+    from: "2024-02",
     to: "2024-08",
     where: { pt: "Híbrido", en: "Hybrid" },
     points: [
       {
-        pt: "Plug: API REST centralizada (Flask, RabbitMQ, Celery) para filas de tarefas assíncronas, resolvendo gargalos de performance.",
-        en: "Plug: a centralised REST API (Flask, RabbitMQ, Celery) for async task queues, removing performance bottlenecks.",
+        pt: "HG7 (corretora de seguros): sistema de importação e conciliação de extratos OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP e alimentando a DRE. O trabalho começou em meio período em 2023, em paralelo ao estágio.",
+        en: "HG7 (insurance brokerage): OFX bank-statement import and reconciliation (Python, Flask, MySQL) across three iterations, embedded in the PHP ERP and feeding the income statement. The engagement began part-time in 2023, alongside the internship.",
       },
       {
-        pt: "HG7: sistema de gestão financeira (DRE) com processamento automático de arquivos OFX.",
-        en: "HG7: a financial management system (income statement) with automatic OFX file processing.",
+        pt: "HG7: integração do CRM RD Station e da telefonia 3CX; ETL do RD Station e do Microsoft Graph para MongoDB, alimentando painéis no Power BI.",
+        en: "HG7: RD Station CRM and 3CX telephony integrations; ETL from RD Station and Microsoft Graph into MongoDB for Power BI dashboards.",
       },
       {
-        pt: "Pipelines ETL de APIs externas (Microsoft Graph, RD Station) para MongoDB, alimentando análises no Power BI; deploy de contêineres na AWS (EC2, S3).",
-        en: "ETL pipelines from external APIs (Microsoft Graph, RD Station) into MongoDB for Power BI analytics; container deploys on AWS (EC2, S3).",
+        pt: "ExportSul: robôs Selenium que processam faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
+        en: "ExportSul: Selenium bots that process invoices in an ERP, with retries and per-item state so runs resume where they stopped.",
+      },
+      {
+        pt: "Deploy de serviços em contêiner na AWS (EC2), com S3 para arquivos.",
+        en: "Containerized services deployed on AWS EC2, with S3 for file storage.",
       },
     ],
-    slugs: ["conciliacao-financeira", "automacao-rpa"],
+    slugs: ["conciliacao-financeira"],
   },
   {
     id: "plug",
@@ -143,16 +147,16 @@ export const experience: Job[] = [
     where: { pt: "São Paulo", en: "São Paulo" },
     points: [
       {
-        pt: "Robôs RPA para portais de operadoras de saúde, faturas, boletos e holerites, com fila de chamados no MySQL.",
-        en: "RPA bots for health-insurer portals, invoices, payment slips and payslips, driven by a MySQL ticket queue.",
+        pt: "15 robôs de automação em produção (Python, Selenium, Playwright) para 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
+        en: "15 production automation bots (Python, Selenium, Playwright) across 4 health-insurer portals, driven by a MySQL ticket queue, plus invoices, payment slips and payslips.",
       },
       {
-        pt: "Filas assíncronas com Celery e RabbitMQ; MySQL para dados transacionais e MongoDB para dados não estruturados.",
-        en: "Async queues with Celery and RabbitMQ; MySQL for transactional data and MongoDB for unstructured data.",
+        pt: "Serviço Flask + Celery + RabbitMQ que executa os robôs em paralelo atrás de uma API REST, com a concorrência dimensionada por teste de carga.",
+        en: "A Flask + Celery + RabbitMQ service that runs the bots in parallel behind a REST API, with concurrency sized by a load test.",
       },
       {
-        pt: "Painéis internos com Django e Flask para métricas de negócio.",
-        en: "Internal dashboards with Django and Flask for business metrics.",
+        pt: "Biblioteca Python interna (wheel) com o código comum dos robôs; MySQL, MongoDB e painéis internos em Django e Flask.",
+        en: "An internal Python package (wheel) with the bots' shared code; MySQL, MongoDB and internal dashboards in Django and Flask.",
       },
     ],
     slugs: ["automacao-rpa"],
@@ -166,8 +170,8 @@ export const experience: Job[] = [
     where: { pt: "São Paulo", en: "São Paulo" },
     points: [
       {
-        pt: "Mentoria para mais de 50 alunos em lógica de programação, algoritmos e arquitetura de computadores.",
-        en: "Mentored 50+ students in programming logic, algorithms and computer architecture.",
+        pt: "Aulas de lógica de programação, algoritmos e Python para mais de 50 alunos.",
+        en: "Taught programming logic, algorithms and Python to 50+ students.",
       },
     ],
   },
@@ -196,7 +200,7 @@ export const stack: StackGroup[] = [
       { name: "Python", slugs: ["maxtools-radio", "pallab", "maxtools", "automacao-rpa", "conciliacao-financeira", "marketing-ops"] },
       { name: "Flask", slugs: ["maxtools-radio", "pallab", "meus-contatos-ms", "conciliacao-financeira", "marketing-ops"] },
       { name: "FastAPI", slugs: ["maxtools"] },
-      { name: "Celery · RabbitMQ", slugs: ["automacao-rpa"], jobs: ["plug", "consulting"] },
+      { name: "Celery · RabbitMQ", slugs: ["automacao-rpa"], jobs: ["plug"] },
       { name: "Django", slugs: [], jobs: ["plug"] },
       { name: "OAuth2 · PKCE · MSAL", slugs: ["maxtools-radio", "meus-contatos-ms"] },
       { name: "SSE · REST", slugs: ["maxtools-radio", "pallab", "maxtools"] },

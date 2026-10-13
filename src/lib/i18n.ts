@@ -28,8 +28,8 @@ export const ui = {
     contact: { pt: "Contato", en: "Contact" },
   },
   role: {
-    pt: "Engenheiro de Software Python · backend, automação e infraestrutura",
-    en: "Python Software Engineer · backend, automation and infrastructure",
+    pt: "Engenheiro Backend Python · APIs, dados, automação e infraestrutura",
+    en: "Python Backend Engineer · APIs, data, automation and infrastructure",
   },
   thesis: {
     pt: "Há mais de 4 anos construo backends, automações e ferramentas internas que tiram trabalho manual das equipes — e mantenho a infraestrutura onde meus próprios projetos rodam.",

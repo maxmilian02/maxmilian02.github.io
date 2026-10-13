@@ -416,8 +416,8 @@ export const projects: Project[] = [
     tier: 2,
     stack: ["Python", "Flask", "MySQL", "PHP", "MongoDB", "Plotly", "Selenium", "REST APIs"],
     context: {
-      pt: "Cliente HG7 (corretora de seguros), como consultor de backend. Credenciais e dados financeiros omitidos.",
-      en: "Client HG7 (insurance brokerage), as a backend consultant. Credentials and financial data omitted.",
+      pt: "Cliente HG7 (corretora de seguros): meio período a partir de 2023, em paralelo ao estágio, e consultoria de backend em 2024. Credenciais e dados financeiros omitidos.",
+      en: "Client HG7 (insurance brokerage): part-time from 2023, alongside the internship, then backend consulting in 2024. Credentials and financial data omitted.",
     },
     tagline: {
       pt: "Importação e conciliação de extratos bancários OFX em três gerações, mais integrações entre CRM, telefonia e o ERP.",
