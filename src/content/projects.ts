@@ -282,8 +282,8 @@ export const projects: Project[] = [
     tier: 1,
     stack: ["Python", "Selenium", "Playwright", "MySQL", "Celery", "RabbitMQ", "FTP", "Excel"],
     context: {
-      pt: "Trabalho para uma corretora de planos de saúde e benefícios. Cliente e credenciais omitidos.",
-      en: "Work for a health-plan and benefits brokerage. Client and credentials omitted.",
+      pt: "Plug Tecnologia (corretora de benefícios), como desenvolvedor Python e depois consultor. Credenciais e dados de beneficiários omitidos.",
+      en: "Plug Tecnologia (benefits brokerage), first as a Python developer and later as a consultant. Credentials and beneficiary data omitted.",
     },
     tagline: {
       pt: "Quinze robôs que tiraram do operacional a digitação em portais de operadoras de saúde, faturas, boletos e holerites.",
@@ -322,10 +322,10 @@ export const projects: Project[] = [
           },
         },
         {
-          title: { pt: "Orquestração em paralelo", en: "Parallel orchestration" },
+          title: { pt: "Fila centralizada para os robôs", en: "A central queue for the bots" },
           body: {
-            pt: "O ROMA foi a prova de conceito para rodar robôs em paralelo: Flask + Socket.IO na frente, Celery com RabbitMQ atrás, e um cenário de carga para medir quanto a concorrência rendia antes de ir para produção.",
-            en: "ROMA was the proof of concept for running bots in parallel: Flask + Socket.IO in front, Celery with RabbitMQ behind, and a load scenario to measure how much concurrency paid off before going to production.",
+            pt: "O ROMA centralizou a execução numa API REST: Flask + Socket.IO na frente, Celery com RabbitMQ distribuindo as tarefas em paralelo, e um cenário de carga para medir quanto a concorrência rendia antes de ligar em produção.",
+            en: "ROMA centralised execution behind a REST API: Flask + Socket.IO in front, Celery with RabbitMQ spreading tasks in parallel, and a load scenario to measure how much concurrency paid off before going live.",
           },
         },
       ],
@@ -416,8 +416,8 @@ export const projects: Project[] = [
     tier: 2,
     stack: ["Python", "Flask", "MySQL", "PHP", "MongoDB", "Plotly", "Selenium", "REST APIs"],
     context: {
-      pt: "Trabalho para uma corretora de seguros. Cliente e credenciais omitidos.",
-      en: "Work for an insurance brokerage. Client and credentials omitted.",
+      pt: "Cliente HG7 (corretora de seguros), como consultor de backend. Credenciais e dados financeiros omitidos.",
+      en: "Client HG7 (insurance brokerage), as a backend consultant. Credentials and financial data omitted.",
     },
     tagline: {
       pt: "Importação e conciliação de extratos bancários OFX em três gerações, mais integrações entre CRM, telefonia e o ERP.",
@@ -479,16 +479,16 @@ export const projects: Project[] = [
     tier: 2,
     stack: ["Python", "Flask", "SQLite", "Jinja", "Jira API", "SOAP"],
     context: {
-      pt: "Ferramenta interna para um time de CRM e e-mail marketing.",
-      en: "Internal tool for a CRM and email-marketing team.",
+      pt: "Ferramenta interna da Netbiis | Data Driven Technologies, para o time de CRM e e-mail marketing.",
+      en: "Internal tool at Netbiis | Data Driven Technologies, for the CRM and email-marketing team.",
     },
     tagline: {
       pt: "Suíte web interna que gera scripts de segmentação, limpa listas de e-mail, lê briefings e confere tickets no Jira.",
       en: "An internal web suite that generates segmentation scripts, cleans email lists, parses briefings and checks Jira tickets.",
     },
     metrics: [
+      { value: "−40%", label: { pt: "tempo de verificação manual", en: "manual verification time" } },
       { value: "8", label: { pt: "ferramentas num só painel", en: "tools in one dashboard" } },
-      { value: "1", label: { pt: "contêiner self-hosted", en: "self-hosted container" } },
     ],
     caseStudy: {
       problem: {

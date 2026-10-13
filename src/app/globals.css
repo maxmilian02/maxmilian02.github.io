@@ -429,6 +429,19 @@ p { text-wrap: pretty; }
 .tl-when { font-size: 13px; color: var(--muted); padding-top: 3px; }
 .tl-item h3 { font-size: 22px; font-stretch: 105%; font-weight: 700; }
 .tl-item p { margin-top: 6px; color: var(--ink-2); max-width: 60ch; }
+.tl-role { margin-top: 4px !important; font-weight: 500; color: var(--ink) !important; }
+.tl-points { margin-top: 10px; display: grid; gap: 6px; max-width: 64ch; color: var(--ink-2); }
+.tl-points li { position: relative; padding-left: 16px; }
+.tl-points li::before { content: ""; position: absolute; left: 0; top: .72em; width: 6px; height: 2px; background: var(--amber); }
+.edu { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; margin-top: 8px; }
+.edu-card { padding: 22px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+.edu-card h3 {
+  font-size: 12px; font-stretch: 75%; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin-bottom: 10px;
+}
+.edu-card p { color: var(--ink-2); }
+.edu-card .edu-main { color: var(--ink); font-weight: 600; }
+.contact-where { margin-top: 18px !important; font-size: 14px !important; color: var(--muted) !important; }
 .tl-links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 10px; font-size: 14px; }
 @media (max-width: 760px) { .tl-item { grid-template-columns: 1fr; gap: 6px; } }
 

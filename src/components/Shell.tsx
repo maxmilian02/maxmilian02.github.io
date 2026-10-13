@@ -20,6 +20,9 @@ export function Shell({
     url: SITE_URL,
     jobTitle: ui.role[lang],
     sameAs: [profile.github, profile.linkedin].filter(Boolean),
+    email: `mailto:${profile.email}`,
+    address: { "@type": "PostalAddress", addressLocality: "São Paulo", addressRegion: "SP", addressCountry: "BR" },
+    alumniOf: { "@type": "CollegeOrUniversity", name: "Impacta Tecnologia" },
     knowsAbout: ["Python", "Flask", "FastAPI", "Next.js", "TypeScript", "Kotlin", "RPA", "Docker", "Proxmox"],
   };
 

@@ -5,9 +5,13 @@ export const profile = {
   github: "https://github.com/maxmilian02",
   githubUser: "maxmilian02",
   siteRepo: "https://github.com/maxmilian02/maxmilian02.github.io",
-  // Preencha para aparecer no contato (deixe vazio para esconder).
-  linkedin: "",
-  email: "",
+  // Deixe vazio para esconder do contato.
+  linkedin: "https://www.linkedin.com/in/maxmilian-duarte-python/",
+  email: "abc.max@hotmail.com",
+  phone: "+55 11 97433-0108",
+  whatsapp: "https://wa.me/5511974330108",
+  location: "São Paulo, SP",
+  cv: { pt: "/cv/maxmilian-duarte-curriculo.pdf", en: "/cv/maxmilian-duarte-resume.pdf" } as L,
 };
 
 /**
@@ -71,70 +75,118 @@ export const totals = {
   last: "2026-10",
 };
 
-export interface Chapter {
-  from: string;
+export interface Job {
+  id: string;
+  org: string;
+  role: L;
+  from: string; // "YYYY-MM"
   to: string;
-  title: L;
-  body: L;
+  where: L;
+  points: L[];
   slugs?: string[];
 }
 
-export const timeline: Chapter[] = [
+/** Experiência profissional, igual ao currículo (mais recente primeiro). */
+export const experience: Job[] = [
   {
-    from: "2022-04",
-    to: "2022-08",
-    title: { pt: "Primeiros scripts e bootcamp", en: "First scripts and bootcamp" },
-    body: {
-      pt: "Bootcamp DEVinHouse (SENAI/SC) no front-end e os primeiros bots em Python, de automação de tela a raspagem de sites.",
-      en: "DEVinHouse bootcamp (SENAI/SC) on the front end, and my first Python bots, from screen automation to web scraping.",
-    },
-    slugs: ["devinhouse", "checkboxrace-bot"],
+    id: "netbiis",
+    org: "Netbiis | Data Driven Technologies",
+    role: { pt: "Engenheiro de Software (Python & Automação)", en: "Software Engineer (Python & Automation)" },
+    from: "2024-09",
+    to: "2026-05",
+    where: { pt: "Híbrido", en: "Hybrid" },
+    points: [
+      {
+        pt: "Liderei o desenvolvimento full-stack de uma aplicação web (Flask + SQL) para orquestração e validação de dados, reduzindo em 40% o tempo de verificação manual da equipe.",
+        en: "Led the full-stack development of a web app (Flask + SQL) to orchestrate data validation, cutting the team's manual verification time by 40%.",
+      },
+      {
+        pt: "Scripts SQL complexos e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
+        en: "Complex SQL scripts and stored procedures to extract and segment high-volume data in Adobe Campaign.",
+      },
+      {
+        pt: "Suporte L3 a pipelines de automação críticos: análise de logs, causa raiz e disponibilidade.",
+        en: "L3 support for critical automation pipelines: log analysis, root cause and availability.",
+      },
+    ],
+    slugs: ["marketing-ops"],
   },
   {
+    id: "consulting",
+    org: "Consultor independente — HG7, Plug, ExportSul",
+    role: { pt: "Engenheiro de Backend & Consultor", en: "Backend Engineer & Consultant" },
+    from: "2021-01",
+    to: "2024-08",
+    where: { pt: "Híbrido", en: "Hybrid" },
+    points: [
+      {
+        pt: "Plug: API REST centralizada (Flask, RabbitMQ, Celery) para filas de tarefas assíncronas, resolvendo gargalos de performance.",
+        en: "Plug: a centralised REST API (Flask, RabbitMQ, Celery) for async task queues, removing performance bottlenecks.",
+      },
+      {
+        pt: "HG7: sistema de gestão financeira (DRE) com processamento automático de arquivos OFX.",
+        en: "HG7: a financial management system (income statement) with automatic OFX file processing.",
+      },
+      {
+        pt: "Pipelines ETL de APIs externas (Microsoft Graph, RD Station) para MongoDB, alimentando análises no Power BI; deploy de contêineres na AWS (EC2, S3).",
+        en: "ETL pipelines from external APIs (Microsoft Graph, RD Station) into MongoDB for Power BI analytics; container deploys on AWS (EC2, S3).",
+      },
+    ],
+    slugs: ["conciliacao-financeira", "automacao-rpa"],
+  },
+  {
+    id: "plug",
+    org: "Plug Tecnologia",
+    role: { pt: "Desenvolvedor Python (Backend)", en: "Python Developer (Backend)" },
     from: "2022-08",
-    to: "2023-11",
-    title: { pt: "Automação para uma corretora de benefícios", en: "Automation for a benefits brokerage" },
-    body: {
-      pt: "Quinze robôs em produção, uma biblioteca interna empacotada e uma prova de conceito de orquestração com Celery e RabbitMQ.",
-      en: "Fifteen bots in production, a packaged internal library and an orchestration proof of concept with Celery and RabbitMQ.",
-    },
+    to: "2024-02",
+    where: { pt: "São Paulo", en: "São Paulo" },
+    points: [
+      {
+        pt: "Robôs RPA para portais de operadoras de saúde, faturas, boletos e holerites, com fila de chamados no MySQL.",
+        en: "RPA bots for health-insurer portals, invoices, payment slips and payslips, driven by a MySQL ticket queue.",
+      },
+      {
+        pt: "Filas assíncronas com Celery e RabbitMQ; MySQL para dados transacionais e MongoDB para dados não estruturados.",
+        en: "Async queues with Celery and RabbitMQ; MySQL for transactional data and MongoDB for unstructured data.",
+      },
+      {
+        pt: "Painéis internos com Django e Flask para métricas de negócio.",
+        en: "Internal dashboards with Django and Flask for business metrics.",
+      },
+    ],
     slugs: ["automacao-rpa"],
   },
   {
-    from: "2023-08",
-    to: "2025-01",
-    title: { pt: "Sistemas financeiros para uma corretora de seguros", en: "Finance systems for an insurance brokerage" },
-    body: {
-      pt: "Três gerações de conciliação de extratos OFX, integração com o ERP em PHP e com CRM e telefonia.",
-      en: "Three generations of OFX statement reconciliation, integrated with the PHP ERP, CRM and telephony.",
-    },
-    slugs: ["conciliacao-financeira"],
-  },
-  {
-    from: "2025-04",
-    to: "2025-11",
-    title: { pt: "Ferramentas internas e full-stack moderno", en: "Internal tools and modern full-stack" },
-    body: {
-      pt: "Uma suíte interna para um time de CRM e, em novembro, o teste técnico Flask + Vue 3 com OAuth da Microsoft.",
-      en: "An internal suite for a CRM team and, in November, the Flask + Vue 3 technical assessment with Microsoft OAuth.",
-    },
-    slugs: ["marketing-ops", "meus-contatos-ms"],
-  },
-  {
-    from: "2026-06",
-    to: "2026-10",
-    title: { pt: "Plataforma própria e servidor em casa", en: "My own platform and home server" },
-    body: {
-      pt: "MaxTools, PalLab e MaxTools Radio — com app Android — rodando num nó Proxmox que eu administro.",
-      en: "MaxTools, PalLab and MaxTools Radio — with an Android app — running on a Proxmox node I administer.",
-    },
-    slugs: ["maxtools", "pallab", "maxtools-radio"],
+    id: "microcamp",
+    org: "Microcamp Tecnologia",
+    role: { pt: "Instrutor Técnico (Lógica e Algoritmos)", en: "Tech Instructor (Logic & Algorithms)" },
+    from: "2021-10",
+    to: "2022-02",
+    where: { pt: "São Paulo", en: "São Paulo" },
+    points: [
+      {
+        pt: "Mentoria para mais de 50 alunos em lógica de programação, algoritmos e arquitetura de computadores.",
+        en: "Mentored 50+ students in programming logic, algorithms and computer architecture.",
+      },
+    ],
   },
 ];
 
+export const education = {
+  course: { pt: "Bacharelado em Engenharia da Computação", en: "Bachelor of Computer Engineering" } as L,
+  school: "Impacta Tecnologia",
+  until: { pt: "Previsão de formatura: 2027", en: "Expected graduation: 2027" } as L,
+  languages: [
+    { pt: "Português — nativo", en: "Portuguese — native" },
+    { pt: "Inglês — avançado (leitura, escrita e documentação técnica)", en: "English — advanced (reading, writing, technical documentation)" },
+  ] as L[],
+};
+
 export interface StackGroup {
   title: L;
-  items: { name: string; slugs: string[] }[];
+  /** slugs = estudos de caso; jobs = ids de `experience`. */
+  items: { name: string | L; slugs: string[]; jobs?: string[] }[];
 }
 
 export const stack: StackGroup[] = [
@@ -144,7 +196,8 @@ export const stack: StackGroup[] = [
       { name: "Python", slugs: ["maxtools-radio", "pallab", "maxtools", "automacao-rpa", "conciliacao-financeira", "marketing-ops"] },
       { name: "Flask", slugs: ["maxtools-radio", "pallab", "meus-contatos-ms", "conciliacao-financeira", "marketing-ops"] },
       { name: "FastAPI", slugs: ["maxtools"] },
-      { name: "Celery · RabbitMQ", slugs: ["automacao-rpa"] },
+      { name: "Celery · RabbitMQ", slugs: ["automacao-rpa"], jobs: ["plug", "consulting"] },
+      { name: "Django", slugs: [], jobs: ["plug"] },
       { name: "OAuth2 · PKCE · MSAL", slugs: ["maxtools-radio", "meus-contatos-ms"] },
       { name: "SSE · REST", slugs: ["maxtools-radio", "pallab", "maxtools"] },
     ],
@@ -154,8 +207,10 @@ export const stack: StackGroup[] = [
     items: [
       { name: "SQLite", slugs: ["maxtools-radio", "marketing-ops"] },
       { name: "MySQL", slugs: ["automacao-rpa", "conciliacao-financeira"] },
-      { name: "MongoDB", slugs: ["conciliacao-financeira"] },
-      { name: "Formatos binários (Oodle, OFX)", slugs: ["pallab", "conciliacao-financeira"] },
+      { name: { pt: "SQL avançado · stored procedures", en: "Advanced SQL · stored procedures" }, slugs: ["marketing-ops"], jobs: ["netbiis"] },
+      { name: "MongoDB", slugs: ["conciliacao-financeira"], jobs: ["plug", "consulting"] },
+      { name: "ETL · Power BI", slugs: [], jobs: ["consulting"] },
+      { name: { pt: "Formatos binários (Oodle, OFX)", en: "Binary formats (Oodle, OFX)" }, slugs: ["pallab", "conciliacao-financeira"] },
     ],
   },
   {
@@ -164,7 +219,7 @@ export const stack: StackGroup[] = [
       { name: "TypeScript · React · Next.js", slugs: ["maxtools"] },
       { name: "Vue 3 · Pinia", slugs: ["meus-contatos-ms"] },
       { name: "Tailwind CSS", slugs: ["maxtools", "meus-contatos-ms"] },
-      { name: "JavaScript sem framework", slugs: ["pallab", "maxtools-radio"] },
+      { name: { pt: "JavaScript sem framework", en: "Framework-free JavaScript" }, slugs: ["pallab", "maxtools-radio"] },
       { name: "Leaflet", slugs: ["pallab"] },
     ],
   },
@@ -197,6 +252,7 @@ export const stack: StackGroup[] = [
       { name: "Proxmox · LXC", slugs: ["maxtools-radio", "pallab", "maxtools"] },
       { name: "nginx · HTTPS", slugs: ["maxtools", "maxtools-radio"] },
       { name: "Linux · systemd", slugs: ["maxtools"] },
+      { name: "AWS (EC2, S3)", slugs: [], jobs: ["consulting"] },
     ],
   },
 ];

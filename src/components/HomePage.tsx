@@ -1,7 +1,7 @@
-import { ArrowRight, ArrowUpRight, Lock } from "lucide-react";
+import { ArrowRight, ArrowUpRight, FileDown, Lock, Mail, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { ViewTransition } from "react";
-import { host, profile, rack, repos, stack, timeline, totals } from "@/content/profile";
+import { education, experience, host, profile, rack, repos, stack, totals } from "@/content/profile";
 import { CATEGORIES, caseStudies, getProject, projects, type Project } from "@/content/projects";
 import { month, paths, ui, type Lang } from "@/lib/i18n";
 import { ProjectIndex } from "./ProjectIndex";
@@ -15,6 +15,12 @@ function Visibility({ p, lang }: { p: Project; lang: Lang }) {
   ) : (
     <span className="badge badge-open">{ui.public[lang]}</span>
   );
+}
+
+/** "Netbiis | Data Driven…" → "Netbiis"; "Consultor independente — HG7…" → "Consultor independente". */
+function jobName(id: string) {
+  const org = experience.find((j) => j.id === id)?.org ?? id;
+  return org.split(" —")[0].split(" |")[0];
 }
 
 function period(p: Project, lang: Lang) {
@@ -51,6 +57,12 @@ export function HomePage({ lang }: { lang: Lang }) {
           <Link href="#work" className="btn btn-primary">
             {ui.ctaWork[lang]} <ArrowRight size={16} aria-hidden />
           </Link>
+          <a href={profile.cv[lang]} className="btn" target="_blank" rel="noopener">
+            {ui.cvShort[lang]} <FileDown size={16} aria-hidden />
+          </a>
+          <a href={profile.linkedin} className="btn" target="_blank" rel="noopener noreferrer">
+            LinkedIn <ArrowUpRight size={16} aria-hidden />
+          </a>
           <a href={profile.github} className="btn" target="_blank" rel="noopener noreferrer">
             {ui.ctaGithub[lang]} <ArrowUpRight size={16} aria-hidden />
           </a>
@@ -130,6 +142,58 @@ export function HomePage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
+      {/* ——— Experiência ——— */}
+      <section id="path" className="section wrap" aria-labelledby="path-title">
+        <SectionHead id="path" title={ui.pathTitle[lang]} intro={ui.pathIntro[lang]} />
+        <ol className="timeline">
+          {experience.map((j) => (
+            <li key={j.id} className="tl-item reveal">
+              <span className="tl-when mono">
+                {month(j.from, lang)} – {month(j.to, lang)}
+              </span>
+              <div>
+                <h3>{j.org}</h3>
+                <p className="tl-role">
+                  {j.role[lang]} <span aria-hidden>·</span> {j.where[lang]}
+                </p>
+                <ul className="tl-points">
+                  {j.points.map((pt) => (
+                    <li key={pt.pt}>{pt[lang]}</li>
+                  ))}
+                </ul>
+                {j.slugs && (
+                  <ul className="tl-links" aria-label={ui.related[lang]}>
+                    {j.slugs.map((slug) => {
+                      const p = getProject(slug);
+                      return p ? (
+                        <li key={slug}>
+                          <Link href={paths.project(lang, slug)}>{p.title}</Link>
+                        </li>
+                      ) : null;
+                    })}
+                  </ul>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div className="edu">
+          <div className="edu-card reveal">
+            <h3>{ui.education[lang]}</h3>
+            <p className="edu-main">{education.course[lang]}</p>
+            <p>
+              {education.school} · {education.until[lang]}
+            </p>
+          </div>
+          <div className="edu-card reveal">
+            <h3>{ui.languages[lang]}</h3>
+            {education.languages.map((l) => (
+              <p key={l.pt}>{l[lang]}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ——— Índice ——— */}
       <section id="index" className="section wrap" aria-labelledby="index-title">
         <SectionHead id="index" title={ui.indexTitle[lang]} intro={ui.indexIntro[lang]} />
@@ -162,45 +226,6 @@ export function HomePage({ lang }: { lang: Lang }) {
         />
       </section>
 
-      {/* ——— Trajetória ——— */}
-      <section id="path" className="section wrap" aria-labelledby="path-title">
-        <SectionHead id="path" title={ui.pathTitle[lang]} intro={ui.pathIntro[lang]} />
-        <ol className="timeline">
-          {timeline.map((c) => (
-            <li key={c.from} className="tl-item reveal">
-              <span className="tl-when mono">
-                {month(c.from, lang)} – {month(c.to, lang)}
-              </span>
-              <div>
-                <h3>{c.title[lang]}</h3>
-                <p>{c.body[lang]}</p>
-                {c.slugs && (
-                  <ul className="tl-links">
-                    {c.slugs.map((slug) => {
-                      const p = getProject(slug);
-                      if (!p) return null;
-                      return (
-                        <li key={slug}>
-                          {p.caseStudy ? (
-                            <Link href={paths.project(lang, slug)}>{p.title}</Link>
-                          ) : p.repo ? (
-                            <a href={p.repo} target="_blank" rel="noopener noreferrer">
-                              {p.title} ↗
-                            </a>
-                          ) : (
-                            p.title
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
       {/* ——— Stack ——— */}
       <section id="stack" className="section wrap" aria-labelledby="stack-title">
         <SectionHead id="stack" title={ui.stackTitle[lang]} intro={ui.stackIntro[lang]} />
@@ -210,19 +235,28 @@ export function HomePage({ lang }: { lang: Lang }) {
               <h3>{g.title[lang]}</h3>
               <ul>
                 {g.items.map((it) => (
-                  <li key={it.name}>
-                    <span className="stack-name">{it.name}</span>
+                  <li key={typeof it.name === "string" ? it.name : it.name.pt}>
+                    <span className="stack-name">{typeof it.name === "string" ? it.name : it.name[lang]}</span>
                     <span className="stack-where">
                       <span className="sr-only">{ui.usedIn[lang]}: </span>
-                      {it.slugs
-                        .map((s) => getProject(s))
-                        .filter((p): p is Project => Boolean(p))
-                        .map((p, i) => (
-                          <span key={p.slug}>
-                            {i > 0 && ", "}
-                            {p.caseStudy ? <Link href={paths.project(lang, p.slug)}>{p.title}</Link> : p.title}
-                          </span>
-                        ))}
+                      {[
+                        ...it.slugs
+                          .map((s) => getProject(s))
+                          .filter((p): p is Project => Boolean(p))
+                          .map((p) => ({
+                            key: p.slug,
+                            node: p.caseStudy ? <Link href={paths.project(lang, p.slug)}>{p.title}</Link> : p.title,
+                          })),
+                        ...(it.jobs ?? []).map((id) => ({
+                          key: id,
+                          node: <Link href="#path">{jobName(id)}</Link>,
+                        })),
+                      ].map((x, i) => (
+                        <span key={x.key}>
+                          {i > 0 && ", "}
+                          {x.node}
+                        </span>
+                      ))}
                     </span>
                   </li>
                 ))}
@@ -260,20 +294,23 @@ export function HomePage({ lang }: { lang: Lang }) {
         <h2 id="contact-title">{ui.contactTitle[lang]}</h2>
         <p>{ui.contactBody[lang]}</p>
         <div className="hero-ctas">
-          <a href={profile.github} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
-            github.com/{profile.githubUser} <ArrowUpRight size={16} aria-hidden />
+          <a href={`mailto:${profile.email}`} className="btn btn-primary">
+            <Mail size={16} aria-hidden /> {profile.email}
           </a>
-          {profile.linkedin && (
-            <a href={profile.linkedin} className="btn" target="_blank" rel="noopener noreferrer">
-              LinkedIn <ArrowUpRight size={16} aria-hidden />
-            </a>
-          )}
-          {profile.email && (
-            <a href={`mailto:${profile.email}`} className="btn">
-              {profile.email}
-            </a>
-          )}
+          <a href={profile.linkedin} className="btn" target="_blank" rel="noopener noreferrer">
+            LinkedIn <ArrowUpRight size={16} aria-hidden />
+          </a>
+          <a href={profile.whatsapp} className="btn" target="_blank" rel="noopener noreferrer">
+            <MessageCircle size={16} aria-hidden /> {ui.whatsapp[lang]} {profile.phone}
+          </a>
+          <a href={profile.github} className="btn" target="_blank" rel="noopener noreferrer">
+            GitHub <ArrowUpRight size={16} aria-hidden />
+          </a>
+          <a href={profile.cv[lang]} className="btn" target="_blank" rel="noopener">
+            <FileDown size={16} aria-hidden /> {ui.cv[lang]}
+          </a>
         </div>
+        <p className="contact-where">{profile.location}</p>
         <p className="fineprint">{ui.updated[lang]}</p>
       </section>
     </>
