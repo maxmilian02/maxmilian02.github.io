@@ -136,8 +136,8 @@ export const experience: Job[] = [
   },
   {
     id: "plug",
-    org: "Plug Tecnologia",
-    role: { pt: "Desenvolvedor Python (Backend)", en: "Python Developer (Backend)" },
+    org: "Plug Benefícios",
+    role: { pt: "Desenvolvedor Python (Estágio)", en: "Python Developer (Internship)" },
     from: "2022-08",
     to: "2024-02",
     where: { pt: "São Paulo", en: "São Paulo" },

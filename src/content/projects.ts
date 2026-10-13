@@ -282,8 +282,8 @@ export const projects: Project[] = [
     tier: 1,
     stack: ["Python", "Selenium", "Playwright", "MySQL", "Celery", "RabbitMQ", "FTP", "Excel"],
     context: {
-      pt: "Plug Tecnologia (corretora de benefícios), como desenvolvedor Python e depois consultor. Credenciais e dados de beneficiários omitidos.",
-      en: "Plug Tecnologia (benefits brokerage), first as a Python developer and later as a consultant. Credentials and beneficiary data omitted.",
+      pt: "Plug Benefícios (corretora de benefícios), como estagiário de desenvolvimento Python. Credenciais e dados de beneficiários omitidos.",
+      en: "Plug Benefícios (benefits brokerage), as a Python development intern. Credentials and beneficiary data omitted.",
     },
     tagline: {
       pt: "Quinze robôs que tiraram do operacional a digitação em portais de operadoras de saúde, faturas, boletos e holerites.",
