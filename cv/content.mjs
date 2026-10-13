@@ -29,7 +29,7 @@ export const cv = {
       "Backend engineer with 4 years of production Python: REST APIs, asynchronous processing with Celery and RabbitMQ, data workflows built on advanced SQL, and automation that takes manual work off operations teams. I own systems end to end — design, implementation, tests and deployment with Docker on Linux — and run the Proxmox infrastructure my own projects live on.",
     skills: [
       ["Backend", "Python, Flask, FastAPI, Django, REST APIs, Celery, RabbitMQ, OAuth2 / PKCE, Server-Sent Events"],
-      ["Data", "MySQL, PostgreSQL, SQLite, MongoDB, advanced SQL and stored procedures, ETL"],
+      ["Data", "MySQL, SQLite, MongoDB, advanced SQL and stored procedures, ETL"],
       ["Infra", "Docker / Compose, Linux, systemd, nginx, Proxmox / LXC, AWS (EC2, S3), GitHub Actions"],
       ["Quality", "pytest, end-to-end tests, type hints, production support (L3), log analysis"],
       ["Also", "TypeScript / Next.js, Vue 3, Kotlin / Jetpack Compose, Selenium / Playwright, FFmpeg"],
@@ -114,7 +114,7 @@ export const cv = {
       "Engenheiro backend com 4 anos de Python em produção: APIs REST, processamento assíncrono com Celery e RabbitMQ, fluxos de dados com SQL avançado e automações que tiram trabalho manual das equipes de operação. Cuido dos sistemas de ponta a ponta — desenho, implementação, testes e deploy com Docker em Linux — e mantenho a infraestrutura Proxmox onde meus projetos pessoais rodam.",
     skills: [
       ["Backend", "Python, Flask, FastAPI, Django, APIs REST, Celery, RabbitMQ, OAuth2 / PKCE, Server-Sent Events"],
-      ["Dados", "MySQL, PostgreSQL, SQLite, MongoDB, SQL avançado e stored procedures, ETL"],
+      ["Dados", "MySQL, SQLite, MongoDB, SQL avançado e stored procedures, ETL"],
       ["Infra", "Docker / Compose, Linux, systemd, nginx, Proxmox / LXC, AWS (EC2, S3), GitHub Actions"],
       ["Qualidade", "pytest, testes ponta a ponta, type hints, suporte de produção (L3), análise de logs"],
       ["Também", "TypeScript / Next.js, Vue 3, Kotlin / Jetpack Compose, Selenium / Playwright, FFmpeg"],
