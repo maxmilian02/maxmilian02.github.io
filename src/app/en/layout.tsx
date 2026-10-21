@@ -6,7 +6,7 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: `${profile.name} — ${ui.role.en}`, template: `%s · ${profile.name}` },
+  title: { default: `${profile.name} · ${ui.role.en}`, template: `%s · ${profile.name}` },
   description: ui.thesis.en,
   authors: [{ name: profile.name, url: profile.github }],
   alternates: { canonical: "/en/", languages: { "pt-BR": "/", en: "/en/" } },
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#e7e9ec" },
-    { media: "(prefers-color-scheme: dark)", color: "#121418" },
+    { media: "(prefers-color-scheme: light)", color: "#f3f4f1" },
+    { media: "(prefers-color-scheme: dark)", color: "#111413" },
   ],
 };
 

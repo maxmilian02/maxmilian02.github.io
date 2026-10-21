@@ -81,7 +81,7 @@ export const cv = {
     projects: [
       [
         "MaxTools Radio",
-        "Discord radio: Python bot streaming 48 kHz PCM through a real-time DSP chain, Flask API with Server-Sent Events, in-call web panel and a Kotlin / Jetpack Compose Android app; state survives deploys. 600+ Python tests, 132 Android unit tests.",
+        "Shared radio that grew from a Discord bot into a product: Python bot streaming 48 kHz PCM through a real-time DSP chain, Flask API with SSE and OAuth accounts (Google, Discord, Spotify), web app and Kotlin / Jetpack Compose Android app. 1,180 Python tests, 340 Android unit tests.",
       ],
       [
         "MaxTools",
@@ -166,7 +166,7 @@ export const cv = {
     projects: [
       [
         "MaxTools Radio",
-        "Rádio para o Discord: bot em Python que transmite PCM 48 kHz por uma cadeia de DSP em tempo real, API Flask com Server-Sent Events, painel web dentro da chamada e app Android em Kotlin / Jetpack Compose; o estado sobrevive a deploys. 600+ testes Python, 132 testes Android.",
+        "Rádio coletiva que saiu do Discord e virou produto: bot em Python com PCM 48 kHz e DSP em tempo real, API Flask com SSE e contas OAuth (Google, Discord, Spotify), site e app Android em Kotlin / Jetpack Compose. 1.180 testes Python, 340 testes Android.",
       ],
       [
         "MaxTools",

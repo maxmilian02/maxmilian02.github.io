@@ -2,6 +2,7 @@ import type { L } from "@/lib/i18n";
 
 export const profile = {
   name: "Maxmilian Duarte",
+  photo: "/img/max.webp",
   github: "https://github.com/maxmilian02",
   githubUser: "maxmilian02",
   siteRepo: "https://github.com/maxmilian02/maxmilian02.github.io",
@@ -14,70 +15,16 @@ export const profile = {
   cv: { pt: "/cv/maxmilian-duarte-curriculo.pdf", en: "/cv/maxmilian-duarte-resume.pdf" } as L,
 };
 
-/**
- * Um registro por repositório do GitHub (out/2026), em ordem de criação.
- * Repositórios de clientes aparecem com rótulo genérico — o nome real fica de fora.
- */
-export interface Repo {
+export interface OrgLink {
   label: string;
-  date: string; // "YYYY-MM" de criação
-  commits: number;
-  lang: string;
-  /** Estudo de caso para onde a barra leva. */
-  slug?: string;
+  href: string;
 }
-
-export const repos: Repo[] = [
-  { label: "Landing page", date: "2022-04", commits: 2, lang: "HTML" },
-  { label: "DEVinHouse · projeto 1", date: "2022-04", commits: 41, lang: "JavaScript" },
-  { label: "Checkbox Race Bot", date: "2022-04", commits: 13, lang: "Python" },
-  { label: "RPA · movimentação de beneficiários", date: "2022-08", commits: 80, lang: "Python", slug: "automacao-rpa" },
-  { label: "RPA · carga diária de planilhas", date: "2022-09", commits: 3, lang: "Python", slug: "automacao-rpa" },
-  { label: "RPA · boletagem semanal", date: "2022-09", commits: 22, lang: "Python", slug: "automacao-rpa" },
-  { label: "RPA · boletos bancários", date: "2022-10", commits: 11, lang: "Python", slug: "automacao-rpa" },
-  { label: "RPA · faturas de operadoras", date: "2022-12", commits: 16, lang: "Python", slug: "automacao-rpa" },
-  { label: "RPA · faturas (v1)", date: "2022-12", commits: 2, lang: "Python", slug: "automacao-rpa" },
-  { label: "Django · tema de painel", date: "2022-12", commits: 1, lang: "Python" },
-  { label: "Experimento · desktop", date: "2022-12", commits: 3, lang: "Python" },
-  { label: "Experimento · e-mail", date: "2022-12", commits: 3, lang: "Python" },
-  { label: "Experimento · imagem", date: "2022-12", commits: 3, lang: "Python" },
-  { label: "Experimento · Excel", date: "2022-12", commits: 5, lang: "Python" },
-  { label: "RPA · portal de boletos", date: "2022-12", commits: 5, lang: "Python", slug: "automacao-rpa" },
-  { label: "RPA · distribuição de holerites", date: "2022-12", commits: 8, lang: "Python", slug: "automacao-rpa" },
-  { label: "RPA · inclusões em lote", date: "2022-12", commits: 10, lang: "Python", slug: "automacao-rpa" },
-  { label: "RPA · portal de seguradora", date: "2023-01", commits: 21, lang: "Python", slug: "automacao-rpa" },
-  { label: "TechPowerUp News", date: "2023-02", commits: 1, lang: "Python" },
-  { label: "RPA · planos de saúde", date: "2023-02", commits: 1, lang: "Python", slug: "automacao-rpa" },
-  { label: "Integrações CRM & telefonia", date: "2023-02", commits: 16, lang: "Python", slug: "conciliacao-financeira" },
-  { label: "Protótipo 2D em Unity", date: "2023-03", commits: 2, lang: "C#" },
-  { label: "RPA · cotações e faturas", date: "2023-04", commits: 6, lang: "Python", slug: "automacao-rpa" },
-  { label: "Biblioteca interna de automação", date: "2023-04", commits: 2, lang: "Python", slug: "automacao-rpa" },
-  { label: "Empacotador da biblioteca", date: "2023-04", commits: 3, lang: "Python", slug: "automacao-rpa" },
-  { label: "Flask REST Panel", date: "2023-04", commits: 2, lang: "Python" },
-  { label: "DEVinHouse · exercícios", date: "2023-06", commits: 21, lang: "HTML" },
-  { label: "Curso de JavaScript", date: "2023-06", commits: 12, lang: "JavaScript" },
-  { label: "ROMA · orquestrador de robôs", date: "2023-07", commits: 3, lang: "Python", slug: "automacao-rpa" },
-  { label: "LocalizaAPI", date: "2023-08", commits: 4, lang: "Python" },
-  { label: "Conciliação OFX · v1", date: "2023-08", commits: 3, lang: "Python", slug: "conciliacao-financeira" },
-  { label: "Conciliação OFX · v2", date: "2023-09", commits: 12, lang: "Python", slug: "conciliacao-financeira" },
-  { label: "Conciliação OFX · v3", date: "2024-02", commits: 39, lang: "Python", slug: "conciliacao-financeira" },
-  { label: "Marketing Ops Toolkit", date: "2025-04", commits: 6, lang: "Python", slug: "marketing-ops" },
-  { label: "Meus Contatos MS", date: "2025-11", commits: 42, lang: "Vue", slug: "meus-contatos-ms" },
-  { label: "MaxTools", date: "2026-07", commits: 33, lang: "TypeScript", slug: "maxtools" },
-  { label: "PalLab", date: "2026-07", commits: 33, lang: "JavaScript", slug: "pallab" },
-  { label: "MaxTools Radio", date: "2026-08", commits: 213, lang: "Python", slug: "maxtools-radio" },
-];
-
-export const totals = {
-  repos: repos.length,
-  commits: repos.reduce((s, r) => s + r.commits, 0),
-  first: repos[0].date,
-  last: "2026-10",
-};
 
 export interface Job {
   id: string;
   org: string | L;
+  /** Site de cada empresa citada (só os que conferi que são da empresa certa). */
+  links?: OrgLink[];
   role: L;
   from: string; // "YYYY-MM"
   to: string;
@@ -91,6 +38,7 @@ export const experience: Job[] = [
   {
     id: "netbiis",
     org: "Netbiis | Data Driven Technologies",
+    links: [{ label: "netbiis.com", href: "https://www.netbiis.com" }],
     role: { pt: "Engenheiro de Software (Python, Backend e Dados)", en: "Software Engineer (Python, Backend & Data)" },
     from: "2024-09",
     to: "2026-05",
@@ -109,11 +57,12 @@ export const experience: Job[] = [
         en: "L3 support for production automation pipelines: log-based root-cause analysis, fixes and follow-up.",
       },
     ],
-    slugs: ["marketing-ops"],
+    slugs: ["campaign-qa"],
   },
   {
     id: "consulting",
-    org: { pt: "Consultor independente — HG7, ExportSul", en: "Independent Consultant — HG7, ExportSul" },
+    org: { pt: "Consultoria independente (HG7, ExportSul)", en: "Independent consulting (HG7, ExportSul)" },
+    links: [{ label: "exportsul.com.br", href: "https://www.exportsul.com.br" }],
     role: { pt: "Desenvolvedor Backend", en: "Backend Developer" },
     from: "2024-02",
     to: "2024-08",
@@ -128,8 +77,8 @@ export const experience: Job[] = [
         en: "HG7: RD Station CRM and 3CX telephony integrations; ETL from RD Station and Microsoft Graph into MongoDB for Power BI dashboards.",
       },
       {
-        pt: "ExportSul: robôs Selenium que processam faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
-        en: "ExportSul: Selenium bots that process invoices in an ERP, with retries and per-item state so runs resume where they stopped.",
+        pt: "ExportSul (corretora de seguros): robôs Selenium que processam faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
+        en: "ExportSul (insurance brokerage): Selenium bots that process invoices in an ERP, with retries and per-item state so runs resume where they stopped.",
       },
       {
         pt: "Deploy de serviços em contêiner na AWS (EC2), com S3 para arquivos.",
@@ -141,6 +90,7 @@ export const experience: Job[] = [
   {
     id: "plug",
     org: "Plug Benefícios",
+    links: [{ label: "plugbeneficios.com.br", href: "https://www.plugbeneficios.com.br" }],
     role: { pt: "Desenvolvedor Python (Estágio)", en: "Python Developer (Internship)" },
     from: "2022-08",
     to: "2024-02",
@@ -164,6 +114,7 @@ export const experience: Job[] = [
   {
     id: "microcamp",
     org: "Microcamp Tecnologia",
+    links: [{ label: "microcamp.com.br", href: "https://www.microcamp.com.br" }],
     role: { pt: "Instrutor Técnico (Lógica e Algoritmos)", en: "Tech Instructor (Logic & Algorithms)" },
     from: "2021-10",
     to: "2022-02",
@@ -179,11 +130,12 @@ export const experience: Job[] = [
 
 export const education = {
   course: { pt: "Bacharelado em Engenharia da Computação", en: "Bachelor of Computer Engineering" } as L,
-  school: "Impacta Tecnologia",
-  until: { pt: "Previsão de formatura: 2027", en: "Expected graduation: 2027" } as L,
+  school: "Faculdade Impacta",
+  site: "https://www.impacta.edu.br",
+  until: { pt: "Formatura em 2027", en: "Graduating 2027" } as L,
   languages: [
-    { pt: "Português — nativo", en: "Portuguese — native" },
-    { pt: "Inglês — avançado (leitura, escrita e documentação técnica)", en: "English — advanced (reading, writing, technical documentation)" },
+    { pt: "Português, nativo", en: "Portuguese, native" },
+    { pt: "Inglês avançado (leitura, escrita e documentação técnica)", en: "Advanced English (reading, writing, technical documentation)" },
   ] as L[],
 };
 
@@ -197,21 +149,21 @@ export const stack: StackGroup[] = [
   {
     title: { pt: "Backend", en: "Backend" },
     items: [
-      { name: "Python", slugs: ["maxtools-radio", "pallab", "maxtools", "automacao-rpa", "conciliacao-financeira", "marketing-ops"] },
-      { name: "Flask", slugs: ["maxtools-radio", "pallab", "meus-contatos-ms", "conciliacao-financeira", "marketing-ops"] },
-      { name: "FastAPI", slugs: ["maxtools"] },
+      { name: "Python", slugs: ["maxtools-radio", "pallab", "maxtools", "automacao-rpa", "conciliacao-financeira", "campaign-qa"] },
+      { name: "Flask", slugs: ["maxtools-radio", "pallab", "meus-contatos-ms", "conciliacao-financeira", "campaign-qa"] },
+      { name: "FastAPI", slugs: ["campaign-qa", "maxtools"] },
       { name: "Celery · RabbitMQ", slugs: ["automacao-rpa"], jobs: ["plug"] },
       { name: "Django", slugs: [], jobs: ["plug"] },
       { name: "OAuth2 · PKCE · MSAL", slugs: ["maxtools-radio", "meus-contatos-ms"] },
-      { name: "SSE · REST", slugs: ["maxtools-radio", "pallab", "maxtools"] },
+      { name: "REST · SOAP · SSE · webhooks", slugs: ["campaign-qa", "maxtools-radio", "pallab", "maxtools"] },
     ],
   },
   {
     title: { pt: "Dados", en: "Data" },
     items: [
-      { name: "SQLite", slugs: ["maxtools-radio", "marketing-ops"] },
+      { name: "SQLite", slugs: ["maxtools-radio", "campaign-qa"] },
       { name: "MySQL", slugs: ["automacao-rpa", "conciliacao-financeira"] },
-      { name: { pt: "SQL avançado · stored procedures", en: "Advanced SQL · stored procedures" }, slugs: ["marketing-ops"], jobs: ["netbiis"] },
+      { name: { pt: "SQL avançado · stored procedures", en: "Advanced SQL · stored procedures" }, slugs: ["campaign-qa"], jobs: ["netbiis"] },
       { name: "MongoDB", slugs: ["conciliacao-financeira"], jobs: ["plug", "consulting"] },
       { name: "ETL · Power BI", slugs: [], jobs: ["consulting"] },
       { name: { pt: "Formatos binários (Oodle, OFX)", en: "Binary formats (Oodle, OFX)" }, slugs: ["pallab", "conciliacao-financeira"] },
@@ -270,7 +222,7 @@ export interface RackUnit {
 
 export const host = {
   name: "Proxmox VE 9",
-  spec: "28 vCPU · 32 GB · 2,4 TB",
+  spec: { pt: "28 vCPU, 32 GB de RAM, 2,4 TB", en: "28 vCPU, 32 GB RAM, 2.4 TB" } as L,
 };
 
 export const rack: RackUnit[] = [
@@ -278,10 +230,85 @@ export const rack: RackUnit[] = [
   { name: "Pi-hole", kind: "lxc", role: { pt: "DNS de toda a casa, com bloqueio", en: "DNS for the whole house, with blocking" } },
   { name: "nginx", kind: "lxc", role: { pt: "Proxy reverso e HTTPS", en: "Reverse proxy and HTTPS" } },
   { name: "MaxTools", kind: "lxc", role: { pt: "FastAPI + Next.js", en: "FastAPI + Next.js" }, slug: "maxtools" },
-  { name: "MaxTools Radio", kind: "lxc", role: { pt: "Bot, API e painel do ouvinte", en: "Bot, API and listener panel" }, slug: "maxtools-radio" },
+  { name: "MaxTools Radio", kind: "lxc", role: { pt: "Bot, API, site e backend do app", en: "Bot, API, website and app backend" }, slug: "maxtools-radio" },
   { name: "Palworld + PalLab", kind: "lxc", role: { pt: "Servidor dedicado e companion", en: "Dedicated server and companion" }, slug: "pallab" },
-  { name: "LanCache", kind: "lxc", role: { pt: "Cache de downloads de jogos para a LAN", en: "Game download cache for the LAN" } },
-  { name: "Apps", kind: "lxc", role: { pt: "Painel do homelab e serviços menores", en: "Homelab dashboard and smaller services" } },
-  { name: "Flask apps", kind: "lxc", role: { pt: "Ferramentas internas", en: "Internal tools" }, slug: "marketing-ops" },
-  { name: "Minecraft", kind: "lxc", role: { pt: "Servidor modpack para amigos", en: "Modpack server for friends" } },
+  { name: "LanCache", kind: "lxc", role: { pt: "Cache de downloads de jogos para a rede", en: "Game download cache for the network" } },
+  { name: "Minecraft", kind: "lxc", role: { pt: "Servidor com modpack para amigos", en: "Modpack server for friends" } },
+];
+
+/** Resultados do topo da página: cada um aponta para o estudo de caso que o sustenta. */
+export interface Proof {
+  value: string | L;
+  label: L;
+  where: string;
+  slug: string;
+}
+
+export const proof: Proof[] = [
+  {
+    value: "−40%",
+    label: { pt: "de tempo de verificação manual antes de cada campanha", en: "manual verification time before each campaign launch" },
+    where: "Netbiis",
+    slug: "campaign-qa",
+  },
+  {
+    value: "15",
+    label: { pt: "robôs em produção em 4 portais de operadoras de saúde", en: "bots in production across 4 health-insurer portals" },
+    where: "Plug Benefícios",
+    slug: "automacao-rpa",
+  },
+  {
+    value: "18",
+    label: { pt: "meses de conciliação bancária em uso diário, dentro do ERP", en: "months of bank reconciliation in daily use, inside the ERP" },
+    where: "HG7",
+    slug: "conciliacao-financeira",
+  },
+  {
+    value: { pt: "1.180", en: "1,180" },
+    label: { pt: "testes automatizados num produto com site, app Android e bot", en: "automated tests on a product with a website, an Android app and a bot" },
+    where: "MaxTools Radio",
+    slug: "maxtools-radio",
+  },
+];
+
+/** O que eu faço por um time; cada item aponta para onde já fiz. */
+export interface Service {
+  title: L;
+  body: L;
+  slugs: string[];
+}
+
+export const services: Service[] = [
+  {
+    title: { pt: "Automação de back-office", en: "Back-office automation" },
+    body: {
+      pt: "Robôs para portais, ERPs, faturas e documentos, com estado no banco, retentativas e retomada. Uma falha não obriga a começar do zero.",
+      en: "Bots for portals, ERPs, invoices and documents, with state in the database, retries and resumable runs. A failure doesn't mean starting over.",
+    },
+    slugs: ["automacao-rpa", "conciliacao-financeira"],
+  },
+  {
+    title: { pt: "APIs e integrações", en: "APIs and integrations" },
+    body: {
+      pt: "APIs REST e SOAP, CRMs, ERPs, Jira, Microsoft Graph, OAuth2 e webhooks, ligando os sistemas que o time já usa em vez de abrir mais uma aba.",
+      en: "REST and SOAP APIs, CRMs, ERPs, Jira, Microsoft Graph, OAuth2 and webhooks, connecting the systems a team already uses instead of adding another tab.",
+    },
+    slugs: ["campaign-qa", "conciliacao-financeira", "maxtools-radio"],
+  },
+  {
+    title: { pt: "Filas, workers e dados", en: "Queues, workers and data" },
+    body: {
+      pt: "Processamento em segundo plano com Celery e RabbitMQ, ETL e SQL avançado. O trabalho pesado sai da requisição e os números fecham.",
+      en: "Background processing with Celery and RabbitMQ, ETL and advanced SQL. Heavy work leaves the request path and the numbers add up.",
+    },
+    slugs: ["automacao-rpa", "maxtools"],
+  },
+  {
+    title: { pt: "Ferramentas internas no ar", en: "Internal tools, deployed" },
+    body: {
+      pt: "Apps em Flask e FastAPI com login, testes e Docker, publicados em Linux atrás de nginx, na AWS ou em infraestrutura que eu mesmo mantenho.",
+      en: "Flask and FastAPI apps with login, tests and Docker, deployed on Linux behind nginx, on AWS or on infrastructure I run myself.",
+    },
+    slugs: ["campaign-qa", "maxtools", "maxtools-radio"],
+  },
 ];

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CaseStudy } from "@/components/CaseStudy";
-import { caseStudies, getProject } from "@/content/projects";
+import { caseStudies, getProject, projectTitle } from "@/content/projects";
 import { paths } from "@/lib/i18n";
 
 export const dynamicParams = false;
@@ -15,13 +15,13 @@ export async function generateMetadata({ params }: PageProps<"/en/projects/[slug
   const p = getProject(slug);
   if (!p) return {};
   return {
-    title: p.title,
+    title: projectTitle(p, "en"),
     description: p.tagline.en,
     alternates: {
       canonical: paths.project("en", slug),
       languages: { "pt-BR": paths.project("pt", slug), en: paths.project("en", slug) },
     },
-    openGraph: { title: p.title, description: p.tagline.en, url: paths.project("en", slug), images: [{ url: "/en/og.png", width: 1200, height: 630 }] },
+    openGraph: { title: projectTitle(p, "en"), description: p.tagline.en, url: paths.project("en", slug), images: [{ url: "/en/og.png", width: 1200, height: 630 }] },
   };
 }
 

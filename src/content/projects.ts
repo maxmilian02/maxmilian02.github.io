@@ -1,4 +1,4 @@
-import type { L } from "@/lib/i18n";
+import type { L, Lang } from "@/lib/i18n";
 
 export type Category = "product" | "automation" | "web" | "study";
 
@@ -10,7 +10,7 @@ export const CATEGORIES: { id: Category; label: L }[] = [
 ];
 
 export interface Metric {
-  value: string;
+  value: string | L;
   label: L;
 }
 
@@ -20,7 +20,7 @@ export interface Step {
 }
 
 export interface ChainNode {
-  name: string;
+  name: string | L;
   detail: L;
 }
 
@@ -32,16 +32,32 @@ export interface CaseStudy {
   learned: L;
 }
 
+export interface ProjectLink {
+  label: L;
+  href: string;
+}
+
 export interface Project {
   slug: string;
+  /** Título em português (e padrão quando não há tradução). */
   title: string;
+  titleEn?: string;
+  /** Feito para uma empresa (cliente/empregador) ou produto próprio. */
+  origin?: "client" | "own";
+  /** Empresa para quem foi feito (aparece na linha de contexto do card). */
+  org?: string | L;
   category: Category;
   visibility: "public" | "private";
   /** Só para repositórios públicos. */
   repo?: string;
+  /** Endereços públicos onde o projeto roda. */
+  links?: ProjectLink[];
+  /** Captura de tela em /public/img (16:10). */
+  image?: { src: string; alt: L };
   start: string; // "YYYY-MM"
   end: string; // "YYYY-MM"
-  commits: number;
+  /** Ausente quando o trabalho não tem um histórico git único para contar. */
+  commits?: number;
   stack: string[];
   tagline: L;
   /** Para trabalho feito para empresas: quem era o cliente, sem nomeá-lo. */
@@ -53,80 +69,107 @@ export interface Project {
 }
 
 const GH = "https://github.com/maxmilian02";
+const RADIO = "https://maxtools.duckdns.org:7443";
 
 export const projects: Project[] = [
   {
     slug: "maxtools-radio",
     title: "MaxTools Radio",
     category: "product",
+    origin: "own",
     visibility: "private",
     start: "2026-08",
     end: "2026-10",
-    commits: 213,
+    commits: 328,
     tier: 1,
-    stack: ["Python", "discord.py", "Flask", "SQLite", "FFmpeg", "Kotlin", "Jetpack Compose", "Media3", "Docker"],
+    stack: ["Python", "discord.py", "Flask", "SQLite", "FFmpeg", "OAuth2", "Kotlin", "Jetpack Compose", "Media3", "Docker"],
+    links: [
+      { label: { pt: "Ouvir no navegador", en: "Listen in the browser" }, href: `${RADIO}/web` },
+      { label: { pt: "App Android", en: "Android app" }, href: `${RADIO}/baixar` },
+    ],
+    image: {
+      src: "/img/radio.webp",
+      alt: {
+        pt: "Tela de entrada do MaxTools Radio no navegador, com login por e-mail, Google ou Discord.",
+        en: "MaxTools Radio's sign-in screen in the browser, with email, Google or Discord login.",
+      },
+    },
     tagline: {
-      pt: "Rádio coletiva para o Discord: bot que não corta a música, painel dentro da chamada de voz e app Android próprio.",
-      en: "A shared radio for Discord: a bot that never cuts the song, a panel inside the voice call and its own Android app.",
+      pt: "Rádio coletiva que começou como bot de Discord e virou produto: site, app Android, uma conta por e-mail e a música passando de um aparelho para outro.",
+      en: "A shared radio that started as a Discord bot and grew into a product: a website, an Android app, one account per email and music that moves between devices.",
     },
     metrics: [
-      { value: "213", label: { pt: "commits em 7 semanas", en: "commits in 7 weeks" } },
-      { value: "600+", label: { pt: "testes Python, ~0,2 s", en: "Python tests, ~0.2 s" } },
-      { value: "132", label: { pt: "testes unitários Android", en: "Android unit tests" } },
-      { value: "~72k", label: { pt: "linhas Python + Kotlin", en: "lines of Python + Kotlin" } },
+      { value: "328", label: { pt: "commits em 8 semanas", en: "commits in 8 weeks" } },
+      { value: { pt: "1.180", en: "1,180" }, label: { pt: "testes automatizados em Python", en: "automated Python tests" } },
+      { value: "340", label: { pt: "testes unitários no Android", en: "Android unit tests" } },
+      { value: "3", label: { pt: "idiomas: português, inglês e espanhol", en: "languages: Portuguese, English, Spanish" } },
     ],
     caseStudy: {
       problem: {
-        pt: "Quase todo bot de música toca a URL de mídia do YouTube direto no FFmpeg. Medindo, descobri que o YouTube só entrega os primeiros 40–60 segundos por HTTP puro — o corte é por tempo, não por bytes, e não gera erro nenhum: a música simplesmente acaba. Além disso, várias pessoas dividem a mesma caixa de som, e nenhum bot mostra quem pediu o quê.",
-        en: "Nearly every music bot pipes YouTube's media URL straight into FFmpeg. By measuring it, I found YouTube only serves the first 40–60 seconds over plain HTTP — the cut is time-based, not byte-based, and raises no error: the song just ends. On top of that, several people share one speaker, and no bot shows who requested what.",
+        pt: "Quase todo bot de música toca a URL de mídia do YouTube direto no FFmpeg. Medindo, descobri que o YouTube só entrega os primeiros 40 a 60 segundos por HTTP puro. O corte é por tempo, não por bytes, e não gera erro: a música simplesmente acaba. Além disso, várias pessoas dividem a mesma caixa de som e nenhum bot mostra quem pediu o quê.",
+        en: "Nearly every music bot pipes YouTube's media URL straight into FFmpeg. By measuring it, I found YouTube only serves the first 40 to 60 seconds over plain HTTP. The cut is time-based, not byte-based, and raises no error: the song just ends. On top of that, several people share one speaker and no bot shows who requested what.",
       },
       approach: [
         {
           title: { pt: "Áudio vem de um serviço próprio", en: "Audio comes from my own service" },
           body: {
-            pt: "O bot não fala com o YouTube. Ele pede a faixa ao MaxTools, que resolve, baixa ou — quando o download direto não serve — grava tocando num navegador e emenda os pedaços com volume calibrado. O bot recebe PCM 48 kHz estéreo pronto e só empurra quadros de 20 ms para o canal de voz.",
-            en: "The bot never talks to YouTube. It asks MaxTools for the track, which resolves it, downloads it or — when direct download fails — records it playing in a browser and stitches the chunks with calibrated volume. The bot receives ready 48 kHz stereo PCM and only pushes 20 ms frames into the voice channel.",
+            pt: "O bot não fala com o YouTube. Ele pede a faixa ao MaxTools, que resolve, baixa ou, quando o download direto não serve, grava tocando num navegador e emenda os pedaços com volume calibrado. O bot recebe PCM 48 kHz estéreo pronto e só empurra quadros de 20 ms para o canal de voz.",
+            en: "The bot never talks to YouTube. It asks MaxTools for the track, which resolves it, downloads it or, when direct download fails, records it playing in a browser and stitches the chunks with calibrated volume. The bot receives ready 48 kHz stereo PCM and only pushes 20 ms frames into the voice channel.",
           },
         },
         {
           title: { pt: "DSP em tempo real", en: "Real-time DSP" },
           body: {
-            pt: "Cadeia de efeitos inteira em audioop (C): crossfade, nivelamento de volume entre faixas, limitador real até 1000%, equalizador de 10 bandas e 17 efeitos. O servidor mede oito oitavas do que está saindo e manda o espectro para o painel — o áudio toca no Discord, então o navegador não tem o que analisar.",
-            en: "The whole effect chain runs on audioop (C): crossfade, loudness levelling across tracks, a real limiter up to 1000%, a 10-band equaliser and 17 effects. The server measures eight octaves of what it's sending and streams the spectrum to the panel — the audio plays in Discord, so the browser has nothing to analyse.",
+            pt: "A cadeia de efeitos roda em audioop (C): crossfade, nivelamento de volume entre faixas, limitador até 1000%, equalizador de 10 bandas e 17 efeitos. O servidor mede oito oitavas do que está saindo e manda o espectro para o painel, porque o áudio toca no Discord e o navegador não tem o que analisar.",
+            en: "The effect chain runs on audioop (C): crossfade, loudness levelling across tracks, a limiter up to 1000%, a 10-band equaliser and 17 effects. The server measures eight octaves of what it's sending and streams the spectrum to the panel, since the audio plays in Discord and the browser has nothing to analyse.",
+          },
+        },
+        {
+          title: { pt: "Uma conta, qualquer aparelho", en: "One account, any device" },
+          body: {
+            pt: "Cada pessoa tem uma conta só, identificada pelo e-mail; Google, Discord e Spotify se vinculam a ela por OAuth. Curtidas, playlists e o que está tocando passam do celular para o navegador. Um link compartilhado abre direto no app (App Links), e o site, o app e o bot falam português, inglês e espanhol.",
+            en: "Each person has a single account keyed by email; Google, Discord and Spotify link to it over OAuth. Likes, playlists and what's playing move between phone and browser. A shared link opens straight in the app (App Links), and the site, the app and the bot speak Portuguese, English and Spanish.",
           },
         },
         {
           title: { pt: "Painel dentro da chamada", en: "A panel inside the call" },
           body: {
-            pt: "Uma Discord Activity com login pelo Discord: capa, letra sincronizada, biblioteca da casa, rankings por pessoa. A fila é justa — reveza entre quem pediu — e cada item é assinado. Para aguentar cem telas abertas medi o p95, troquei o servidor de desenvolvimento do Flask pelo waitress e passei a empurrar eventos por SSE.",
-            en: "A Discord Activity with Discord login: cover art, synced lyrics, the house library, per-person rankings. The queue is fair — it rotates between requesters — and every item is signed. To hold a hundred open screens I measured p95, swapped Flask's dev server for waitress and moved to pushing events over SSE.",
+            pt: "Uma Discord Activity mostra capa, letra sincronizada, biblioteca e rankings por pessoa. A fila reveza entre quem pediu e cada item é assinado. Para aguentar cem telas abertas medi o p95, troquei o servidor de desenvolvimento do Flask pelo waitress e passei a empurrar eventos por SSE.",
+            en: "A Discord Activity shows cover art, synced lyrics, the library and per-person rankings. The queue rotates between requesters and every item is signed. To hold a hundred open screens I measured p95, swapped Flask's dev server for waitress and moved to pushing events over SSE.",
           },
         },
         {
-          title: { pt: "Sobrevive a deploy", en: "Survives deploys" },
+          title: { pt: "Recursos atrás de chaves", en: "Features behind flags" },
           body: {
-            pt: "Fila e posição são fotografadas a cada 5 s em SQLite. No boot, o bot volta ao canal e retoma de onde parou; sessões continuam válidas e o painel se recarrega sozinho quando a página muda.",
-            en: "Queue and position are snapshotted every 5 s into SQLite. On boot the bot rejoins the channel and resumes where it stopped; sessions stay valid and the panel reloads itself when the page changes.",
+            pt: "Todo recurso novo nasce desligado, atrás de uma chave que o admin liga sem deploy; até os comandos do bot aparecem sozinhos quando a chave liga. Doações do Ko-fi e do Mercado Pago chegam por webhook e ligam o selo de apoiador na conta certa pelo e-mail.",
+            en: "Every new feature ships switched off, behind a flag the admin turns on without a deploy; even the bot's commands appear on their own when their flag goes on. Ko-fi and Mercado Pago donations arrive by webhook and switch on the supporter badge on the right account by email.",
           },
         },
         {
-          title: { pt: "App Android independente", en: "Standalone Android app" },
+          title: { pt: "App Android", en: "Android app" },
           body: {
-            pt: "Kotlin, Jetpack Compose e Media3. Busca, extração de áudio, cache e biblioteca rodam no próprio celular para tirar carga do servidor; suporta Android Auto. A aba “Discord Radio” sintoniza a sala ao vivo. Import do Spotify via OAuth PKCE, sem segredo no servidor.",
-            en: "Kotlin, Jetpack Compose and Media3. Search, audio extraction, cache and library run on the phone itself to offload the server; Android Auto supported. The “Discord Radio” tab tunes into the live room. Spotify import via OAuth PKCE, with no secret on the server.",
+            pt: "Kotlin, Jetpack Compose e Media3. Busca, extração de áudio, cache e biblioteca rodam no próprio celular para tirar carga do servidor. Toca com a tela desligada, no Android Auto e como despertador; a aba “Discord Radio” sintoniza a sala ao vivo.",
+            en: "Kotlin, Jetpack Compose and Media3. Search, audio extraction, cache and library run on the phone itself to offload the server. It plays with the screen off, in Android Auto and as an alarm clock; the “Discord Radio” tab tunes into the live room.",
+          },
+        },
+        {
+          title: { pt: "Feito para ficar no ar", en: "Built to stay up" },
+          body: {
+            pt: "Fila e posição são gravadas a cada 5 s em SQLite, e depois de um deploy o bot volta ao canal de onde parou. Uma auditoria de segurança passou pelo sistema inteiro: sessões guardadas como hash, IP do cliente aceito só do proxy, proteção contra SSRF e CSP no site.",
+            en: "Queue and position are saved every 5 s to SQLite, and after a deploy the bot rejoins the channel where it stopped. A security audit went through the whole system: sessions stored as hashes, client IP trusted only from the proxy, SSRF protection and a CSP on the site.",
           },
         },
       ],
       chain: [
-        { name: "YouTube · Spotify · streams", detail: { pt: "fontes", en: "sources" } },
+        { name: "YouTube · Spotify", detail: { pt: "fontes", en: "sources" } },
         { name: "MaxTools", detail: { pt: "resolve, baixa, captura, cacheia", en: "resolve, download, capture, cache" } },
-        { name: "Bot", detail: { pt: "PCM 48 kHz → efeitos → voz", en: "48 kHz PCM → effects → voice" } },
-        { name: "API + SSE", detail: { pt: "estado, espectro, fila", en: "state, spectrum, queue" } },
-        { name: "Activity · Android", detail: { pt: "quem ouve", en: "listeners" } },
+        { name: "Bot", detail: { pt: "PCM 48 kHz, efeitos, voz", en: "48 kHz PCM, effects, voice" } },
+        { name: "API + SSE", detail: { pt: "contas, fila, espectro", en: "accounts, queue, spectrum" } },
+        { name: { pt: "Site · Activity · Android", en: "Web · Activity · Android" }, detail: { pt: "quem ouve", en: "listeners" } },
       ],
       learned: {
-        pt: "Medir antes de supor. “A música acaba sozinha” parecia bug do player; era um limite de tempo do provedor, e só um teste de bancada provou. A suíte de testes cobre justamente o que já quebrou de verdade em produção.",
-        en: "Measure before assuming. “The song just ends” looked like a player bug; it was a provider time limit, and only a bench test proved it. The test suite covers exactly what has actually broken in production.",
+        pt: "Medir antes de supor. “A música acaba sozinha” parecia bug do player; era um limite de tempo do provedor, e só um teste de bancada provou. A suíte de testes cobre justamente o que já quebrou em produção.",
+        en: "Measure before assuming. “The song just ends” looked like a player bug; it was a provider time limit, and only a bench test proved it. The test suite covers exactly what has broken in production.",
       },
     },
   },
@@ -134,21 +177,29 @@ export const projects: Project[] = [
     slug: "pallab",
     title: "PalLab",
     category: "product",
+    origin: "own",
     visibility: "private",
     start: "2026-07",
     end: "2026-08",
     commits: 33,
-    tier: 1,
+    tier: 2,
     stack: ["Python", "Flask", "C (Oodle)", "JavaScript", "Leaflet", "Docker"],
+    image: {
+      src: "/img/pallab.webp",
+      alt: {
+        pt: "Página inicial do PalLab: números do servidor, progresso do Paldex e atalhos para mapa, breeding e itens.",
+        en: "PalLab's home page: server numbers, Paldex progress and shortcuts to the map, breeding and items.",
+      },
+    },
     tagline: {
-      pt: "Companion do servidor de Palworld da casa: lê o save binário real do jogo e a API oficial do servidor dedicado.",
-      en: "Companion app for our Palworld server: reads the game's real binary save and the dedicated server's official API.",
+      pt: "Companion do servidor de Palworld da casa: lê o save binário do jogo e a API oficial do servidor dedicado.",
+      en: "A companion app for our Palworld server: it reads the game's binary save and the dedicated server's official API.",
     },
     metrics: [
-      { value: "99,6%", label: { pt: "da fórmula validada contra o jogo", en: "of the formula validated against the game" } },
-      { value: "2.466", label: { pt: "itens indexados", en: "items indexed" } },
+      { value: { pt: "99,6%", en: "99.6%" }, label: { pt: "da fórmula validada contra o jogo", en: "of the formula validated against the game" } },
+      { value: { pt: "2.466", en: "2,466" }, label: { pt: "itens indexados", en: "items indexed" } },
       { value: "460", label: { pt: "habilidades (375 + 85)", en: "skills (375 + 85)" } },
-      { value: "33.930", label: { pt: "pares de breeding conferidos", en: "breeding pairs checked" } },
+      { value: { pt: "33.930", en: "33,930" }, label: { pt: "pares de breeding conferidos", en: "breeding pairs checked" } },
     ],
     caseStudy: {
       problem: {
@@ -157,7 +208,7 @@ export const projects: Project[] = [
       },
       approach: [
         {
-          title: { pt: "Ler o save de verdade", en: "Reading the real save" },
+          title: { pt: "Ler o save do jogo", en: "Reading the game save" },
           body: {
             pt: "Parser baseado no palsav com a extensão Oodle em C compilada dentro da imagem Docker. O Level.sav é relido por mtime a cada autosave, então os dados acompanham o jogo sem reiniciar nada.",
             en: "A parser built on palsav with the Oodle C extension compiled inside the Docker image. Level.sav is re-read by mtime on every autosave, so data follows the game without restarting anything.",
@@ -166,28 +217,28 @@ export const projects: Project[] = [
         {
           title: { pt: "Fórmula de breeding validada", en: "A validated breeding formula" },
           body: {
-            pt: "Reimplementei o cálculo e validei contra as tabelas do jogo: 33.778 de 33.930 pares conferem. Foi assim que apareceram as regras que a comunidade erra — filhos de combinação única nunca saem pela fórmula e empate de rank é decidido pelo maior.",
-            en: "I reimplemented the calculation and validated it against the game's tables: 33,778 of 33,930 pairs match. That's how the rules the community gets wrong surfaced — unique-combo children never come from the formula, and rank ties go to the higher one.",
+            pt: "Reimplementei o cálculo e validei contra as tabelas do jogo: 33.778 de 33.930 pares conferem. Foi assim que apareceram as regras que a comunidade erra: filhos de combinação única nunca saem pela fórmula, e empate de rank é decidido pelo maior.",
+            en: "I reimplemented the calculation and validated it against the game's tables: 33,778 of 33,930 pairs match. That's how the rules the community gets wrong surfaced: unique-combo children never come from the formula, and rank ties go to the higher one.",
           },
         },
         {
           title: { pt: "Planejamento em várias gerações", en: "Multi-generation planning" },
           body: {
-            pt: "O fecho transitivo do breeding a partir do Palbox de cada jogador responde “consigo chegar nesse Pal?” e reconstrói a cadeia passo a passo, escolhendo o melhor casal real (♂×♀) pela soma de IVs.",
-            en: "The transitive closure of breeding from each player's Palbox answers “can I reach this Pal?” and rebuilds the chain step by step, picking the best real couple (♂×♀) by IV sum.",
+            pt: "O fecho transitivo do breeding a partir do Palbox de cada jogador responde “consigo chegar nesse Pal?” e reconstrói a cadeia passo a passo, escolhendo o melhor casal (♂×♀) pela soma de IVs.",
+            en: "The transitive closure of breeding from each player's Palbox answers “can I reach this Pal?” and rebuilds the chain step by step, picking the best couple (♂×♀) by IV sum.",
           },
         },
         {
           title: { pt: "Mapa e radar ao vivo", en: "Live map and radar" },
           body: {
-            pt: "Mapa Leaflet de 8192 px com a transformação de coordenadas do jogo, progresso por jogador e radar de quem está online via proxy da REST API oficial com cache de 3 s.",
-            en: "An 8192 px Leaflet map with the game's coordinate transform, per-player progress and a radar of who's online via a proxy to the official REST API with a 3 s cache.",
+            pt: "Mapa Leaflet de 8192 px com a transformação de coordenadas do jogo, progresso por jogador e radar de quem está online via proxy da REST API oficial, com cache de 3 s.",
+            en: "An 8192 px Leaflet map with the game's coordinate transform, per-player progress and a radar of who's online via a proxy to the official REST API, with a 3 s cache.",
           },
         },
         {
           title: { pt: "Admin que confere o resultado", en: "An admin that verifies results" },
           body: {
-            pt: "A tela de configuração escreve as variáveis do contêiner do servidor e faz polling até o .ini regerado bater com o valor pedido. Limites mínimos/máximos nunca são aplicados em silêncio.",
+            pt: "A tela de configuração escreve as variáveis do contêiner do servidor e faz polling até o .ini regerado bater com o valor pedido. Limites mínimos e máximos nunca são aplicados em silêncio.",
             en: "The settings screen writes the server container's environment and polls until the regenerated .ini matches the requested value. Min/max clamps are never applied silently.",
           },
         },
@@ -196,12 +247,12 @@ export const projects: Project[] = [
         { name: "Level.sav", detail: { pt: "binário PlM / Oodle", en: "PlM / Oodle binary" } },
         { name: "palsav (C)", detail: { pt: "descompacta e decodifica", en: "decompress and decode" } },
         { name: "Flask API", detail: { pt: "breeding, dex, mapa, admin", en: "breeding, dex, map, admin" } },
-        { name: "REST do servidor", detail: { pt: "jogadores online, cache 3 s", en: "online players, 3 s cache" } },
-        { name: "SPA vanilla", detail: { pt: "sem build step", en: "no build step" } },
+        { name: { pt: "REST do servidor", en: "Server REST API" }, detail: { pt: "jogadores online, cache 3 s", en: "online players, 3 s cache" } },
+        { name: { pt: "Front sem framework", en: "Framework-free UI" }, detail: { pt: "sem build step", en: "no build step" } },
       ],
       learned: {
-        pt: "Fórmula da comunidade não é fórmula do jogo. As exceções só apareceram quando validei contra a tabela inteira em vez de uns casos de exemplo — hoje um caso-teste trava cada uma delas.",
-        en: "The community's formula isn't the game's formula. The exceptions only showed up when I validated against the whole table instead of a few examples — today a test case pins each of them down.",
+        pt: "Fórmula da comunidade não é fórmula do jogo. As exceções só apareceram quando validei contra a tabela inteira, e não contra uns casos de exemplo. Hoje um caso-teste trava cada uma delas.",
+        en: "The community's formula isn't the game's formula. The exceptions only showed up when I validated against the whole table instead of a few examples. Today a test case pins each of them down.",
       },
     },
   },
@@ -209,6 +260,7 @@ export const projects: Project[] = [
     slug: "maxtools",
     title: "MaxTools",
     category: "product",
+    origin: "own",
     visibility: "private",
     start: "2026-07",
     end: "2026-07",
@@ -247,12 +299,12 @@ export const projects: Project[] = [
         {
           title: { pt: "Corte frame a frame", en: "Frame-accurate trimming" },
           body: {
-            pt: "O backend serve um proxy ≤480p com HTTP Range; o editor anda quadro a quadro, marca entrada/saída e toca a seleção em loop. O download final baixa só o trecho, em qualidade cheia, com corte forçado em keyframe.",
-            en: "The backend serves a ≤480p proxy over HTTP Range; the editor steps frame by frame, marks in/out and loops the selection. The final download fetches only that range, at full quality, with keyframe-forced cuts.",
+            pt: "O backend serve um proxy de até 480p com HTTP Range; o editor anda quadro a quadro, marca entrada e saída e toca a seleção em loop. O download final baixa só o trecho, em qualidade cheia, com corte forçado em keyframe.",
+            en: "The backend serves a proxy of up to 480p over HTTP Range; the editor steps frame by frame, marks in and out and loops the selection. The final download fetches only that range, at full quality, with keyframe-forced cuts.",
           },
         },
         {
-          title: { pt: "Plataforma, não só UI", en: "A platform, not just UI" },
+          title: { pt: "Plataforma, não só interface", en: "A platform, not just a UI" },
           body: {
             pt: "Jobs assíncronos com progresso, autenticação opcional por API key e um janitor que apaga arquivos por TTL. Os mesmos plugins servem de backend de áudio para o MaxTools Radio.",
             en: "Async jobs with progress, optional API-key auth and a janitor that deletes files by TTL. The same plugins act as the audio backend for MaxTools Radio.",
@@ -266,15 +318,18 @@ export const projects: Project[] = [
         { name: "Next.js", detail: { pt: "painel dinâmico", en: "dynamic dashboard" } },
       ],
       learned: {
-        pt: "Investir no contrato antes das features. Depois que o formato do plugin estabilizou, ferramentas novas viraram trabalho de uma tarde — e o Radio pôde reaproveitar a plataforma inteira.",
-        en: "Invest in the contract before features. Once the plugin shape settled, new tools became an afternoon's work — and the Radio could reuse the whole platform.",
+        pt: "Investir no contrato antes das features. Depois que o formato do plugin estabilizou, uma ferramenta nova passou a levar uma tarde, e o Radio reaproveitou a plataforma inteira.",
+        en: "Invest in the contract before features. Once the plugin shape settled, a new tool took an afternoon, and the Radio could reuse the whole platform.",
       },
     },
   },
   {
     slug: "automacao-rpa",
     title: "RPA para corretora de benefícios",
+    titleEn: "RPA for a benefits brokerage",
     category: "automation",
+    origin: "client",
+    org: "Plug Benefícios",
     visibility: "private",
     start: "2022-08",
     end: "2023-11",
@@ -290,21 +345,21 @@ export const projects: Project[] = [
       en: "Fifteen bots that took typing into health-insurer portals, invoices, payment slips and payslips off the operations team.",
     },
     metrics: [
-      { value: "15", label: { pt: "repositórios de robôs", en: "bot repositories" } },
-      { value: "193", label: { pt: "commits", en: "commits" } },
-      { value: "4", label: { pt: "portais de operadoras integrados", en: "insurer portals integrated" } },
+      { value: "15", label: { pt: "robôs em produção", en: "bots in production" } },
+      { value: "4", label: { pt: "portais de operadoras automatizados", en: "insurer portals automated" } },
+      { value: "1", label: { pt: "biblioteca interna usada por todos os robôs", en: "internal library shared by every bot" } },
     ],
     caseStudy: {
       problem: {
-        pt: "A equipe digitava à mão cada movimentação de beneficiário — inclusão, exclusão, alteração — em portais diferentes de cada operadora, baixava faturas e boletos um a um e distribuía holerites para as empresas clientes por e-mail.",
-        en: "The team hand-typed every beneficiary change — additions, removals, updates — into each insurer's own portal, downloaded invoices and payment slips one by one and emailed payslips to client companies.",
+        pt: "A equipe digitava à mão cada movimentação de beneficiário (inclusão, exclusão, alteração) no portal de cada operadora, baixava faturas e boletos um a um e mandava os holerites às empresas clientes por e-mail.",
+        en: "The team hand-typed every beneficiary change (additions, removals, updates) into each insurer's own portal, downloaded invoices and payment slips one by one and emailed payslips to client companies.",
       },
       approach: [
         {
           title: { pt: "Fila no banco, um módulo por operadora", en: "A database queue, one module per insurer" },
           body: {
-            pt: "O robô principal lê os chamados pendentes no MySQL do sistema da corretora e despacha cada um para o módulo da operadora certa, que preenche o portal e grava o status de volta. 80 commits só nele.",
-            en: "The main bot reads pending tickets from the brokerage system's MySQL and dispatches each one to the right insurer module, which fills the portal and writes the status back. 80 commits in that one alone.",
+            pt: "O robô principal lê os chamados pendentes no MySQL do sistema da corretora e despacha cada um para o módulo da operadora certa, que preenche o portal e grava o status de volta. Foram 80 commits só nele.",
+            en: "The main bot reads pending tickets from the brokerage system's MySQL and dispatches each one to the right insurer module, which fills the portal and writes the status back. That one alone took 80 commits.",
           },
         },
         {
@@ -317,8 +372,8 @@ export const projects: Project[] = [
         {
           title: { pt: "Uma biblioteca interna", en: "An internal library" },
           body: {
-            pt: "O que se repetia entre robôs — inicialização do navegador, contorno de bloqueios de UI, utilitários de arquivo — virou um pacote Python distribuído como wheel e instalado em todos eles.",
-            en: "What repeated across bots — browser start-up, working around UI blockers, file utilities — became a Python package shipped as a wheel and installed in all of them.",
+            pt: "O que se repetia entre robôs (inicialização do navegador, contorno de bloqueios de interface, utilitários de arquivo) virou um pacote Python distribuído como wheel e instalado em todos eles.",
+            en: "What repeated across bots (browser start-up, working around UI blockers, file utilities) became a Python package shipped as a wheel and installed in all of them.",
           },
         },
         {
@@ -330,23 +385,24 @@ export const projects: Project[] = [
         },
       ],
       chain: [
-        { name: "Sistema da corretora", detail: { pt: "chamados no MySQL", en: "tickets in MySQL" } },
-        { name: "Despachante", detail: { pt: "um módulo por operadora", en: "one module per insurer" } },
-        { name: "Portais", detail: { pt: "Selenium / Playwright", en: "Selenium / Playwright" } },
-        { name: "Status + arquivos", detail: { pt: "banco, e-mail, FTP", en: "database, email, FTP" } },
+        { name: { pt: "Sistema da corretora", en: "Brokerage system" }, detail: { pt: "chamados no MySQL", en: "tickets in MySQL" } },
+        { name: { pt: "Despachante", en: "Dispatcher" }, detail: { pt: "um módulo por operadora", en: "one module per insurer" } },
+        { name: { pt: "Portais", en: "Portals" }, detail: { pt: "Selenium / Playwright", en: "Selenium / Playwright" } },
+        { name: { pt: "Status + arquivos", en: "Status + files" }, detail: { pt: "banco, e-mail, FTP", en: "database, email, FTP" } },
       ],
       learned: {
-        pt: "Robô de produção precisa de log, estado no banco e retomada — não de mais velocidade. Os maiores ganhos vieram de saber exatamente onde cada chamado parou.",
-        en: "A production bot needs logging, state in the database and resumability — not more speed. The biggest wins came from knowing exactly where each ticket stopped.",
+        pt: "Robô de produção precisa de log, estado no banco e retomada, mais do que de velocidade. Os maiores ganhos vieram de saber exatamente onde cada chamado parou.",
+        en: "A production bot needs logging, state in the database and resumability more than it needs speed. The biggest wins came from knowing exactly where each ticket stopped.",
       },
     },
   },
   {
     slug: "meus-contatos-ms",
-    title: "Meus Contatos MS",
+    title: "MS Graph Contacts Explorer",
     category: "web",
+    org: { pt: "Teste técnico", en: "Technical assessment" },
     visibility: "public",
-    repo: `${GH}/meus-contatos-ms`,
+    repo: `${GH}/msgraph-contacts-explorer`,
     start: "2025-11",
     end: "2025-11",
     commits: 42,
@@ -372,7 +428,7 @@ export const projects: Project[] = [
       },
       approach: [
         {
-          title: { pt: "OAuth2 feito direito", en: "OAuth2 done properly" },
+          title: { pt: "OAuth2 bem feito", en: "OAuth2 done properly" },
           body: {
             pt: "Fluxo de código com MSAL no Flask e validação do parâmetro state contra CSRF. O backend troca o código por token e só expõe ao front o que ele precisa.",
             en: "Authorisation-code flow with MSAL in Flask and state-parameter validation against CSRF. The backend exchanges the code for a token and exposes only what the frontend needs.",
@@ -381,39 +437,42 @@ export const projects: Project[] = [
         {
           title: { pt: "Regra de negócio testada", en: "Tested business logic" },
           body: {
-            pt: "O agrupamento por domínio fica isolado no backend com testes em pytest; o front em Vue 3 + Pinia cuida de grade/lista, busca em tempo real e exportação.",
-            en: "Domain grouping lives isolated in the backend with pytest tests; the Vue 3 + Pinia frontend handles grid/list views, live search and export.",
+            pt: "O agrupamento por domínio fica isolado no backend com testes em pytest; o front em Vue 3 + Pinia cuida de grade e lista, busca em tempo real e exportação.",
+            en: "Domain grouping lives isolated in the backend with pytest tests; the Vue 3 + Pinia frontend handles grid and list views, live search and export.",
           },
         },
         {
           title: { pt: "Acabamento", en: "Finish" },
           body: {
-            pt: "Tema claro/escuro com detecção do sistema, i18n PT/EN, backend em Docker e deploy no Firebase (Hosting + Functions), com README de instalação passo a passo.",
-            en: "Light/dark theme with system detection, PT/EN i18n, a Dockerised backend and Firebase deploy (Hosting + Functions), with a step-by-step setup README.",
+            pt: "Tema claro e escuro com detecção do sistema, i18n PT/EN, backend em Docker e deploy no Firebase (Hosting + Functions), com README de instalação passo a passo.",
+            en: "Light and dark themes with system detection, PT/EN i18n, a Dockerised backend and Firebase deploy (Hosting + Functions), with a step-by-step setup README.",
           },
         },
       ],
       chain: [
-        { name: "Conta Microsoft", detail: { pt: "OAuth2 + state", en: "OAuth2 + state" } },
+        { name: { pt: "Conta Microsoft", en: "Microsoft account" }, detail: { pt: "OAuth2 + state", en: "OAuth2 + state" } },
         { name: "Flask + MSAL", detail: { pt: "token e Graph API", en: "token and Graph API" } },
-        { name: "Agrupamento", detail: { pt: "por domínio, testado", en: "by domain, tested" } },
+        { name: { pt: "Agrupamento", en: "Grouping" }, detail: { pt: "por domínio, testado", en: "by domain, tested" } },
         { name: "Vue 3", detail: { pt: "busca, export", en: "search, export" } },
       ],
       learned: {
-        pt: "Em teste técnico, o README é parte da entrega: quem avalia precisa rodar o projeto em minutos, e documentar as decisões de arquitetura economiza a conversa depois.",
-        en: "In a technical assessment, the README is part of the deliverable: the reviewer needs to run it in minutes, and documenting architecture decisions saves the conversation later.",
+        pt: "Em teste técnico, o README é parte da entrega. Quem avalia precisa rodar o projeto em minutos, e documentar as decisões de arquitetura economiza a conversa depois.",
+        en: "In a technical assessment, the README is part of the deliverable. The reviewer needs to run it in minutes, and documenting architecture decisions saves the conversation later.",
       },
     },
   },
   {
     slug: "conciliacao-financeira",
-    title: "Conciliação OFX & integrações de CRM",
+    title: "Conciliação OFX e integrações de CRM",
+    titleEn: "OFX reconciliation and CRM integrations",
     category: "automation",
+    origin: "client",
+    org: "HG7",
     visibility: "private",
     start: "2023-08",
     end: "2025-01",
     commits: 70,
-    tier: 2,
+    tier: 1,
     stack: ["Python", "Flask", "MySQL", "PHP", "MongoDB", "Plotly", "Selenium", "REST APIs"],
     context: {
       pt: "Cliente HG7 (corretora de seguros): meio período a partir de 2023, em paralelo ao estágio, e consultoria de backend em 2024. Credenciais e dados financeiros omitidos.",
@@ -424,9 +483,9 @@ export const projects: Project[] = [
       en: "Bank statement (OFX) import and reconciliation across three generations, plus integrations between CRM, telephony and the ERP.",
     },
     metrics: [
-      { value: "3", label: { pt: "gerações do sistema", en: "system generations" } },
-      { value: "70", label: { pt: "commits", en: "commits" } },
-      { value: "18", label: { pt: "meses em uso", en: "months in use" } },
+      { value: "18", label: { pt: "meses em uso diário", en: "months in daily use" } },
+      { value: "3", label: { pt: "gerações, a última dentro do ERP", en: "generations, the last inside the ERP" } },
+      { value: "3", label: { pt: "sistemas conectados: CRM, telefonia, ERP", en: "systems connected: CRM, phone, ERP" } },
     ],
     caseStudy: {
       problem: {
@@ -444,8 +503,8 @@ export const projects: Project[] = [
         {
           title: { pt: "Dentro do ERP existente", en: "Inside the existing ERP" },
           body: {
-            pt: "Na terceira geração, as telas de edição e transferência de agrupamentos passaram a viver dentro do ERP em PHP que a empresa já usava, com um fluxo de promoção dev → prod.",
-            en: "In the third generation, the editing and regrouping screens moved inside the PHP ERP the company already used, with a dev → prod promotion flow.",
+            pt: "Na terceira geração, as telas de edição e transferência de agrupamentos passaram a viver dentro do ERP em PHP que a empresa já usava, com um fluxo de promoção de dev para prod.",
+            en: "In the third generation, the editing and regrouping screens moved inside the PHP ERP the company already used, with a dev-to-prod promotion flow.",
           },
         },
         {
@@ -457,8 +516,8 @@ export const projects: Project[] = [
         },
       ],
       chain: [
-        { name: "Extrato OFX", detail: { pt: "upload", en: "upload" } },
-        { name: "Normalização", detail: { pt: "mapa de históricos", en: "memo mapping" } },
+        { name: { pt: "Extrato OFX", en: "OFX statement" }, detail: { pt: "upload", en: "upload" } },
+        { name: { pt: "Normalização", en: "Normalisation" }, detail: { pt: "mapa de históricos", en: "memo mapping" } },
         { name: "MySQL", detail: { pt: "lançamentos", en: "ledger" } },
         { name: "ERP (PHP)", detail: { pt: "revisão e agrupamento", en: "review and grouping" } },
       ],
@@ -469,68 +528,85 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "marketing-ops",
-    title: "Marketing Ops Toolkit",
-    category: "web",
+    slug: "campaign-qa",
+    title: "QA automático de campanhas",
+    titleEn: "Campaign QA automation",
+    category: "automation",
+    origin: "client",
+    org: "Netbiis",
     visibility: "private",
     start: "2025-04",
-    end: "2025-08",
-    commits: 6,
-    tier: 2,
-    stack: ["Python", "Flask", "SQLite", "Jinja", "Jira API", "SOAP"],
+    end: "2026-03",
+    tier: 1,
+    stack: ["Python", "FastAPI", "Flask", "Adobe Campaign (SOAP)", "Jira API", "SSE", "SQLite", "Jinja", "OpenVPN"],
     context: {
-      pt: "Ferramenta interna da Netbiis | Data Driven Technologies, para o time de CRM e e-mail marketing.",
-      en: "Internal tool at Netbiis | Data Driven Technologies, for the CRM and email-marketing team.",
+      pt: "Netbiis | Data Driven Technologies, para o time que opera as campanhas de e-mail de um cliente corporativo no Adobe Campaign. Nome do cliente, dados de campanha e procedimentos internos omitidos.",
+      en: "Netbiis | Data Driven Technologies, for the team that runs an enterprise client's email campaigns in Adobe Campaign. Client name, campaign data and internal procedures omitted.",
     },
     tagline: {
-      pt: "Suíte web interna que gera scripts de segmentação, limpa listas de e-mail, lê briefings e confere tickets no Jira.",
-      en: "An internal web suite that generates segmentation scripts, cleans email lists, parses briefings and checks Jira tickets.",
+      pt: "Ferramentas que conferem cada campanha contra o briefing antes do envio e tiram do time de CRM o trabalho repetitivo de preparação.",
+      en: "Tools that check every campaign against its briefing before it ships and take the repetitive prep work off the CRM team.",
     },
     metrics: [
       { value: "−40%", label: { pt: "tempo de verificação manual", en: "manual verification time" } },
-      { value: "8", label: { pt: "ferramentas num só painel", en: "tools in one dashboard" } },
+      { value: "2", label: { pt: "sistemas cruzados por execução (Jira × Adobe)", en: "systems cross-checked per run (Jira × Adobe)" } },
+      { value: "8", label: { pt: "ferramentas de preparação num só painel", en: "prep tools in one dashboard" } },
     ],
     caseStudy: {
       problem: {
-        pt: "Cada campanha exigia montar scripts de segmentação à mão, limpar listas de e-mail, conferir briefing e checar o status no Jira — tarefas repetitivas, propensas a erro e espalhadas em planilhas.",
-        en: "Every campaign meant hand-building segmentation scripts, cleaning email lists, checking the briefing and the Jira status — repetitive, error-prone tasks scattered across spreadsheets.",
+        pt: "Cada campanha nasce de um briefing no Jira e é montada à mão no Adobe Campaign: workflows, queries de segmentação, deliveries. Antes de cada envio, alguém conferia item por item se o que foi montado batia com o pedido. Era lento e repetitivo, e um detalhe que passasse chegava à caixa de entrada do cliente final. Em volta disso havia mais preparação manual: scripts de segmentação, limpeza de listas, personalização de assunto.",
+        en: "Each campaign starts as a Jira briefing and is built by hand in Adobe Campaign: workflows, targeting queries, deliveries. Before every send, someone checked item by item that what was built matched what was asked. It was slow and repetitive, and a missed detail landed in the end customer's inbox. Around it sat more manual prep: segmentation scripts, list cleaning, subject-line personalisation.",
       },
       approach: [
         {
-          title: { pt: "Modelo de dados primeiro", en: "Data model first" },
+          title: { pt: "Briefing × implementação, numa execução", en: "Briefing vs. build, in one run" },
           body: {
-            pt: "SQLite com segmentos, listas e itens; scripts de carga leem as planilhas de origem e um CRUD web mantém tudo atualizado sem tocar no banco.",
-            en: "SQLite with segments, lists and items; loader scripts read the source spreadsheets and a web CRUD keeps everything current without touching the database.",
+            pt: "A partir da chave do ticket, o validador lê o briefing estruturado pela API de formulários do Jira e baixa a campanha, os workflows e as deliveries pela API SOAP do Adobe Campaign. O XML é normalizado e cruzado com o briefing: rótulos, condições de segmentação e se cada delivery referenciada pelo workflow de execução existe de fato.",
+            en: "From a ticket key, the validator reads the structured briefing through Jira's forms API and pulls the campaign, its workflows and deliveries through Adobe Campaign's SOAP API. The XML is normalised and cross-checked against the briefing: labels, targeting conditions, and whether every delivery the execution workflow references actually exists.",
           },
         },
         {
-          title: { pt: "Ferramentas pequenas e focadas", en: "Small, focused tools" },
+          title: { pt: "Resultado chega enquanto é calculado", en: "Results stream as they're computed" },
           body: {
-            pt: "Gerador de script de segmento, limpador de listas, formatador de SKU, personalização de assunto, parser de briefing e checagem de tickets no Jira, todos atrás de login.",
-            en: "Segment script generator, list cleaner, SKU formatter, subject personalisation, briefing parser and Jira ticket checks, all behind a login.",
+            pt: "O FastAPI transmite cada seção por Server-Sent Events, então o painel vai se preenchendo conforme as checagens terminam, em vez de travar num carregando. Cada item mostra o esperado e o encontrado lado a lado, com status OK ou NOK.",
+            en: "FastAPI streams each section over Server-Sent Events, so the dashboard fills in as checks finish instead of hanging on a spinner. Every item shows expected and found side by side, with an OK or NOK status.",
+          },
+        },
+        {
+          title: { pt: "Falhas que se explicam", en: "Failures that explain themselves" },
+          body: {
+            pt: "A maioria das execuções quebradas não era bug: era token de sessão expirado ou VPN caída. A ferramenta gerencia o cliente de VPN, reconhece os códigos de erro de autenticação da plataforma e marca cada falha com a origem (Jira, Adobe, rede) numa tela de diagnóstico.",
+            en: "Most broken runs weren't bugs: an expired session token or a dropped VPN. The tool manages the VPN client, recognises the platform's auth error codes and tags every failure with its origin (Jira, Adobe, network) in a diagnostics view.",
+          },
+        },
+        {
+          title: { pt: "Um kit para a preparação repetitiva", en: "A toolkit for the repetitive prep" },
+          body: {
+            pt: "Uma suíte Flask + SQLite com login: gerador de script de segmento, limpador de listas de e-mail, formatador de SKU, personalização de assunto, leitor de briefing e checagem de tickets no Jira, com o modelo de dados carregado das planilhas de origem do time.",
+            en: "A Flask + SQLite suite behind a login: segment-script generator, email-list cleaner, SKU formatter, subject personalisation, briefing parser and Jira ticket checks, with the data model loaded from the team's source spreadsheets.",
           },
         },
       ],
       chain: [
-        { name: "Planilhas", detail: { pt: "origem", en: "source" } },
-        { name: "SQLite", detail: { pt: "segmentos e listas", en: "segments and lists" } },
-        { name: "Flask", detail: { pt: "8 ferramentas", en: "8 tools" } },
-        { name: "Jira", detail: { pt: "status da campanha", en: "campaign status" } },
+        { name: "Jira", detail: { pt: "briefing estruturado", en: "structured briefing" } },
+        { name: "Adobe Campaign", detail: { pt: "SOAP · XML", en: "SOAP · XML" } },
+        { name: "FastAPI", detail: { pt: "esperado × encontrado", en: "expected × found" } },
+        { name: "SSE", detail: { pt: "relatório ao vivo no painel", en: "live report in the dashboard" } },
       ],
       learned: {
-        pt: "Ferramenta interna boa é chata: faz uma coisa, sempre do mesmo jeito. Documentar a API e o modelo de dados com diagramas fez o time adotar sem treinamento.",
-        en: "A good internal tool is boring: it does one thing, the same way every time. Documenting the API and data model with diagrams let the team adopt it without training.",
+        pt: "Faça cada falha se explicar. Quando o erro passou a dizer de onde veio, “o validador não funciona” virou “renove o token”: uma correção de uma linha no lugar de uma sessão de depuração.",
+        en: "Make every failure explain itself. Once each error said where it came from, “the validator is broken” became “renew the token”: a one-line fix instead of a debugging session.",
       },
     },
   },
 
-  // ——— Índice (sem estudo de caso) ———
+  // Índice (sem estudo de caso)
   {
     slug: "localiza-api",
-    title: "LocalizaAPI",
+    title: "Car Rental Price Tracker",
     category: "automation",
     visibility: "public",
-    repo: `${GH}/LocalizaAPI`,
+    repo: `${GH}/car-rental-price-tracker`,
     start: "2023-08",
     end: "2023-08",
     commits: 4,
@@ -542,10 +618,10 @@ export const projects: Project[] = [
   },
   {
     slug: "techpowerup-news",
-    title: "TechPowerUp News",
+    title: "Hardware News Translator",
     category: "automation",
     visibility: "public",
-    repo: `${GH}/Techpowerup_noticias`,
+    repo: `${GH}/hardware-news-translator`,
     start: "2023-02",
     end: "2023-02",
     commits: 1,
@@ -560,7 +636,7 @@ export const projects: Project[] = [
     title: "Checkbox Race Bot",
     category: "automation",
     visibility: "public",
-    repo: `${GH}/Checkboxrace_bot`,
+    repo: `${GH}/checkbox-race-bot`,
     start: "2022-04",
     end: "2022-04",
     commits: 13,
@@ -573,6 +649,7 @@ export const projects: Project[] = [
   {
     slug: "unity-2d",
     title: "Protótipo 2D em Unity",
+    titleEn: "2D prototype in Unity",
     category: "study",
     visibility: "private",
     start: "2023-03",
@@ -589,7 +666,7 @@ export const projects: Project[] = [
     title: "DEVinHouse",
     category: "study",
     visibility: "public",
-    repo: `${GH}/DevInHouse`,
+    repo: `${GH}/devinhouse-bootcamp`,
     start: "2022-04",
     end: "2023-08",
     commits: 62,
@@ -602,16 +679,17 @@ export const projects: Project[] = [
   {
     slug: "javascript-curso",
     title: "Curso de JavaScript",
+    titleEn: "JavaScript course",
     category: "study",
     visibility: "public",
-    repo: `${GH}/Javascript-Curso`,
+    repo: `${GH}/javascript-fundamentals`,
     start: "2023-06",
     end: "2023-06",
     commits: 12,
     stack: ["JavaScript"],
     tagline: {
-      pt: "Quinze aulas comentadas, de variáveis a async/await — o repositório público com mais estrelas.",
-      en: "Fifteen annotated lessons, from variables to async/await — my most-starred public repository.",
+      pt: "Quinze aulas comentadas, de variáveis a async/await. É o meu repositório público com mais estrelas.",
+      en: "Fifteen annotated lessons, from variables to async/await. My most-starred public repository.",
     },
   },
   {
@@ -633,19 +711,41 @@ export const projects: Project[] = [
     title: "Landing page",
     category: "study",
     visibility: "public",
-    repo: `${GH}/landing-page`,
+    repo: `${GH}/responsive-landing-page`,
     start: "2022-04",
     end: "2022-04",
     commits: 2,
     stack: ["HTML", "CSS", "JavaScript"],
     tagline: {
-      pt: "Primeiro exercício de landing page — o começo da linha do tempo.",
-      en: "First landing page exercise — where the timeline starts.",
+      pt: "Meu primeiro exercício de landing page, de 2022.",
+      en: "My first landing page exercise, from 2022.",
     },
   },
 ];
 
-export const caseStudies = projects.filter((p) => p.caseStudy);
+/** Trabalho para empresas primeiro: é o que cliente e recrutador procuram. */
+const CASE_ORDER = [
+  "campaign-qa",
+  "automacao-rpa",
+  "conciliacao-financeira",
+  "maxtools-radio",
+  "maxtools",
+  "pallab",
+  "meus-contatos-ms",
+];
+
+export const caseStudies = projects
+  .filter((p) => p.caseStudy)
+  .sort((a, b) => CASE_ORDER.indexOf(a.slug) - CASE_ORDER.indexOf(b.slug));
+
+export function projectTitle(p: Project, lang: Lang) {
+  return lang === "en" && p.titleEn ? p.titleEn : p.title;
+}
+
+/** Texto que pode ou não ter tradução. */
+export function tr(v: string | L, lang: Lang) {
+  return typeof v === "string" ? v : v[lang];
+}
 
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
