@@ -602,6 +602,22 @@ export const projects: Project[] = [
 
   // Índice (sem estudo de caso)
   {
+    slug: "cnabkit",
+    title: "cnabkit",
+    category: "automation",
+    origin: "own",
+    visibility: "public",
+    repo: `${GH}/cnabkit`,
+    start: "2026-10",
+    end: "2026-10",
+    commits: 1,
+    stack: ["Python", "pytest", "mypy", "GitHub Actions"],
+    tagline: {
+      pt: "Biblioteca de código aberto que lê arquivos de banco brasileiros: retorno CNAB 240 e 400 e extratos OFX, com erros que apontam a linha e o campo.",
+      en: "Open-source library that reads Brazilian bank files: CNAB 240 and 400 returns and OFX statements, with errors that point to the line and field.",
+    },
+  },
+  {
     slug: "localiza-api",
     title: "Car Rental Price Tracker",
     category: "automation",

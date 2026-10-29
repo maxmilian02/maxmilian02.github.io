@@ -218,7 +218,7 @@ export function HomePage({ lang }: { lang: Lang }) {
           {experience.map((j) => (
             <li key={j.id} className="job">
               <p className="job-when mono">
-                {month(j.from, lang)} – {month(j.to, lang)}
+                {month(j.from, lang)} – {j.to === "now" ? ui.now[lang] : month(j.to, lang)}
               </p>
               <div>
                 <h3>{tr(j.org, lang)}</h3>

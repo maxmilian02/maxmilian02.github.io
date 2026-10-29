@@ -36,6 +36,30 @@ export interface Job {
 /** Experiência profissional, igual ao currículo (mais recente primeiro). */
 export const experience: Job[] = [
   {
+    id: "independent",
+    org: { pt: "Desenvolvedor independente", en: "Independent developer" },
+    links: [{ label: "github.com/maxmilian02/cnabkit", href: "https://github.com/maxmilian02/cnabkit" }],
+    role: { pt: "Produtos próprios e código aberto", en: "Own products and open source" },
+    from: "2026-07",
+    to: "now",
+    where: { pt: "Remoto", en: "Remote" },
+    points: [
+      {
+        pt: "MaxTools Radio: site, app Android e bot de Discord com uma conta por e-mail (OAuth com Google, Discord e Spotify), recursos ligados por chave sem deploy e doações por webhook; 1.180 testes Python e 340 testes Android.",
+        en: "MaxTools Radio: website, Android app and Discord bot with one account per email (OAuth with Google, Discord and Spotify), feature flags switched on without a deploy and donations by webhook; 1,180 Python tests and 340 Android tests.",
+      },
+      {
+        pt: "cnabkit: biblioteca Python de código aberto que lê arquivos de banco brasileiros (CNAB 240, CNAB 400 e OFX), com testes, tipagem estrita e CI.",
+        en: "cnabkit: open-source Python library that reads Brazilian bank files (CNAB 240, CNAB 400 and OFX), with tests, strict typing and CI.",
+      },
+      {
+        pt: "Infraestrutura própria em produção: Proxmox, Docker, nginx com HTTPS, monitoramento com Uptime Kuma e backups semanais.",
+        en: "Own production infrastructure: Proxmox, Docker, nginx with HTTPS, Uptime Kuma monitoring and weekly backups.",
+      },
+    ],
+    slugs: ["maxtools-radio", "cnabkit"],
+  },
+  {
     id: "netbiis",
     org: "Netbiis | Data Driven Technologies",
     links: [{ label: "netbiis.com", href: "https://www.netbiis.com" }],
@@ -79,10 +103,6 @@ export const experience: Job[] = [
       {
         pt: "ExportSul (corretora de seguros): robôs Selenium que processam faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
         en: "ExportSul (insurance brokerage): Selenium bots that process invoices in an ERP, with retries and per-item state so runs resume where they stopped.",
-      },
-      {
-        pt: "Deploy de serviços em contêiner na AWS (EC2), com S3 para arquivos.",
-        en: "Containerized services deployed on AWS EC2, with S3 for file storage.",
       },
     ],
     slugs: ["conciliacao-financeira"],
@@ -208,7 +228,7 @@ export const stack: StackGroup[] = [
       { name: "Proxmox · LXC", slugs: ["maxtools-radio", "pallab", "maxtools"] },
       { name: "nginx · HTTPS", slugs: ["maxtools", "maxtools-radio"] },
       { name: "Linux · systemd", slugs: ["maxtools"] },
-      { name: "AWS (EC2, S3)", slugs: [], jobs: ["consulting"] },
+      { name: { pt: "Monitoramento (Uptime Kuma) · backups agendados", en: "Monitoring (Uptime Kuma) · scheduled backups" }, slugs: ["maxtools-radio", "pallab", "maxtools"] },
     ],
   },
 ];
@@ -306,8 +326,8 @@ export const services: Service[] = [
   {
     title: { pt: "Ferramentas internas no ar", en: "Internal tools, deployed" },
     body: {
-      pt: "Apps em Flask e FastAPI com login, testes e Docker, publicados em Linux atrás de nginx, na AWS ou em infraestrutura que eu mesmo mantenho.",
-      en: "Flask and FastAPI apps with login, tests and Docker, deployed on Linux behind nginx, on AWS or on infrastructure I run myself.",
+      pt: "Apps em Flask e FastAPI com login, testes e Docker, publicados em Linux atrás de nginx, num servidor que eu mesmo mantenho, com monitoramento e backup.",
+      en: "Flask and FastAPI apps with login, tests and Docker, deployed on Linux behind nginx, on a server I run myself, with monitoring and backups.",
     },
     slugs: ["campaign-qa", "maxtools", "maxtools-radio"],
   },
