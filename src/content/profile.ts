@@ -70,7 +70,7 @@ export const experience: Job[] = [
     points: [
       {
         pt: "Criei e mantive uma aplicação web interna (Flask + SQL) que automatizou a validação de dados das campanhas, reduzindo em 40% o tempo de verificação manual da equipe.",
-        en: "Built and owned an internal Flask + SQL web application that automated data validation for campaign operations, cutting the team's manual verification time by 40%.",
+        en: "Built and owned an internal Flask + SQL web application that automated data validation for campaign operations, cutting manual verification time by 40%.",
       },
       {
         pt: "Escrevi e otimizei consultas SQL complexas e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
@@ -87,22 +87,22 @@ export const experience: Job[] = [
     id: "consulting",
     org: { pt: "Consultoria independente (HG7, ExportSul)", en: "Independent consulting (HG7, ExportSul)" },
     links: [{ label: "exportsul.com.br", href: "https://www.exportsul.com.br" }],
-    role: { pt: "Desenvolvedor Backend", en: "Backend Developer" },
+    role: { pt: "Desenvolvedor Backend (HG7 em meio período desde 2023)", en: "Backend Developer (HG7 part-time from 2023)" },
     from: "2024-02",
     to: "2024-08",
     where: { pt: "Híbrido", en: "Hybrid" },
     points: [
       {
-        pt: "HG7 (corretora de seguros): sistema de importação e conciliação de extratos OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP e alimentando a DRE. O trabalho começou em meio período em 2023, em paralelo ao estágio.",
-        en: "HG7 (insurance brokerage): OFX bank-statement import and reconciliation (Python, Flask, MySQL) across three iterations, embedded in the PHP ERP and feeding the income statement. The engagement began part-time in 2023, alongside the internship.",
+        pt: "HG7 (corretora de seguros): criei o sistema de importação e conciliação de extratos OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP e alimentando a DRE, no lugar da conciliação em planilha.",
+        en: "HG7 (insurance brokerage): built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the PHP ERP and feeding the income statement, replacing spreadsheet reconciliation.",
       },
       {
-        pt: "HG7: integração do CRM RD Station e da telefonia 3CX; ETL do RD Station e do Microsoft Graph para MongoDB, alimentando painéis no Power BI.",
-        en: "HG7: RD Station CRM and 3CX telephony integrations; ETL from RD Station and Microsoft Graph into MongoDB for Power BI dashboards.",
+        pt: "HG7: integrei o CRM RD Station e a telefonia 3CX e criei o ETL do RD Station e do Microsoft Graph para MongoDB, alimentando painéis no Power BI.",
+        en: "HG7: integrated RD Station CRM and 3CX telephony and built ETL from RD Station and Microsoft Graph into MongoDB for Power BI dashboards.",
       },
       {
-        pt: "ExportSul (corretora de seguros): robôs Selenium que processam faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
-        en: "ExportSul (insurance brokerage): Selenium bots that process invoices in an ERP, with retries and per-item state so runs resume where they stopped.",
+        pt: "ExportSul (corretora de seguros): criei robôs Selenium que processam faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
+        en: "ExportSul (insurance brokerage): built Selenium bots that process invoices in an ERP, with retries and per-item state so runs resume where they stopped.",
       },
     ],
     slugs: ["conciliacao-financeira"],
@@ -117,16 +117,16 @@ export const experience: Job[] = [
     where: { pt: "São Paulo", en: "São Paulo" },
     points: [
       {
-        pt: "15 robôs de automação em produção (Python, Selenium, Playwright) para 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
-        en: "15 production automation bots (Python, Selenium, Playwright) across 4 health-insurer portals, driven by a MySQL ticket queue, plus invoices, payment slips and payslips.",
+        pt: "Desenhei um serviço Flask + Celery + RabbitMQ que executa 15 robôs de produção em paralelo atrás de uma API REST, com a concorrência dimensionada por teste de carga.",
+        en: "Designed a Flask + Celery + RabbitMQ service that runs 15 production bots in parallel behind a REST API, with concurrency sized by a load test.",
       },
       {
-        pt: "Serviço Flask + Celery + RabbitMQ que executa os robôs em paralelo atrás de uma API REST, com a concorrência dimensionada por teste de carga.",
-        en: "A Flask + Celery + RabbitMQ service that runs the bots in parallel behind a REST API, with concurrency sized by a load test.",
+        pt: "Criei e mantive esses robôs (Python, Selenium, Playwright) para 4 portais de operadoras de saúde, a partir de uma fila de chamados no MySQL.",
+        en: "Built and maintained those bots (Python, Selenium, Playwright) across 4 health-insurer portals, driven by a MySQL ticket queue.",
       },
       {
-        pt: "Biblioteca Python interna (wheel) com o código comum dos robôs; MySQL, MongoDB e painéis internos em Django e Flask.",
-        en: "An internal Python package (wheel) with the bots' shared code; MySQL, MongoDB and internal dashboards in Django and Flask.",
+        pt: "Extraí o código comum para uma biblioteca Python interna (wheel) usada por todos os robôs; MySQL, MongoDB e painéis internos em Django e Flask.",
+        en: "Extracted the shared code into an internal Python package (wheel) used by every bot; MySQL, MongoDB and internal dashboards in Django and Flask.",
       },
     ],
     slugs: ["automacao-rpa"],

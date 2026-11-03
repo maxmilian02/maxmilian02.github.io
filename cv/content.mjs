@@ -50,21 +50,20 @@ export const cv = {
         when: "Sep 2024 – May 2026",
         where: "Remote",
         points: [
-          "Built and owned an internal Flask + SQL web application that automated data validation for campaign operations, cutting the team's manual verification time by 40%.",
-          "Wrote and optimized complex SQL and stored procedures for high-volume extraction and audience segmentation in Adobe Campaign.",
+          "Built and owned an internal Flask + SQL web application that automated data validation for campaign operations, cutting manual verification time by 40%.",
+          "Wrote and optimized complex SQL and stored procedures for high-volume extraction and segmentation in Adobe Campaign.",
           "Provided L3 support for production automation pipelines: log-based root-cause analysis, fixes and follow-up.",
         ],
       },
       {
         org: "Independent Consultant",
-        role: "Backend Developer for HG7 and ExportSul (insurance brokerages)",
+        role: "Backend Developer for HG7 and ExportSul (insurance brokerages; HG7 part-time from 2023)",
         when: "Feb 2024 – Aug 2024",
         where: "Hybrid",
-        note: "The HG7 engagement began part-time in 2023, alongside the internship.",
         points: [
           "HG7: built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the company's PHP ERP and feeding its income statement (DRE), replacing line-by-line spreadsheet reconciliation.",
-          "HG7: integrated RD Station CRM and 3CX telephony with internal systems; ETL from RD Station and Microsoft Graph into MongoDB for Power BI dashboards.",
-          "ExportSul: Selenium bots processing invoices in an ERP, with retries and per-item state so runs resume where they stopped.",
+          "HG7: integrated RD Station CRM and 3CX telephony with internal systems; built ETL from RD Station and Microsoft Graph into MongoDB for Power BI dashboards.",
+          "ExportSul: built Selenium bots that process invoices in an ERP, with retries and per-item state to resume where they stopped.",
         ],
       },
       {
@@ -73,8 +72,8 @@ export const cv = {
         when: "Aug 2022 – Feb 2024",
         where: "São Paulo",
         points: [
-          "Built and maintained 15 production bots (Python, Selenium, Playwright) processing beneficiary changes across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips and payslips.",
-          "Designed a Flask + Celery + RabbitMQ service that runs the bots in parallel behind a REST API, with concurrency sized by a load test.",
+          "Designed a Flask + Celery + RabbitMQ service running 15 production bots in parallel behind a REST API, sized by a load test.",
+          "Built and maintained those bots (Python, Selenium, Playwright), processing beneficiary changes across 4 health-insurer portals from a MySQL ticket queue.",
           "Extracted shared automation code into an internal Python package (wheel) reused by every bot; MySQL for transactional data, MongoDB for scraped data, internal dashboards in Django and Flask.",
         ],
       },
@@ -146,14 +145,13 @@ export const cv = {
       },
       {
         org: "Consultor independente",
-        role: "Desenvolvedor Backend para HG7 e ExportSul (corretoras de seguros)",
+        role: "Desenvolvedor Backend para HG7 e ExportSul (corretoras de seguros; HG7 em meio período desde 2023)",
         when: "fev 2024 – ago 2024",
         where: "Híbrido",
-        note: "O trabalho com a HG7 começou em meio período em 2023, em paralelo ao estágio.",
         points: [
           "HG7: sistema de importação e conciliação de extratos bancários OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP da empresa e alimentando a DRE, substituindo a conciliação linha a linha em planilha.",
-          "HG7: integração do CRM RD Station e da telefonia 3CX com os sistemas internos; ETL do RD Station e do Microsoft Graph para MongoDB, alimentando painéis no Power BI.",
-          "ExportSul: robôs Selenium que automatizam o processamento de faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
+          "HG7: integrei o CRM RD Station e a telefonia 3CX aos sistemas internos e criei o ETL do RD Station e do Microsoft Graph para MongoDB, alimentando painéis no Power BI.",
+          "ExportSul: criei robôs Selenium que automatizam o processamento de faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
         ],
       },
       {
@@ -162,8 +160,8 @@ export const cv = {
         when: "ago 2022 – fev 2024",
         where: "São Paulo",
         points: [
-          "Criei e mantive 15 robôs de automação em produção (Python, Selenium, Playwright) que processavam movimentações de beneficiários em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites (e-mail, FTP).",
-          "Desenhei um serviço Flask + Celery + RabbitMQ que executa os robôs em paralelo atrás de uma API REST, dimensionando a concorrência com teste de carga antes de ir para produção.",
+          "Desenhei um serviço Flask + Celery + RabbitMQ que executa 15 robôs de produção em paralelo atrás de uma API REST, dimensionando a concorrência com teste de carga antes de ir para produção.",
+          "Criei e mantive esses robôs (Python, Selenium, Playwright), que processavam movimentações de beneficiários em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL.",
           "Extraí o código comum dos robôs para uma biblioteca Python interna (wheel) reaproveitada por todos; MySQL para dados transacionais, MongoDB para dados coletados e painéis internos em Django e Flask.",
         ],
       },

@@ -27,15 +27,13 @@ function html(lang) {
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font: 9.2pt/1.32 "IBM Plex Sans", "Segoe UI", Arial, sans-serif; color: #1b1e23; background: #fff; padding: 22pt 34pt 12pt; }
   a { color: inherit; text-decoration: none; }
-  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16pt;
-           padding-bottom: 9pt; border-bottom: 1.2pt solid #1b1e23; }
+  header { padding-bottom: 8pt; border-bottom: 1.2pt solid #1b1e23; }
   h1 { font-size: 20pt; line-height: 1; font-weight: 700; }
   .title { margin-top: 5pt; font-size: 11pt; font-weight: 600; color: #8f5200; }
-  .contact { text-align: right; font-size: 8.6pt; line-height: 1.55; color: #3a3f47; }
+  .contact { margin-top: 5pt; font-size: 8.6pt; line-height: 1.5; color: #3a3f47; }
   section { margin-top: 8pt; }
-  h2 { font-size: 8.6pt; font-weight: 700; text-transform: uppercase; color: #5d636c;
-       margin-bottom: 3.5pt; display: flex; align-items: center; gap: 6pt; }
-  h2::before { content: ""; width: 6pt; height: 6pt; background: #e8890c; border-radius: 1pt; }
+  h2 { font-size: 8.6pt; font-weight: 700; text-transform: uppercase; color: #5d636c; margin-bottom: 3.5pt;
+       padding-bottom: 1.5pt; border-bottom: 0.5pt solid #d5d8dd; }
   h2 small { font-weight: 500; text-transform: none; color: #8a9099; }
   .summary { color: #2b3038; }
   .skills { display: grid; grid-template-columns: 54pt 1fr; gap: 1.5pt 10pt; }
@@ -57,15 +55,11 @@ function html(lang) {
 </head>
 <body>
 <header>
-  <div>
-    <h1>${esc(contact.name)}</h1>
-    <div class="title">${esc(c.title)}</div>
-  </div>
+  <h1>${esc(contact.name)}</h1>
+  <div class="title">${esc(c.title)}</div>
   <div class="contact">
-    ${esc(c.location)}<br>
-    ${link(`tel:${contact.phone.replace(/[^+\d]/g, "")}`, contact.phone)} · ${link(`mailto:${contact.email}`, contact.email)}<br>
-    ${link(`https://${contact.linkedin}`, contact.linkedin)}<br>
-    ${link(`https://${contact.github}`, contact.github)} · ${link(`https://${contact.site}`, contact.site)}
+    ${esc(c.location)} · ${link(`tel:${contact.phone.replace(/[^+\d]/g, "")}`, contact.phone)} · ${link(`mailto:${contact.email}`, contact.email)}<br>
+    ${link(`https://${contact.linkedin}`, contact.linkedin)} · ${link(`https://${contact.github}`, contact.github)} · ${link(`https://${contact.site}`, contact.site)}
   </div>
 </header>
 
