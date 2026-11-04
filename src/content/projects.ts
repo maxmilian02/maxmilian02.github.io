@@ -548,8 +548,9 @@ export const projects: Project[] = [
       en: "Tools that check every campaign against its briefing before it ships and take the repetitive prep work off the CRM team.",
     },
     metrics: [
-      { value: "−40%", label: { pt: "tempo de verificação manual", en: "manual verification time" } },
-      { value: "2", label: { pt: "sistemas cruzados por execução (Jira × Adobe)", en: "systems cross-checked per run (Jira × Adobe)" } },
+      { value: "32", label: { pt: "campanhas por dia passando pelas ferramentas", en: "campaigns a day going through the tools" } },
+      { value: "10–15", label: { pt: "delas com QA totalmente automático", en: "of them with fully automated QA" } },
+      { value: "+40%", label: { pt: "de produção dos operadores, no melhor caso", en: "operator output, at best" } },
       { value: "8", label: { pt: "ferramentas de preparação num só painel", en: "prep tools in one dashboard" } },
     ],
     caseStudy: {

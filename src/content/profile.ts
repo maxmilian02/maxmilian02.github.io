@@ -8,7 +8,7 @@ export const profile = {
   siteRepo: "https://github.com/maxmilian02/maxmilian02.github.io",
   // Deixe vazio para esconder do contato.
   linkedin: "https://www.linkedin.com/in/maxmilian-duarte-python/",
-  email: "abc.max@hotmail.com",
+  email: "maximiliannduarte@gmail.com",
   phone: "+55 11 97433-0108",
   whatsapp: "https://wa.me/5511974330108",
   location: "São Paulo, SP",
@@ -69,8 +69,8 @@ export const experience: Job[] = [
     where: { pt: "Remoto", en: "Remote" },
     points: [
       {
-        pt: "Criei e mantive uma aplicação web interna (Flask + SQL) que automatizou a validação de dados das campanhas, reduzindo em 40% o tempo de verificação manual da equipe.",
-        en: "Built and owned an internal Flask + SQL web application that automated data validation for campaign operations, cutting manual verification time by 40%.",
+        pt: "Criei e mantive uma aplicação web interna (Flask + SQL) para a operação de campanhas (cerca de 32 por dia): o QA automático cobria de 10 a 15 delas, e as ferramentas de apoio aumentaram em até 40% a produção dos operadores nas 32.",
+        en: "Built and owned an internal Flask + SQL web application for campaign operations (~32 campaigns a day): automated QA fully covered 10 to 15 of them, and its support tools raised operator output by up to 40% across all 32.",
       },
       {
         pt: "Escrevi e otimizei consultas SQL complexas e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
@@ -97,8 +97,8 @@ export const experience: Job[] = [
         en: "HG7 (insurance brokerage): built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the PHP ERP and feeding the income statement, replacing spreadsheet reconciliation.",
       },
       {
-        pt: "HG7: integrei o CRM RD Station e a telefonia 3CX e criei o ETL do RD Station e do Microsoft Graph para MongoDB, alimentando painéis no Power BI.",
-        en: "HG7: integrated RD Station CRM and 3CX telephony and built ETL from RD Station and Microsoft Graph into MongoDB for Power BI dashboards.",
+        pt: "HG7: integrei o CRM RD Station e a telefonia 3CX e criei o ETL do RD Station (dentro do limite de 120 requisições/min da API) e do Microsoft Graph para MongoDB, alimentando painéis no Power BI.",
+        en: "HG7: integrated RD Station CRM and 3CX telephony and built ETL from RD Station (within its 120 requests/min API limit) and Microsoft Graph into MongoDB for Power BI dashboards.",
       },
       {
         pt: "ExportSul (corretora de seguros): criei robôs Selenium que processam faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
@@ -266,8 +266,8 @@ export interface Proof {
 
 export const proof: Proof[] = [
   {
-    value: "−40%",
-    label: { pt: "de tempo de verificação manual antes de cada campanha", en: "manual verification time before each campaign launch" },
+    value: "+40%",
+    label: { pt: "de produção no time de campanhas, no melhor caso, com 32 campanhas por dia", en: "more output from the campaign team at best, across 32 campaigns a day" },
     where: "Netbiis",
     slug: "campaign-qa",
   },

@@ -4,7 +4,7 @@
 export const contact = {
   name: "Maxmilian Duarte",
   phone: "+55 11 97433-0108",
-  email: "abc.max@hotmail.com",
+  email: "maximiliannduarte@gmail.com",
   linkedin: "linkedin.com/in/maxmilian-duarte-python",
   github: "github.com/maxmilian02",
   site: "maxmilian02.github.io",
@@ -50,7 +50,7 @@ export const cv = {
         when: "Sep 2024 – May 2026",
         where: "Remote",
         points: [
-          "Built and owned an internal Flask + SQL web application that automated data validation for campaign operations, cutting manual verification time by 40%.",
+          "Built and owned an internal Flask + SQL web application for campaign operations (~32 campaigns a day): automated QA fully covered 10 to 15 of them, and its support tools raised operator output by up to 40% across all 32.",
           "Wrote and optimized complex SQL and stored procedures for high-volume extraction and segmentation in Adobe Campaign.",
           "Provided L3 support for production automation pipelines: log-based root-cause analysis, fixes and follow-up.",
         ],
@@ -62,7 +62,7 @@ export const cv = {
         where: "Hybrid",
         points: [
           "HG7: built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the company's PHP ERP and feeding its income statement (DRE), replacing line-by-line spreadsheet reconciliation.",
-          "HG7: integrated RD Station CRM and 3CX telephony with internal systems; built ETL from RD Station and Microsoft Graph into MongoDB for Power BI dashboards.",
+          "HG7: integrated RD Station CRM and 3CX telephony with internal systems; built ETL from RD Station (within its 120 requests/min API limit) and Microsoft Graph into MongoDB for Power BI dashboards.",
           "ExportSul: built Selenium bots that process invoices in an ERP, with retries and per-item state to resume where they stopped.",
         ],
       },
@@ -138,7 +138,7 @@ export const cv = {
         when: "set 2024 – mai 2026",
         where: "Remoto",
         points: [
-          "Criei e mantive uma aplicação web interna (Flask + SQL) que automatizou a validação de dados das campanhas, reduzindo em 40% o tempo de verificação manual da equipe.",
+          "Criei e mantive uma aplicação web interna (Flask + SQL) para a operação de campanhas (cerca de 32 por dia): o QA automático cobria de 10 a 15 delas, e as ferramentas de apoio aumentaram em até 40% a produção dos operadores nas 32.",
           "Escrevi e otimizei consultas SQL complexas e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
           "Suporte L3 a pipelines de automação em produção: análise de logs, causa raiz, correção e acompanhamento.",
         ],
@@ -150,7 +150,7 @@ export const cv = {
         where: "Híbrido",
         points: [
           "HG7: sistema de importação e conciliação de extratos bancários OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP da empresa e alimentando a DRE, substituindo a conciliação linha a linha em planilha.",
-          "HG7: integrei o CRM RD Station e a telefonia 3CX aos sistemas internos e criei o ETL do RD Station e do Microsoft Graph para MongoDB, alimentando painéis no Power BI.",
+          "HG7: integrei o CRM RD Station e a telefonia 3CX aos sistemas internos e criei o ETL do RD Station (dentro do limite de 120 requisições/min da API) e do Microsoft Graph para MongoDB, alimentando painéis no Power BI.",
           "ExportSul: criei robôs Selenium que automatizam o processamento de faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
         ],
       },
@@ -160,7 +160,7 @@ export const cv = {
         when: "ago 2022 – fev 2024",
         where: "São Paulo",
         points: [
-          "Desenhei um serviço Flask + Celery + RabbitMQ que executa 15 robôs de produção em paralelo atrás de uma API REST, dimensionando a concorrência com teste de carga antes de ir para produção.",
+          "Desenhei um serviço Flask + Celery + RabbitMQ que executa 15 robôs de produção em paralelo atrás de uma API REST, com a concorrência dimensionada por teste de carga.",
           "Criei e mantive esses robôs (Python, Selenium, Playwright), que processavam movimentações de beneficiários em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL.",
           "Extraí o código comum dos robôs para uma biblioteca Python interna (wheel) reaproveitada por todos; MySQL para dados transacionais, MongoDB para dados coletados e painéis internos em Django e Flask.",
         ],
