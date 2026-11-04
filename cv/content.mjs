@@ -1,7 +1,7 @@
 // Conteúdo do currículo — fonte única para os PDFs em PT e EN.
 // Regra: só entra o que dá para sustentar em entrevista; números vêm dos projetos reais.
 // Base: versão revisada por ferramenta de ATS (nov/2026). Exceção: a frase da Netbiis segue os números
-// confirmados pelo dono (32 jobs/dia, QA automático em 10–15, cada job de ~20 para ~12 min, −40%).
+// confirmados pelo dono (32 jobs/dia, QA automático em 10–15, cada job de cerca de 20 para 12 min, −40%).
 // Layout: o cargo vai em negrito na primeira linha (role) e a empresa embaixo (org).
 
 export const contact = {
@@ -18,13 +18,13 @@ export const cv = {
     file: "maxmilian-duarte-resume.pdf",
     paper: "Letter",
     title: "Python Backend Engineer",
-    location: "São Paulo, Brazil (UTC−3) · remote, overlaps US business hours",
+    location: "São Paulo, Brazil (UTC−3), remote, overlaps US business hours",
     h: {
       summary: "Professional summary",
       skills: "Skills",
       experience: "Work Experience",
       projects: "Projects",
-      projectsNote: "case studies at maxmilian02.github.io",
+      projectsNote: "Case studies at maxmilian02.github.io",
       education: "Education",
       languages: "Languages",
     },
@@ -53,15 +53,15 @@ export const cv = {
         when: "Sep 2024 – May 2026",
         where: "Remote",
         points: [
-          "Built and owned an internal Flask and SQL web app for ~32 daily campaign jobs, with automated QA fully covering 10 to 15.",
-          "Cut each campaign job from ~20 to ~12 minutes (−40%) with the app's support tools, used on all 32.",
+          "Built and owned an internal Flask and SQL web app for about 32 daily campaign jobs, with automated QA fully covering 10 to 15.",
+          "Cut each campaign job from about 20 to 12 minutes (−40%) with the app's support tools, used on all 32.",
           "Wrote and optimized complex SQL and stored procedures for high-volume extraction and segmentation in Adobe Campaign.",
           "Provided L3 support for production automation pipelines: log-based root-cause analysis, fixes, and follow-up.",
         ],
       },
       {
-        role: "Backend Developer, HG7 Group (Insurance Brokerages and a Clinic)",
-        org: "Independent Consultant",
+        role: "Backend Developer, Independent Consultant",
+        org: "HG7 Group (Insurance Brokerages and a Clinic)",
         when: "Feb 2024 – Aug 2024",
         where: "Hybrid",
         points: [
@@ -96,10 +96,10 @@ export const cv = {
       ],
       [
         "MaxTools",
-        "FastAPI plugin platform: a registry auto-discovers tool modules and a Next.js dashboard renders from their manifest. Async jobs with progress, API-key auth, TTL cleanup, and frame-accurate video trimming over HTTP Range.",
+        "FastAPI plugin platform where a registry auto-discovers tool modules and a Next.js dashboard renders from their manifest. Async jobs with progress, API-key auth, TTL cleanup, and frame-accurate video trimming over HTTP Range.",
       ],
     ],
-    languages: "Portuguese (native) · English (advanced: reading, writing, technical documentation)",
+    languages: "Portuguese (native), English (advanced: reading, writing, technical documentation)",
     education: "B.Sc. Computer Engineering, Impacta Tecnologia (expected 2027)",
   },
 
@@ -107,13 +107,13 @@ export const cv = {
     file: "maxmilian-duarte-curriculo.pdf",
     paper: "A4",
     title: "Engenheiro de Software Backend Python",
-    location: "São Paulo, SP · aberto a remoto",
+    location: "São Paulo, SP, aberto a remoto",
     h: {
       summary: "Resumo profissional",
       skills: "Competências",
       experience: "Experiência profissional",
       projects: "Projetos",
-      projectsNote: "estudos de caso em maxmilian02.github.io",
+      projectsNote: "Estudos de caso em maxmilian02.github.io",
       education: "Formação",
       languages: "Idiomas",
     },
@@ -143,14 +143,14 @@ export const cv = {
         where: "Remoto",
         points: [
           "Criei e mantive uma aplicação web interna (Flask + SQL) para cerca de 32 jobs de campanha por dia, com QA automático que cobria de 10 a 15 deles.",
-          "Reduzi cada job de ~20 para ~12 minutos (−40%) com as ferramentas de apoio da aplicação, usadas nos 32.",
+          "Reduzi cada job de cerca de 20 para 12 minutos (−40%) com as ferramentas de apoio da aplicação, usadas nos 32.",
           "Escrevi e otimizei consultas SQL complexas e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
           "Prestei suporte L3 a pipelines de automação em produção: análise de logs, causa raiz, correção e acompanhamento.",
         ],
       },
       {
-        role: "Desenvolvedor Backend, grupo HG7 (corretoras de seguros e uma clínica)",
-        org: "Consultor independente",
+        role: "Desenvolvedor Backend, Consultor Independente",
+        org: "Grupo HG7 (corretoras de seguros e uma clínica)",
         when: "fev 2024 – ago 2024",
         where: "Híbrido",
         points: [
@@ -185,10 +185,10 @@ export const cv = {
       ],
       [
         "MaxTools",
-        "Plataforma de plugins em FastAPI: um registry descobre os módulos e um painel Next.js é montado a partir do manifesto. Jobs assíncronos com progresso, autenticação por API key, limpeza por TTL e corte de vídeo quadro a quadro via HTTP Range.",
+        "Plataforma de plugins em FastAPI em que um registry descobre os módulos e um painel Next.js é montado a partir do manifesto. Jobs assíncronos com progresso, autenticação por API key, limpeza por TTL e corte de vídeo quadro a quadro via HTTP Range.",
       ],
     ],
-    languages: "Português (nativo) · Inglês (avançado: leitura, escrita e documentação técnica)",
+    languages: "Português (nativo), Inglês (avançado: leitura, escrita e documentação técnica)",
     education: "Bacharelado em Engenharia da Computação, Impacta Tecnologia (previsão 2027)",
   },
 };

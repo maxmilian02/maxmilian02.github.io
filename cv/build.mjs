@@ -44,8 +44,11 @@ function html(lang) {
   .when { font-size: 8.8pt; white-space: nowrap; }
   .role { font-weight: 500; }
   .note { font-size: 8.6pt; font-style: italic; }
-  ul { margin-top: 2.5pt; padding-left: 11pt; }
-  li { margin-top: 1pt; }
+  /* o "•" é texto de verdade (não marcador de CSS) para o ATS enxergar a lista ao extrair o texto do PDF */
+  ul { margin-top: 2.5pt; list-style: none; padding-left: 0; }
+  li { margin-top: 1pt; position: relative; padding-left: 11pt; }
+  li .b { position: absolute; left: 1.5pt; }
+  .proj-note { font-size: 8.6pt; margin-bottom: 1pt; }
   .proj { margin-top: 2.5pt; break-inside: avoid; }
   .proj b { font-weight: 700; }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16pt; }
@@ -74,13 +77,14 @@ ${c.jobs
   <div class="job-head"><span class="org">${esc(j.role)}</span><span class="when">${esc(j.when)}</span></div>
   <div class="job-head"><span class="role">${esc(j.org)}</span><span class="when">${esc(j.where)}</span></div>
   ${j.note ? `<div class="note">${esc(j.note)}</div>` : ""}
-  ${j.points.length ? `<ul>${j.points.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : ""}
+  ${j.points.length ? `<ul>${j.points.map((p) => `<li><span class="b">•</span> ${esc(p)}</li>`).join("")}</ul>` : ""}
 </div>`,
   )
   .join("\n")}
 </section>
 
-<section><h2>${esc(c.h.projects)} <small>· ${link(`https://${contact.site}`, c.h.projectsNote)}</small></h2>
+<section><h2>${esc(c.h.projects)}</h2>
+<p class="proj-note">${link(`https://${contact.site}`, c.h.projectsNote)}</p>
 ${c.projects.map(([n, d]) => `<p class="proj"><b>${esc(n)}</b>: ${esc(d)}</p>`).join("\n")}
 </section>
 
@@ -110,6 +114,18 @@ try {
     const pageH = c.paper === "A4" ? 1122.5 : 1056;
     const used = await page.evaluate(() => document.body.getBoundingClientRect().height);
     console.log(`${lang}: ${c.file} — ${Math.round(used)} / ${pageH} px${used > pageH ? " ⚠ passa de 1 página" : ""}`);
+    // Checagem de ATS: os pontos em que a ferramenta de currículo já ganhou de nós não podem voltar.
+    const text = await page.evaluate(() => document.body.innerText);
+    const bullets = c.jobs.reduce((n, j) => n + j.points.length, 0);
+    const problems = [
+      [/[~·]/.test(text), "tem '~' ou '·' (alguns parsers descartam)"],
+      [(text.match(/•/g) || []).length !== bullets, "algum bullet sem o caractere '•' no texto"],
+      [!text.includes(c.title), "falta o cargo-alvo abaixo do nome"],
+      [!text.includes(contact.linkedin) || !text.includes(contact.github), "LinkedIn/GitHub sem o endereço por extenso"],
+      [c.projects.some(([n, d]) => `${n}: ${d}`.split(":").length > 2), "projeto com dois-pontos repetidos"],
+    ].filter(([bad]) => bad);
+    for (const [, msg] of problems) console.log(`  ⚠ ATS (${lang}): ${msg}`);
+    if (problems.length) process.exitCode = 1;
     await page.close();
   }
 } finally {
