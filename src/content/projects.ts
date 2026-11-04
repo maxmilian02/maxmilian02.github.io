@@ -100,8 +100,8 @@ export const projects: Project[] = [
     },
     metrics: [
       { value: "328", label: { pt: "commits em 8 semanas", en: "commits in 8 weeks" } },
-      { value: { pt: "1.180", en: "1,180" }, label: { pt: "testes automatizados em Python", en: "automated Python tests" } },
-      { value: "340", label: { pt: "testes unitários no Android", en: "Android unit tests" } },
+      { value: { pt: "1.264", en: "1,264" }, label: { pt: "testes automatizados em Python", en: "automated Python tests" } },
+      { value: "472", label: { pt: "testes unitários no Android", en: "Android unit tests" } },
       { value: "3", label: { pt: "idiomas: português, inglês e espanhol", en: "languages: Portuguese, English, Spanish" } },
     ],
     caseStudy: {
@@ -335,10 +335,10 @@ export const projects: Project[] = [
     end: "2023-11",
     commits: 193,
     tier: 1,
-    stack: ["Python", "Selenium", "Playwright", "MySQL", "Celery", "RabbitMQ", "FTP", "Excel"],
+    stack: ["Python", "Selenium", "MySQL", "SpeechRecognition", "FTP", "Excel"],
     context: {
-      pt: "Plug Benefícios (corretora de benefícios), como estagiário de desenvolvimento Python. Credenciais e dados de beneficiários omitidos.",
-      en: "Plug Benefícios (benefits brokerage), as a Python development intern. Credentials and beneficiary data omitted.",
+      pt: "Plug Benefícios (corretora de benefícios) e clientes dela, como a ExportSul, como estagiário de desenvolvimento Python. Credenciais e dados de beneficiários omitidos.",
+      en: "Plug Benefícios (benefits brokerage) and its clients, such as ExportSul, as a Python development intern. Credentials and beneficiary data omitted.",
     },
     tagline: {
       pt: "Quinze robôs que tiraram do operacional a digitação em portais de operadoras de saúde, faturas, boletos e holerites.",
@@ -347,7 +347,7 @@ export const projects: Project[] = [
     metrics: [
       { value: "15", label: { pt: "robôs em produção", en: "bots in production" } },
       { value: "4", label: { pt: "portais de operadoras automatizados", en: "insurer portals automated" } },
-      { value: "1", label: { pt: "biblioteca interna usada por todos os robôs", en: "internal library shared by every bot" } },
+      { value: "1", label: { pt: "biblioteca interna, reaproveitada em outros clientes", en: "internal library, reused for other clients" } },
     ],
     caseStudy: {
       problem: {
@@ -372,22 +372,22 @@ export const projects: Project[] = [
         {
           title: { pt: "Uma biblioteca interna", en: "An internal library" },
           body: {
-            pt: "O que se repetia entre robôs (inicialização do navegador, contorno de bloqueios de interface, utilitários de arquivo) virou um pacote Python distribuído como wheel e instalado em todos eles.",
-            en: "What repeated across bots (browser start-up, working around UI blockers, file utilities) became a Python package shipped as a wheel and installed in all of them.",
+            pt: "O que se repetia entre robôs (inicialização do navegador, reCAPTCHA resolvido por áudio com reconhecimento de voz, envio por FTP, utilitários de arquivo) virou um pacote Python distribuído como wheel, depois reaproveitado nos robôs de outros clientes.",
+            en: "What repeated across bots (browser start-up, reCAPTCHA solved by audio with speech recognition, FTP upload, file utilities) became a Python package shipped as a wheel, later reused in bots for other clients.",
           },
         },
         {
-          title: { pt: "Fila centralizada para os robôs", en: "A central queue for the bots" },
+          title: { pt: "Averbações para uma corretora cliente", en: "Export filings for a client brokerage" },
           body: {
-            pt: "O ROMA centralizou a execução numa API REST: Flask + Socket.IO na frente, Celery com RabbitMQ distribuindo as tarefas em paralelo, e um cenário de carga para medir quanto a concorrência rendia antes de ligar em produção.",
-            en: "ROMA centralised execution behind a REST API: Flask + Socket.IO in front, Celery with RabbitMQ spreading tasks in parallel, and a load scenario to measure how much concurrency paid off before going live.",
+            pt: "Para a ExportSul, robôs nos portais da Akad, Sompo e Tokio Marine registram averbações de embarques de exportação e baixam faturas. Cada registro tem status no MySQL (a fazer, averbado, certificado, erro), então uma execução interrompida retoma de onde parou.",
+            en: "For ExportSul, bots on the Akad, Sompo and Tokio Marine portals register export shipments and download invoices. Each record has a status in MySQL (to do, filed, certified, error), so an interrupted run resumes where it stopped.",
           },
         },
       ],
       chain: [
         { name: { pt: "Sistema da corretora", en: "Brokerage system" }, detail: { pt: "chamados no MySQL", en: "tickets in MySQL" } },
         { name: { pt: "Despachante", en: "Dispatcher" }, detail: { pt: "um módulo por operadora", en: "one module per insurer" } },
-        { name: { pt: "Portais", en: "Portals" }, detail: { pt: "Selenium / Playwright", en: "Selenium / Playwright" } },
+        { name: { pt: "Portais", en: "Portals" }, detail: { pt: "Selenium", en: "Selenium" } },
         { name: { pt: "Status + arquivos", en: "Status + files" }, detail: { pt: "banco, e-mail, FTP", en: "database, email, FTP" } },
       ],
       learned: {
@@ -473,10 +473,10 @@ export const projects: Project[] = [
     end: "2025-01",
     commits: 70,
     tier: 1,
-    stack: ["Python", "Flask", "MySQL", "PHP", "MongoDB", "Plotly", "Selenium", "REST APIs"],
+    stack: ["Python", "Flask", "MySQL", "PHP", "asyncio", "MongoDB", "Plotly", "Selenium", "REST APIs"],
     context: {
-      pt: "Cliente HG7 (corretora de seguros): meio período a partir de 2023, em paralelo ao estágio, e consultoria de backend em 2024. Credenciais e dados financeiros omitidos.",
-      en: "Client HG7 (insurance brokerage): part-time from 2023, alongside the internship, then backend consulting in 2024. Credentials and financial data omitted.",
+      pt: "Cliente HG7 (corretora de seguros) e empresas do mesmo dono, outra corretora e uma clínica: meio período a partir de 2023, em paralelo ao estágio, e consultoria de backend em 2024. Credenciais e dados financeiros omitidos.",
+      en: "Client HG7 (insurance brokerage) and two companies with the same owner, another brokerage and a clinic: part-time from 2023, alongside the internship, then backend consulting in 2024. Credentials and financial data omitted.",
     },
     tagline: {
       pt: "Importação e conciliação de extratos bancários OFX em três gerações, mais integrações entre CRM, telefonia e o ERP.",
@@ -510,8 +510,8 @@ export const projects: Project[] = [
         {
           title: { pt: "CRM, telefonia e dados", en: "CRM, telephony and data" },
           body: {
-            pt: "Integrações com a API do CRM para atualizar etapas e empresas, captura de chamadas da central telefônica e painéis com Plotly e Seaborn sobre os dados consolidados em MongoDB.",
-            en: "Integrations with the CRM API to update stages and companies, call capture from the phone system and Plotly/Seaborn dashboards over data consolidated in MongoDB.",
+            pt: "ETL assíncrono da API do CRM para as tabelas do Power BI no MySQL (10 requisições por lote, no ritmo do limite de 120 por minuto), um robô que transforma chamadas atendidas na central em leads no CRM, e painéis com Plotly sobre dados consolidados em MongoDB.",
+            en: "Async ETL from the CRM API into the Power BI tables in MySQL (10 requests per batch, paced to the 120 per minute limit), a bot that turns answered calls into CRM leads, and Plotly dashboards over data consolidated in MongoDB.",
           },
         },
       ],

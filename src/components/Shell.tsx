@@ -24,7 +24,7 @@ export function Shell({
     email: `mailto:${profile.email}`,
     address: { "@type": "PostalAddress", addressLocality: "São Paulo", addressRegion: "SP", addressCountry: "BR" },
     alumniOf: { "@type": "CollegeOrUniversity", name: "Faculdade Impacta" },
-    knowsAbout: ["Python", "Flask", "FastAPI", "SQL", "Celery", "RPA", "Docker", "Next.js", "TypeScript", "Kotlin"],
+    knowsAbout: ["Python", "Flask", "FastAPI", "SQL", "Selenium", "RPA", "Docker", "Next.js", "TypeScript", "Kotlin"],
   };
 
   return (

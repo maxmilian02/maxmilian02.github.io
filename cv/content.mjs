@@ -29,9 +29,9 @@ export const cv = {
       languages: "Languages",
     },
     summary:
-      "Python backend engineer with 4 years of production experience building REST APIs, async processing systems with Celery and RabbitMQ, and data workflows on advanced SQL. I own systems end to end: design, implementation, tests, and deployment with Docker on Linux.",
+      "Python backend engineer with 4 years of production experience building REST APIs, browser automation that runs unattended, and data pipelines on advanced SQL. I own systems end to end: design, implementation, tests, and deployment with Docker on Linux.",
     skills: [
-      ["Backend", "Python, Flask, FastAPI, Django, REST APIs, Celery, RabbitMQ, OAuth2 / PKCE, Server-Sent Events"],
+      ["Backend", "Python, Flask, FastAPI, REST APIs, asyncio / aiohttp, OAuth2 / PKCE, Server-Sent Events"],
       ["Data", "MySQL, SQLite, MongoDB, advanced SQL, stored procedures, ETL"],
       ["Infra", "Docker / Compose, Linux, systemd, nginx, Proxmox / LXC, GitHub Actions, Uptime Kuma, scheduled backups"],
       ["Quality", "pytest, end-to-end tests, type hints, production support (L3), log analysis"],
@@ -59,14 +59,14 @@ export const cv = {
         ],
       },
       {
-        role: "Backend Developer, HG7 and ExportSul (insurance brokerages)",
+        role: "Backend Developer, HG7 group (insurance brokerages and a clinic)",
         org: "Independent Consultant",
         when: "Feb 2024 – Aug 2024",
         where: "Hybrid",
         points: [
-          "HG7: Built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the company's PHP ERP and feeding its income statement, replacing line-by-line spreadsheet reconciliation.",
-          "HG7: Integrated RD Station CRM and 3CX telephony with internal systems; built ETL pipelines from RD Station and Microsoft Graph into MongoDB for Power BI dashboards.",
-          "ExportSul: Built Selenium bots processing invoices in an ERP, with retries and per-item state so runs resume where they stopped.",
+          "Built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the company's PHP ERP and feeding its income statement, replacing line-by-line spreadsheet reconciliation.",
+          "Built async ETL from RD Station CRM into MySQL for Power BI (10 parallel requests per batch, paced to its 120 requests/min limit) and from Exact Spotter into MongoDB.",
+          "Built a bot that reads answered calls from the cloud phone system and creates RD Station leads assigned to the right salesperson.",
         ],
       },
       {
@@ -75,9 +75,9 @@ export const cv = {
         when: "Aug 2022 – Feb 2024",
         where: "São Paulo",
         points: [
-          "Built and maintained 15 production bots (Python, Selenium, Playwright) processing beneficiary changes across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
-          "Designed a Flask + Celery + RabbitMQ service that runs the bots in parallel behind a REST API, with concurrency sized by a load test.",
-          "Extracted shared automation code into an internal Python package (wheel) reused by every bot; used MySQL for transactional data, MongoDB for scraped data, and built internal dashboards in Django and Flask.",
+          "Built and maintained 15 production bots (Python, Selenium) processing beneficiary changes across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
+          "For ExportSul, a client brokerage, built bots on the Akad, Sompo, and Tokio Marine portals that register export shipments and download invoices, with per-record status in MySQL so runs resume where they stopped.",
+          "Packaged shared code (browser setup, audio-based reCAPTCHA solving, FTP upload) into an internal Python wheel, later reused in other client projects.",
         ],
       },
       {
@@ -91,7 +91,7 @@ export const cv = {
     projects: [
       [
         "MaxTools Radio",
-        "Python bot streaming 48 kHz PCM through a real-time DSP chain, Flask API with SSE and OAuth accounts (Google, Discord, Spotify), web app, and Kotlin / Jetpack Compose Android app. 1,180 Python tests and 340 Android unit tests.",
+        "Python bot streaming 48 kHz PCM through a real-time DSP chain, Flask API with SSE and OAuth accounts (Google, Discord, Spotify), web app, and Kotlin / Jetpack Compose Android app. 1,264 Python tests and 472 Android unit tests.",
       ],
       [
         "MaxTools",
@@ -117,9 +117,9 @@ export const cv = {
       languages: "Idiomas",
     },
     summary:
-      "Engenheiro backend Python com 4 anos de experiência em produção construindo APIs REST, processamento assíncrono com Celery e RabbitMQ e fluxos de dados com SQL avançado. Cuido dos sistemas de ponta a ponta: desenho, implementação, testes e deploy com Docker em Linux.",
+      "Engenheiro backend Python com 4 anos de experiência em produção construindo APIs REST, automações de navegador que rodam sem supervisão e pipelines de dados com SQL avançado. Cuido dos sistemas de ponta a ponta: desenho, implementação, testes e deploy com Docker em Linux.",
     skills: [
-      ["Backend", "Python, Flask, FastAPI, Django, APIs REST, Celery, RabbitMQ, OAuth2 / PKCE, Server-Sent Events"],
+      ["Backend", "Python, Flask, FastAPI, APIs REST, asyncio / aiohttp, OAuth2 / PKCE, Server-Sent Events"],
       ["Dados", "MySQL, SQLite, MongoDB, SQL avançado, stored procedures, ETL"],
       ["Infra", "Docker / Compose, Linux, systemd, nginx, Proxmox / LXC, GitHub Actions, Uptime Kuma, backups agendados"],
       ["Qualidade", "pytest, testes ponta a ponta, type hints, suporte de produção (L3), análise de logs"],
@@ -147,14 +147,14 @@ export const cv = {
         ],
       },
       {
-        role: "Desenvolvedor Backend, HG7 e ExportSul (corretoras de seguros)",
+        role: "Desenvolvedor Backend, grupo HG7 (corretoras de seguros e uma clínica)",
         org: "Consultor independente",
         when: "fev 2024 – ago 2024",
         where: "Híbrido",
         points: [
-          "HG7: criei o sistema de importação e conciliação de extratos bancários OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP da empresa e alimentando a DRE, substituindo a conciliação linha a linha em planilha.",
-          "HG7: integrei o CRM RD Station e a telefonia 3CX aos sistemas internos; criei pipelines de ETL do RD Station e do Microsoft Graph para MongoDB, alimentando painéis no Power BI.",
-          "ExportSul: criei robôs Selenium que processam faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
+          "Criei o sistema de importação e conciliação de extratos bancários OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP da empresa e alimentando a DRE, substituindo a conciliação linha a linha em planilha.",
+          "Criei ETLs assíncronos do CRM RD Station para MySQL, alimentando o Power BI (10 requisições paralelas por lote, no ritmo do limite de 120 por minuto), e do Exact Spotter para MongoDB.",
+          "Criei um robô que lê as chamadas atendidas na central telefônica em nuvem e cadastra cada lead no RD Station com o vendedor certo.",
         ],
       },
       {
@@ -163,9 +163,9 @@ export const cv = {
         when: "ago 2022 – fev 2024",
         where: "São Paulo",
         points: [
-          "Criei e mantive 15 robôs em produção (Python, Selenium, Playwright) que processavam movimentações de beneficiários em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
-          "Desenhei um serviço Flask + Celery + RabbitMQ que executa os robôs em paralelo atrás de uma API REST, com a concorrência dimensionada por teste de carga.",
-          "Extraí o código comum dos robôs para uma biblioteca Python interna (wheel) reaproveitada por todos; usei MySQL para dados transacionais e MongoDB para dados coletados, e criei painéis internos em Django e Flask.",
+          "Criei e mantive 15 robôs em produção (Python, Selenium) que processavam movimentações de beneficiários em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
+          "Para a ExportSul, corretora cliente, criei robôs nos portais da Akad, Sompo e Tokio Marine que registram averbações de exportação e baixam faturas, com status por registro no MySQL para retomar de onde pararam.",
+          "Reuni o código comum (inicialização do navegador, reCAPTCHA resolvido por áudio, envio por FTP) numa biblioteca Python interna (wheel), depois reaproveitada em outros clientes.",
         ],
       },
       {
@@ -179,7 +179,7 @@ export const cv = {
     projects: [
       [
         "MaxTools Radio",
-        "Bot em Python com PCM 48 kHz e DSP em tempo real, API Flask com SSE e contas OAuth (Google, Discord, Spotify), site e app Android em Kotlin / Jetpack Compose. 1.180 testes Python e 340 testes Android.",
+        "Bot em Python com PCM 48 kHz e DSP em tempo real, API Flask com SSE e contas OAuth (Google, Discord, Spotify), site e app Android em Kotlin / Jetpack Compose. 1.264 testes Python e 472 testes Android.",
       ],
       [
         "MaxTools",

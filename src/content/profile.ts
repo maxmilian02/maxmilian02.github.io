@@ -45,8 +45,8 @@ export const experience: Job[] = [
     where: { pt: "Remoto", en: "Remote" },
     points: [
       {
-        pt: "MaxTools Radio: site, app Android e bot de Discord com uma conta por e-mail (OAuth com Google, Discord e Spotify), recursos ligados por chave sem deploy e doações por webhook; 1.180 testes Python e 340 testes Android.",
-        en: "MaxTools Radio: website, Android app and Discord bot with one account per email (OAuth with Google, Discord and Spotify), feature flags switched on without a deploy and donations by webhook; 1,180 Python tests and 340 Android tests.",
+        pt: "MaxTools Radio: site, app Android e bot de Discord com uma conta por e-mail (OAuth com Google, Discord e Spotify), recursos ligados por chave sem deploy e doações por webhook; 1.264 testes Python e 472 testes Android.",
+        en: "MaxTools Radio: website, Android app and Discord bot with one account per email (OAuth with Google, Discord and Spotify), feature flags switched on without a deploy and donations by webhook; 1,264 Python tests and 472 Android tests.",
       },
       {
         pt: "cnabkit: biblioteca Python de código aberto que lê arquivos de banco brasileiros (CNAB 240, CNAB 400 e OFX), com testes, tipagem estrita e CI.",
@@ -85,24 +85,23 @@ export const experience: Job[] = [
   },
   {
     id: "consulting",
-    org: { pt: "Consultoria independente (HG7, ExportSul)", en: "Independent consulting (HG7, ExportSul)" },
-    links: [{ label: "exportsul.com.br", href: "https://www.exportsul.com.br" }],
+    org: { pt: "Consultoria independente (grupo HG7)", en: "Independent consulting (HG7 group)" },
     role: { pt: "Desenvolvedor Backend", en: "Backend Developer" },
     from: "2024-02",
     to: "2024-08",
     where: { pt: "Híbrido", en: "Hybrid" },
     points: [
       {
-        pt: "HG7 (corretora de seguros): criei o sistema de importação e conciliação de extratos OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP e alimentando a DRE, no lugar da conciliação em planilha.",
-        en: "HG7 (insurance brokerage): built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the PHP ERP and feeding the income statement, replacing spreadsheet reconciliation.",
+        pt: "HG7 (corretora de seguros) e empresas do mesmo dono, outra corretora e uma clínica: criei o sistema de importação e conciliação de extratos OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP e alimentando a DRE, no lugar da conciliação em planilha.",
+        en: "HG7 (insurance brokerage) and two companies with the same owner, another brokerage and a clinic: built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the PHP ERP and feeding the income statement, replacing spreadsheet reconciliation.",
       },
       {
-        pt: "HG7: integrei o CRM RD Station e a telefonia 3CX e criei o ETL do RD Station (dentro do limite de 120 requisições/min da API) e do Microsoft Graph para MongoDB, alimentando painéis no Power BI.",
-        en: "HG7: integrated RD Station CRM and 3CX telephony and built ETL from RD Station (within its 120 requests/min API limit) and Microsoft Graph into MongoDB for Power BI dashboards.",
+        pt: "Criei ETLs assíncronos do CRM RD Station para MySQL, alimentando o Power BI (10 requisições paralelas por lote, no ritmo do limite de 120 por minuto), e do Exact Spotter para MongoDB.",
+        en: "Built async ETL from RD Station CRM into MySQL for Power BI (10 parallel requests per batch, paced to its 120 requests/min limit) and from Exact Spotter into MongoDB.",
       },
       {
-        pt: "ExportSul (corretora de seguros): criei robôs Selenium que processam faturas num ERP, com retentativas e estado por item para retomar de onde pararam.",
-        en: "ExportSul (insurance brokerage): built Selenium bots that process invoices in an ERP, with retries and per-item state so runs resume where they stopped.",
+        pt: "Criei um robô que lê as chamadas atendidas na central telefônica em nuvem e cadastra cada lead no RD Station com o vendedor certo.",
+        en: "Built a bot that reads answered calls from the cloud phone system and creates RD Station leads assigned to the right salesperson.",
       },
     ],
     slugs: ["conciliacao-financeira"],
@@ -110,23 +109,26 @@ export const experience: Job[] = [
   {
     id: "plug",
     org: "Plug Benefícios",
-    links: [{ label: "plugbeneficios.com.br", href: "https://www.plugbeneficios.com.br" }],
+    links: [
+      { label: "plugbeneficios.com.br", href: "https://www.plugbeneficios.com.br" },
+      { label: "exportsul.com.br", href: "https://www.exportsul.com.br" },
+    ],
     role: { pt: "Desenvolvedor Python (Estágio)", en: "Python Developer (Internship)" },
     from: "2022-08",
     to: "2024-02",
     where: { pt: "São Paulo", en: "São Paulo" },
     points: [
       {
-        pt: "Criei e mantive 15 robôs em produção (Python, Selenium, Playwright) que processavam movimentações de beneficiários em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
-        en: "Built and maintained 15 production bots (Python, Selenium, Playwright) processing beneficiary changes across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
+        pt: "Criei e mantive 15 robôs em produção (Python, Selenium) que processavam movimentações de beneficiários em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
+        en: "Built and maintained 15 production bots (Python, Selenium) processing beneficiary changes across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
       },
       {
-        pt: "Desenhei um serviço Flask + Celery + RabbitMQ que executa os robôs em paralelo atrás de uma API REST, com a concorrência dimensionada por teste de carga.",
-        en: "Designed a Flask + Celery + RabbitMQ service that runs the bots in parallel behind a REST API, with concurrency sized by a load test.",
+        pt: "Para a ExportSul, corretora cliente, criei robôs nos portais da Akad, Sompo e Tokio Marine que registram averbações de exportação e baixam faturas, com status por registro no MySQL para retomar de onde pararam.",
+        en: "For ExportSul, a client brokerage, built bots on the Akad, Sompo, and Tokio Marine portals that register export shipments and download invoices, with per-record status in MySQL so runs resume where they stopped.",
       },
       {
-        pt: "Extraí o código comum dos robôs para uma biblioteca Python interna (wheel) reaproveitada por todos; MySQL, MongoDB e painéis internos em Django e Flask.",
-        en: "Extracted shared automation code into an internal Python package (wheel) reused by every bot; MySQL, MongoDB and internal dashboards in Django and Flask.",
+        pt: "Reuni o código comum (inicialização do navegador, reCAPTCHA resolvido por áudio, envio por FTP) numa biblioteca Python interna (wheel), depois reaproveitada em outros clientes.",
+        en: "Packaged shared code (browser setup, audio-based reCAPTCHA solving, FTP upload) into an internal Python wheel, later reused in other client projects.",
       },
     ],
     slugs: ["automacao-rpa"],
@@ -172,8 +174,7 @@ export const stack: StackGroup[] = [
       { name: "Python", slugs: ["maxtools-radio", "pallab", "maxtools", "automacao-rpa", "conciliacao-financeira", "campaign-qa"] },
       { name: "Flask", slugs: ["maxtools-radio", "pallab", "meus-contatos-ms", "conciliacao-financeira", "campaign-qa"] },
       { name: "FastAPI", slugs: ["campaign-qa", "maxtools"] },
-      { name: "Celery · RabbitMQ", slugs: ["automacao-rpa"], jobs: ["plug"] },
-      { name: "Django", slugs: [], jobs: ["plug"] },
+      { name: "asyncio · aiohttp", slugs: ["conciliacao-financeira"], jobs: ["consulting"] },
       { name: "OAuth2 · PKCE · MSAL", slugs: ["maxtools-radio", "meus-contatos-ms"] },
       { name: "REST · SOAP · SSE · webhooks", slugs: ["campaign-qa", "maxtools-radio", "pallab", "maxtools"] },
     ],
@@ -184,7 +185,7 @@ export const stack: StackGroup[] = [
       { name: "SQLite", slugs: ["maxtools-radio", "campaign-qa"] },
       { name: "MySQL", slugs: ["automacao-rpa", "conciliacao-financeira"] },
       { name: { pt: "SQL avançado · stored procedures", en: "Advanced SQL · stored procedures" }, slugs: ["campaign-qa"], jobs: ["netbiis"] },
-      { name: "MongoDB", slugs: ["conciliacao-financeira"], jobs: ["plug", "consulting"] },
+      { name: "MongoDB", slugs: ["conciliacao-financeira"], jobs: ["consulting"] },
       { name: "ETL · Power BI", slugs: [], jobs: ["consulting"] },
       { name: { pt: "Formatos binários (Oodle, OFX)", en: "Binary formats (Oodle, OFX)" }, slugs: ["pallab", "conciliacao-financeira"] },
     ],
@@ -210,7 +211,7 @@ export const stack: StackGroup[] = [
     title: { pt: "Automação", en: "Automation" },
     items: [
       { name: "Selenium", slugs: ["automacao-rpa", "conciliacao-financeira", "localiza-api"] },
-      { name: "Playwright", slugs: ["automacao-rpa"] },
+      { name: "Playwright", slugs: ["maxtools-radio"] },
       { name: "Scraping", slugs: ["localiza-api", "techpowerup-news"] },
     ],
   },
@@ -284,7 +285,7 @@ export const proof: Proof[] = [
     slug: "conciliacao-financeira",
   },
   {
-    value: { pt: "1.180", en: "1,180" },
+    value: { pt: "1.264", en: "1,264" },
     label: { pt: "testes automatizados num produto com site, app Android e bot", en: "automated tests on a product with a website, an Android app and a bot" },
     where: "MaxTools Radio",
     slug: "maxtools-radio",
@@ -316,12 +317,12 @@ export const services: Service[] = [
     slugs: ["campaign-qa", "conciliacao-financeira", "maxtools-radio"],
   },
   {
-    title: { pt: "Filas, workers e dados", en: "Queues, workers and data" },
+    title: { pt: "Jobs em segundo plano e dados", en: "Background jobs and data" },
     body: {
-      pt: "Processamento em segundo plano com Celery e RabbitMQ, ETL e SQL avançado. O trabalho pesado sai da requisição e os números fecham.",
-      en: "Background processing with Celery and RabbitMQ, ETL and advanced SQL. Heavy work leaves the request path and the numbers add up.",
+      pt: "Jobs em segundo plano com progresso, ETL assíncrono e SQL avançado. O trabalho pesado sai da requisição e os números fecham.",
+      en: "Background jobs with progress, async ETL and advanced SQL. Heavy work leaves the request path and the numbers add up.",
     },
-    slugs: ["automacao-rpa", "maxtools"],
+    slugs: ["conciliacao-financeira", "maxtools"],
   },
   {
     title: { pt: "Ferramentas internas no ar", en: "Internal tools, deployed" },
