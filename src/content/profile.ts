@@ -69,8 +69,8 @@ export const experience: Job[] = [
     where: { pt: "Remoto", en: "Remote" },
     points: [
       {
-        pt: "Criei e mantive uma aplicação web interna (Flask + SQL) para a operação de campanhas (cerca de 32 por dia): o QA automático cobria de 10 a 15 delas, e as ferramentas de apoio aumentaram em até 40% a produção dos operadores nas 32.",
-        en: "Built and owned an internal Flask + SQL web application for campaign operations (~32 campaigns a day): automated QA fully covered 10 to 15 of them, and its support tools raised operator output by up to 40% across all 32.",
+        pt: "Criei e mantive uma aplicação web interna (Flask + SQL) para a operação de campanhas (cerca de 32 por dia): o QA automático cobria de 10 a 15 delas, e as ferramentas de apoio reduziram cada campanha de ~20 para ~12 minutos (−40%) nas 32.",
+        en: "Built and owned an internal Flask + SQL web application for campaign operations (~32 campaigns a day): automated QA fully covered 10 to 15 of them, and its support tools cut each job from ~20 to ~12 minutes (−40%) across all 32.",
       },
       {
         pt: "Escrevi e otimizei consultas SQL complexas e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
@@ -119,8 +119,8 @@ export const experience: Job[] = [
     where: { pt: "São Paulo", en: "São Paulo" },
     points: [
       {
-        pt: "Criei e mantive 15 robôs em produção (Python, Selenium) que processavam movimentações de beneficiários em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
-        en: "Built and maintained 15 production bots (Python, Selenium) processing beneficiary changes across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
+        pt: "Criei e mantive 15 robôs em produção (Python, Selenium) que processavam centenas de movimentações de beneficiários por mês em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
+        en: "Built and maintained 15 production bots (Python, Selenium) processing hundreds of beneficiary changes a month across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
       },
       {
         pt: "Para a ExportSul, corretora cliente, criei robôs nos portais da Akad, Sompo e Tokio Marine que registram averbações de exportação e baixam faturas, com status por registro no MySQL para retomar de onde pararam.",
@@ -267,8 +267,8 @@ export interface Proof {
 
 export const proof: Proof[] = [
   {
-    value: "+40%",
-    label: { pt: "de produção no time de campanhas, no melhor caso, com 32 campanhas por dia", en: "more output from the campaign team at best, across 32 campaigns a day" },
+    value: "−40%",
+    label: { pt: "de tempo por campanha (de ~20 para ~12 min), em 32 campanhas por dia", en: "time per campaign (from ~20 to ~12 min), across 32 campaigns a day" },
     where: "Netbiis",
     slug: "campaign-qa",
   },

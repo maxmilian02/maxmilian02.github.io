@@ -550,7 +550,7 @@ export const projects: Project[] = [
     metrics: [
       { value: "32", label: { pt: "campanhas por dia passando pelas ferramentas", en: "campaigns a day going through the tools" } },
       { value: "10–15", label: { pt: "delas com QA totalmente automático", en: "of them with fully automated QA" } },
-      { value: "+40%", label: { pt: "de produção dos operadores, no melhor caso", en: "operator output, at best" } },
+      { value: "−40%", label: { pt: "de tempo por campanha, de ~20 para ~12 min", en: "time per campaign, from ~20 to ~12 min" } },
       { value: "8", label: { pt: "ferramentas de preparação num só painel", en: "prep tools in one dashboard" } },
     ],
     caseStudy: {

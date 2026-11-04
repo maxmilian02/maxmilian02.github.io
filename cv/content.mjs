@@ -1,7 +1,7 @@
 // Conteúdo do currículo — fonte única para os PDFs em PT e EN.
 // Regra: só entra o que dá para sustentar em entrevista; números vêm dos projetos reais.
 // Base: versão revisada por ferramenta de ATS (nov/2026). Exceção: a frase da Netbiis segue os números
-// confirmados pelo dono (32 jobs/dia, QA automático em 10–15, até +40% de produção dos operadores).
+// confirmados pelo dono (32 jobs/dia, QA automático em 10–15, cada job de ~20 para ~12 min, −40%).
 // Layout: o cargo vai em negrito na primeira linha (role) e a empresa embaixo (org).
 
 export const contact = {
@@ -53,7 +53,7 @@ export const cv = {
         when: "Sep 2024 – May 2026",
         where: "Remote",
         points: [
-          "Built and owned an internal Flask and SQL web application for ~32 daily campaign jobs: automated QA fully covered 10 to 15 of them, and its support tools raised operator output by up to 40% across all 32.",
+          "Built and owned an internal Flask and SQL web application for ~32 daily campaign jobs: automated QA fully covered 10 to 15 of them, and its support tools cut each job from ~20 to ~12 minutes (−40%) across all 32.",
           "Wrote and optimized complex SQL and stored procedures for high-volume extraction and audience segmentation in Adobe Campaign.",
           "Provided L3 support for production automation pipelines: log-based root-cause analysis, fixes, and follow-up.",
         ],
@@ -75,7 +75,7 @@ export const cv = {
         when: "Aug 2022 – Feb 2024",
         where: "São Paulo",
         points: [
-          "Built and maintained 15 production bots (Python, Selenium) processing beneficiary changes across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
+          "Built and maintained 15 production bots (Python, Selenium) processing hundreds of beneficiary changes a month across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
           "For ExportSul, a client brokerage, built bots on the Akad, Sompo, and Tokio Marine portals that register export shipments and download invoices, with per-record status in MySQL so runs resume where they stopped.",
           "Packaged shared code (browser setup, audio-based reCAPTCHA solving, FTP upload) into an internal Python wheel, later reused across other client projects.",
         ],
@@ -141,7 +141,7 @@ export const cv = {
         when: "set 2024 – mai 2026",
         where: "Remoto",
         points: [
-          "Criei e mantive uma aplicação web interna (Flask + SQL) para cerca de 32 jobs de campanha por dia: o QA automático cobria de 10 a 15 deles, e as ferramentas de apoio aumentaram em até 40% a produção dos operadores nos 32.",
+          "Criei e mantive uma aplicação web interna (Flask + SQL) para cerca de 32 jobs de campanha por dia: o QA automático cobria de 10 a 15 deles, e as ferramentas de apoio reduziram cada job de ~20 para ~12 minutos (−40%) nos 32.",
           "Escrevi e otimizei consultas SQL complexas e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
           "Prestei suporte L3 a pipelines de automação em produção: análise de logs, causa raiz, correção e acompanhamento.",
         ],
@@ -163,7 +163,7 @@ export const cv = {
         when: "ago 2022 – fev 2024",
         where: "São Paulo",
         points: [
-          "Criei e mantive 15 robôs em produção (Python, Selenium) que processavam movimentações de beneficiários em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
+          "Criei e mantive 15 robôs em produção (Python, Selenium) que processavam centenas de movimentações de beneficiários por mês em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
           "Para a ExportSul, corretora cliente, criei robôs nos portais da Akad, Sompo e Tokio Marine que registram averbações de exportação e baixam faturas, com status por registro no MySQL para retomar de onde pararam.",
           "Reuni o código comum (inicialização do navegador, reCAPTCHA resolvido por áudio, envio por FTP) numa biblioteca Python interna (wheel), depois reaproveitada em outros clientes.",
         ],
