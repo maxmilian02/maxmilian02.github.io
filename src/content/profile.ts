@@ -87,7 +87,7 @@ export const experience: Job[] = [
     id: "consulting",
     org: { pt: "Consultoria independente (HG7, ExportSul)", en: "Independent consulting (HG7, ExportSul)" },
     links: [{ label: "exportsul.com.br", href: "https://www.exportsul.com.br" }],
-    role: { pt: "Desenvolvedor Backend (HG7 em meio período desde 2023)", en: "Backend Developer (HG7 part-time from 2023)" },
+    role: { pt: "Desenvolvedor Backend", en: "Backend Developer" },
     from: "2024-02",
     to: "2024-08",
     where: { pt: "Híbrido", en: "Hybrid" },
@@ -117,16 +117,16 @@ export const experience: Job[] = [
     where: { pt: "São Paulo", en: "São Paulo" },
     points: [
       {
-        pt: "Desenhei um serviço Flask + Celery + RabbitMQ que executa 15 robôs de produção em paralelo atrás de uma API REST, com a concorrência dimensionada por teste de carga.",
-        en: "Designed a Flask + Celery + RabbitMQ service that runs 15 production bots in parallel behind a REST API, with concurrency sized by a load test.",
+        pt: "Criei e mantive 15 robôs em produção (Python, Selenium, Playwright) que processavam movimentações de beneficiários em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
+        en: "Built and maintained 15 production bots (Python, Selenium, Playwright) processing beneficiary changes across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
       },
       {
-        pt: "Criei e mantive esses robôs (Python, Selenium, Playwright) para 4 portais de operadoras de saúde, a partir de uma fila de chamados no MySQL.",
-        en: "Built and maintained those bots (Python, Selenium, Playwright) across 4 health-insurer portals, driven by a MySQL ticket queue.",
+        pt: "Desenhei um serviço Flask + Celery + RabbitMQ que executa os robôs em paralelo atrás de uma API REST, com a concorrência dimensionada por teste de carga.",
+        en: "Designed a Flask + Celery + RabbitMQ service that runs the bots in parallel behind a REST API, with concurrency sized by a load test.",
       },
       {
-        pt: "Extraí o código comum para uma biblioteca Python interna (wheel) usada por todos os robôs; MySQL, MongoDB e painéis internos em Django e Flask.",
-        en: "Extracted the shared code into an internal Python package (wheel) used by every bot; MySQL, MongoDB and internal dashboards in Django and Flask.",
+        pt: "Extraí o código comum dos robôs para uma biblioteca Python interna (wheel) reaproveitada por todos; MySQL, MongoDB e painéis internos em Django e Flask.",
+        en: "Extracted shared automation code into an internal Python package (wheel) reused by every bot; MySQL, MongoDB and internal dashboards in Django and Flask.",
       },
     ],
     slugs: ["automacao-rpa"],

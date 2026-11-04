@@ -25,20 +25,20 @@ function html(lang) {
 <style>
   @page { margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font: 9.2pt/1.32 "IBM Plex Sans", "Segoe UI", Arial, sans-serif; color: #1b1e23; background: #fff; padding: 22pt 34pt 12pt; }
+  body { font: 9pt/1.27 "IBM Plex Sans", "Segoe UI", Arial, sans-serif; color: #1b1e23; background: #fff; padding: 20pt 32pt 10pt; }
   a { color: inherit; text-decoration: none; }
   header { padding-bottom: 8pt; border-bottom: 1.2pt solid #1b1e23; }
   h1 { font-size: 20pt; line-height: 1; font-weight: 700; }
   .title { margin-top: 5pt; font-size: 11pt; font-weight: 600; color: #8f5200; }
   .contact { margin-top: 5pt; font-size: 8.6pt; line-height: 1.5; color: #3a3f47; }
-  section { margin-top: 8pt; }
+  section { margin-top: 6.5pt; }
   h2 { font-size: 8.6pt; font-weight: 700; text-transform: uppercase; color: #5d636c; margin-bottom: 3.5pt;
        padding-bottom: 1.5pt; border-bottom: 0.5pt solid #d5d8dd; }
   h2 small { font-weight: 500; text-transform: none; color: #8a9099; }
   .summary { color: #2b3038; }
   .skills { display: grid; grid-template-columns: 54pt 1fr; gap: 1.5pt 10pt; }
   .skills dt { font-weight: 600; }
-  .job { margin-top: 5.5pt; break-inside: avoid; }
+  .job { margin-top: 4.5pt; break-inside: avoid; }
   .job:first-of-type { margin-top: 0; }
   .job-head { display: flex; justify-content: space-between; gap: 12pt; }
   .org { font-weight: 700; font-size: 10.2pt; }
@@ -73,8 +73,8 @@ function html(lang) {
 ${c.jobs
   .map(
     (j) => `<div class="job">
-  <div class="job-head"><span class="org">${esc(j.org)}</span><span class="when">${esc(j.when)} · ${esc(j.where)}</span></div>
-  <div class="role">${esc(j.role)}</div>
+  <div class="job-head"><span class="org">${esc(j.role)}</span><span class="when">${esc(j.when)}</span></div>
+  <div class="job-head"><span class="role">${esc(j.org)}</span><span class="when">${esc(j.where)}</span></div>
   ${j.note ? `<div class="note">${esc(j.note)}</div>` : ""}
   ${j.points.length ? `<ul>${j.points.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : ""}
 </div>`,
@@ -82,14 +82,13 @@ ${c.jobs
   .join("\n")}
 </section>
 
-<section><h2>${esc(c.h.projects)} <small>— ${link(`https://${contact.site}`, c.h.projectsNote)}</small></h2>
-${c.projects.map(([n, d]) => `<p class="proj"><b>${esc(n)}</b> — ${esc(d)}</p>`).join("\n")}
+<section><h2>${esc(c.h.projects)} <small>· ${link(`https://${contact.site}`, c.h.projectsNote)}</small></h2>
+${c.projects.map(([n, d]) => `<p class="proj"><b>${esc(n)}</b>: ${esc(d)}</p>`).join("\n")}
 </section>
 
-<section><h2>${esc(c.h.education)} · ${esc(c.h.languages)}</h2>
-  <p>${esc(c.education)}</p>
-  <p>${esc(c.languages)}</p>
-</section>
+<section><h2>${esc(c.h.languages)}</h2><p>${esc(c.languages)}</p></section>
+
+<section><h2>${esc(c.h.education)}</h2><p>${esc(c.education)}</p></section>
 </body>
 </html>`;
 }
