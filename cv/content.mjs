@@ -66,7 +66,7 @@ export const cv = {
         points: [
           "Built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the company's PHP ERP and feeding its income statement, replacing line-by-line spreadsheet reconciliation.",
           "Built async ETL from RD Station CRM into MySQL for Power BI (10 parallel requests per batch, paced to its 120 requests/min limit) and from Exact Spotter into MongoDB.",
-          "Built a bot that reads answered calls from the cloud phone system and creates RD Station leads assigned to the right salesperson.",
+          "Built a bot that reads answered calls from the 3CX phone system and creates RD Station leads assigned to the right salesperson.",
         ],
       },
       {
@@ -154,7 +154,7 @@ export const cv = {
         points: [
           "Criei o sistema de importação e conciliação de extratos bancários OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP da empresa e alimentando a DRE, substituindo a conciliação linha a linha em planilha.",
           "Criei ETLs assíncronos do CRM RD Station para MySQL, alimentando o Power BI (10 requisições paralelas por lote, no ritmo do limite de 120 por minuto), e do Exact Spotter para MongoDB.",
-          "Criei um robô que lê as chamadas atendidas na central telefônica em nuvem e cadastra cada lead no RD Station com o vendedor certo.",
+          "Criei um robô que lê as chamadas atendidas na central 3CX e cadastra cada lead no RD Station com o vendedor certo.",
         ],
       },
       {

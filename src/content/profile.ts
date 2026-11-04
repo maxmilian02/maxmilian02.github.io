@@ -100,8 +100,8 @@ export const experience: Job[] = [
         en: "Built async ETL from RD Station CRM into MySQL for Power BI (10 parallel requests per batch, paced to its 120 requests/min limit) and from Exact Spotter into MongoDB.",
       },
       {
-        pt: "Criei um robô que lê as chamadas atendidas na central telefônica em nuvem e cadastra cada lead no RD Station com o vendedor certo.",
-        en: "Built a bot that reads answered calls from the cloud phone system and creates RD Station leads assigned to the right salesperson.",
+        pt: "Criei um robô que lê as chamadas atendidas na central 3CX e cadastra cada lead no RD Station com o vendedor certo.",
+        en: "Built a bot that reads answered calls from the 3CX phone system and creates RD Station leads assigned to the right salesperson.",
       },
     ],
     slugs: ["conciliacao-financeira"],

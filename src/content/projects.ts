@@ -510,8 +510,8 @@ export const projects: Project[] = [
         {
           title: { pt: "CRM, telefonia e dados", en: "CRM, telephony and data" },
           body: {
-            pt: "ETL assíncrono da API do CRM para as tabelas do Power BI no MySQL (10 requisições por lote, no ritmo do limite de 120 por minuto), um robô que transforma chamadas atendidas na central em leads no CRM, e painéis com Plotly sobre dados consolidados em MongoDB.",
-            en: "Async ETL from the CRM API into the Power BI tables in MySQL (10 requests per batch, paced to the 120 per minute limit), a bot that turns answered calls into CRM leads, and Plotly dashboards over data consolidated in MongoDB.",
+            pt: "ETL assíncrono da API do CRM para as tabelas do Power BI no MySQL (10 requisições por lote, no ritmo do limite de 120 por minuto), um robô que transforma chamadas atendidas na central 3CX em leads no CRM, e painéis com Plotly sobre dados consolidados em MongoDB.",
+            en: "Async ETL from the CRM API into the Power BI tables in MySQL (10 requests per batch, paced to the 120 per minute limit), a bot that turns answered 3CX calls into CRM leads, and Plotly dashboards over data consolidated in MongoDB.",
           },
         },
       ],
