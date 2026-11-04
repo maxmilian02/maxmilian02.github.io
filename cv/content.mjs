@@ -22,7 +22,7 @@ export const cv = {
     h: {
       summary: "Professional summary",
       skills: "Skills",
-      experience: "Experience",
+      experience: "Work Experience",
       projects: "Projects",
       projectsNote: "case studies at maxmilian02.github.io",
       education: "Education",
@@ -59,13 +59,13 @@ export const cv = {
         ],
       },
       {
-        role: "Backend Developer, HG7 group (insurance brokerages and a clinic)",
+        role: "Backend Developer, HG7 Group (Insurance Brokerages and a Clinic)",
         org: "Independent Consultant",
         when: "Feb 2024 – Aug 2024",
         where: "Hybrid",
         points: [
           "Built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the company's PHP ERP and feeding its income statement, replacing line-by-line spreadsheet reconciliation.",
-          "Built async ETL from RD Station CRM into MySQL for Power BI (10 parallel requests per batch, paced to its 120 requests/min limit) and from Exact Spotter into MongoDB.",
+          "Built async ETL from RD Station CRM into MySQL for Power BI (10 parallel requests per batch, paced to the 120 requests/min rate limit) and from Exact Spotter into MongoDB.",
           "Built a bot that reads answered calls from the 3CX phone system and creates RD Station leads assigned to the right salesperson.",
         ],
       },
@@ -77,7 +77,7 @@ export const cv = {
         points: [
           "Built and maintained 15 production bots (Python, Selenium) processing beneficiary changes across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
           "For ExportSul, a client brokerage, built bots on the Akad, Sompo, and Tokio Marine portals that register export shipments and download invoices, with per-record status in MySQL so runs resume where they stopped.",
-          "Packaged shared code (browser setup, audio-based reCAPTCHA solving, FTP upload) into an internal Python wheel, later reused in other client projects.",
+          "Packaged shared code (browser setup, audio-based reCAPTCHA solving, FTP upload) into an internal Python wheel, later reused across other client projects.",
         ],
       },
       {
@@ -110,7 +110,7 @@ export const cv = {
     h: {
       summary: "Resumo profissional",
       skills: "Competências",
-      experience: "Experiência",
+      experience: "Experiência profissional",
       projects: "Projetos",
       projectsNote: "estudos de caso em maxmilian02.github.io",
       education: "Formação",

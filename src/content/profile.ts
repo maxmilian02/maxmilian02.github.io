@@ -97,7 +97,7 @@ export const experience: Job[] = [
       },
       {
         pt: "Criei ETLs assíncronos do CRM RD Station para MySQL, alimentando o Power BI (10 requisições paralelas por lote, no ritmo do limite de 120 por minuto), e do Exact Spotter para MongoDB.",
-        en: "Built async ETL from RD Station CRM into MySQL for Power BI (10 parallel requests per batch, paced to its 120 requests/min limit) and from Exact Spotter into MongoDB.",
+        en: "Built async ETL from RD Station CRM into MySQL for Power BI (10 parallel requests per batch, paced to the 120 requests/min rate limit) and from Exact Spotter into MongoDB.",
       },
       {
         pt: "Criei um robô que lê as chamadas atendidas na central 3CX e cadastra cada lead no RD Station com o vendedor certo.",
@@ -128,7 +128,7 @@ export const experience: Job[] = [
       },
       {
         pt: "Reuni o código comum (inicialização do navegador, reCAPTCHA resolvido por áudio, envio por FTP) numa biblioteca Python interna (wheel), depois reaproveitada em outros clientes.",
-        en: "Packaged shared code (browser setup, audio-based reCAPTCHA solving, FTP upload) into an internal Python wheel, later reused in other client projects.",
+        en: "Packaged shared code (browser setup, audio-based reCAPTCHA solving, FTP upload) into an internal Python wheel, later reused across other client projects.",
       },
     ],
     slugs: ["automacao-rpa"],
