@@ -29,25 +29,23 @@ function html(lang) {
   a { color: inherit; text-decoration: none; }
   header { padding-bottom: 8pt; border-bottom: 1.2pt solid #1b1e23; }
   h1 { font-size: 20pt; line-height: 1; font-weight: 700; }
-  .title { margin-top: 5pt; font-size: 11pt; font-weight: 600; color: #8f5200; }
-  .contact { margin-top: 5pt; font-size: 8.6pt; line-height: 1.5; color: #3a3f47; }
+  .title { margin-top: 5pt; font-size: 11pt; font-weight: 600; }
+  .contact { margin-top: 5pt; font-size: 8.6pt; line-height: 1.5; }
   section { margin-top: 6.5pt; }
-  h2 { font-size: 8.6pt; font-weight: 700; text-transform: uppercase; color: #5d636c; margin-bottom: 3.5pt;
-       padding-bottom: 1.5pt; border-bottom: 0.5pt solid #d5d8dd; }
-  h2 small { font-weight: 500; text-transform: none; color: #8a9099; }
-  .summary { color: #2b3038; }
-  .skills { display: grid; grid-template-columns: 54pt 1fr; gap: 1.5pt 10pt; }
-  .skills dt { font-weight: 600; }
+  h2 { font-size: 8.6pt; font-weight: 700; text-transform: uppercase; margin-bottom: 3.5pt;
+       padding-bottom: 1.5pt; border-bottom: 0.5pt solid #1b1e23; }
+  h2 small { font-weight: 500; text-transform: none; }
+  /* competências em linhas simples "Rótulo: itens" (sem grade), mais seguro para ATS */
+  .skill + .skill { margin-top: 1.5pt; }
   .job { margin-top: 4.5pt; break-inside: avoid; }
   .job:first-of-type { margin-top: 0; }
   .job-head { display: flex; justify-content: space-between; gap: 12pt; }
   .org { font-weight: 700; font-size: 10.2pt; }
-  .when { font-size: 8.8pt; color: #3a3f47; white-space: nowrap; }
-  .role { font-weight: 500; color: #2b3038; }
-  .note { font-size: 8.6pt; color: #5d636c; font-style: italic; }
+  .when { font-size: 8.8pt; white-space: nowrap; }
+  .role { font-weight: 500; }
+  .note { font-size: 8.6pt; font-style: italic; }
   ul { margin-top: 2.5pt; padding-left: 11pt; }
   li { margin-top: 1pt; }
-  li::marker { color: #e8890c; }
   .proj { margin-top: 2.5pt; break-inside: avoid; }
   .proj b { font-weight: 700; }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16pt; }
@@ -58,15 +56,15 @@ function html(lang) {
   <h1>${esc(contact.name)}</h1>
   <div class="title">${esc(c.title)}</div>
   <div class="contact">
-    ${esc(c.location)} · ${link(`tel:${contact.phone.replace(/[^+\d]/g, "")}`, contact.phone)} · ${link(`mailto:${contact.email}`, contact.email)}<br>
-    ${link(`https://${contact.linkedin}`, contact.linkedin)} · ${link(`https://${contact.github}`, contact.github)} · ${link(`https://${contact.site}`, contact.site)}
+    ${esc(c.location)} | ${link(`tel:${contact.phone.replace(/[^+\d]/g, "")}`, contact.phone)} | ${link(`mailto:${contact.email}`, contact.email)}<br>
+    ${link(`https://${contact.linkedin}`, contact.linkedin)} | ${link(`https://${contact.github}`, contact.github)} | ${link(`https://${contact.site}`, contact.site)}
   </div>
 </header>
 
 <section><h2>${esc(c.h.summary)}</h2><p class="summary">${esc(c.summary)}</p></section>
 
 <section><h2>${esc(c.h.skills)}</h2>
-  <dl class="skills">${c.skills.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+  ${c.skills.map(([k, v]) => `<p class="skill"><b>${esc(k)}:</b> ${esc(v)}</p>`).join("\n  ")}
 </section>
 
 <section><h2>${esc(c.h.experience)}</h2>

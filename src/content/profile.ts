@@ -69,8 +69,12 @@ export const experience: Job[] = [
     where: { pt: "Remoto", en: "Remote" },
     points: [
       {
-        pt: "Criei e mantive uma aplicação web interna (Flask + SQL) para a operação de campanhas (cerca de 32 por dia): o QA automático cobria de 10 a 15 delas, e as ferramentas de apoio reduziram cada campanha de ~20 para ~12 minutos (−40%) nas 32.",
-        en: "Built and owned an internal Flask + SQL web application for campaign operations (~32 campaigns a day): automated QA fully covered 10 to 15 of them, and its support tools cut each job from ~20 to ~12 minutes (−40%) across all 32.",
+        pt: "Criei e mantive uma aplicação web interna (Flask + SQL) para a operação de campanhas (cerca de 32 por dia), com QA automático que cobria de 10 a 15 delas.",
+        en: "Built and owned an internal Flask + SQL web application for campaign operations (~32 campaigns a day), with automated QA that fully covered 10 to 15 of them.",
+      },
+      {
+        pt: "Reduzi cada campanha de ~20 para ~12 minutos (−40%) com as ferramentas de apoio da aplicação, usadas nas 32.",
+        en: "Cut each campaign from ~20 to ~12 minutes (−40%) with the app's support tools, used on all 32.",
       },
       {
         pt: "Escrevi e otimizei consultas SQL complexas e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",

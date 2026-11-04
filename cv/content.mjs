@@ -53,8 +53,9 @@ export const cv = {
         when: "Sep 2024 – May 2026",
         where: "Remote",
         points: [
-          "Built and owned an internal Flask and SQL web application for ~32 daily campaign jobs: automated QA fully covered 10 to 15 of them, and its support tools cut each job from ~20 to ~12 minutes (−40%) across all 32.",
-          "Wrote and optimized complex SQL and stored procedures for high-volume extraction and audience segmentation in Adobe Campaign.",
+          "Built and owned an internal Flask and SQL web app for ~32 daily campaign jobs, with automated QA fully covering 10 to 15.",
+          "Cut each campaign job from ~20 to ~12 minutes (−40%) with the app's support tools, used on all 32.",
+          "Wrote and optimized complex SQL and stored procedures for high-volume extraction and segmentation in Adobe Campaign.",
           "Provided L3 support for production automation pipelines: log-based root-cause analysis, fixes, and follow-up.",
         ],
       },
@@ -141,7 +142,8 @@ export const cv = {
         when: "set 2024 – mai 2026",
         where: "Remoto",
         points: [
-          "Criei e mantive uma aplicação web interna (Flask + SQL) para cerca de 32 jobs de campanha por dia: o QA automático cobria de 10 a 15 deles, e as ferramentas de apoio reduziram cada job de ~20 para ~12 minutos (−40%) nos 32.",
+          "Criei e mantive uma aplicação web interna (Flask + SQL) para cerca de 32 jobs de campanha por dia, com QA automático que cobria de 10 a 15 deles.",
+          "Reduzi cada job de ~20 para ~12 minutos (−40%) com as ferramentas de apoio da aplicação, usadas nos 32.",
           "Escrevi e otimizei consultas SQL complexas e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
           "Prestei suporte L3 a pipelines de automação em produção: análise de logs, causa raiz, correção e acompanhamento.",
         ],
