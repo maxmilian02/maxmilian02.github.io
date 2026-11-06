@@ -1,7 +1,10 @@
 // Conteúdo do currículo — fonte única para os PDFs em PT e EN.
 // Regra: só entra o que dá para sustentar em entrevista; números vêm dos projetos reais.
-// Base: versão revisada por ferramenta de ATS (nov/2026). Exceção: a frase da Netbiis segue os números
-// confirmados pelo dono (32 jobs/dia, QA automático em 10–15, cada job de cerca de 20 para 12 min, −40%).
+// Conferido contra o código de todos os repos em 2026-11-05 (auditoria em 5 grupos). O que o código não
+// mostra e o dono confirmou: 32 jobs/dia, QA em 10–15, cada job de 20 para 12 min (−40%), stored
+// procedures e JS dentro do Adobe Campaign, os 15 robôs da Plug (vários só no servidor Ubuntu da Plug,
+// fora do GitHub) e o servidor Ubuntu com Samba e impressoras. HG7 termina em ago/2024 para não
+// sobrepor a Netbiis. Não afirmar: MongoDB/Celery/RabbitMQ em produção, PHP escrito à mão, systemd.
 // Layout: o cargo vai em negrito na primeira linha (role) e a empresa embaixo (org).
 
 export const contact = {
@@ -29,13 +32,13 @@ export const cv = {
       languages: "Languages",
     },
     summary:
-      "Python backend engineer with 4 years of production experience building REST APIs, browser automation that runs unattended, and data pipelines on advanced SQL. I own systems end to end: design, implementation, tests, and deployment with Docker on Linux.",
+      "Python backend engineer with 4 years of production experience building REST and SOAP integrations, browser automation that runs unattended, and data pipelines on advanced SQL. I own systems end to end, from design and tests to Docker deployment on Linux.",
     skills: [
-      ["Backend", "Python, Flask, FastAPI, REST APIs, asyncio / aiohttp, OAuth2 / PKCE, Server-Sent Events"],
-      ["Data", "MySQL, SQLite, MongoDB, advanced SQL, stored procedures, ETL"],
-      ["Infra", "Docker / Compose, Linux, systemd, nginx, Proxmox / LXC, GitHub Actions, Uptime Kuma, scheduled backups"],
-      ["Quality", "pytest, end-to-end tests, type hints, production support (L3), log analysis"],
-      ["Also", "TypeScript / Next.js, Vue 3, Kotlin / Jetpack Compose, Selenium / Playwright, FFmpeg"],
+      ["Backend", "Python, Flask, FastAPI, REST and SOAP APIs, asyncio / aiohttp, OAuth2 / PKCE, Server-Sent Events"],
+      ["Data", "MySQL, SQLite, advanced SQL, stored procedures, ETL, Power BI, Adobe Campaign"],
+      ["Infra", "Linux (Ubuntu Server, Samba), Docker / Compose, nginx, Proxmox / LXC, GitHub Actions, Uptime Kuma, scheduled backups"],
+      ["Quality", "pytest, Playwright end-to-end tests, type hints, production support (L3), log analysis"],
+      ["Also", "TypeScript / Next.js, Vue 3, Kotlin / Jetpack Compose, Selenium, FFmpeg, Jira API"],
     ],
     jobs: [
       {
@@ -44,7 +47,7 @@ export const cv = {
         when: "Jul 2026 – Present",
         where: "Remote",
         points: [
-          "Building MaxTools Radio and cnabkit, an open-source Python library for Brazilian bank files (CNAB 240/400, OFX), on self-managed infrastructure: Proxmox, Docker, nginx, Uptime Kuma, and weekly backups.",
+          "Building MaxTools Radio and cnabkit, an open-source Python library for Brazilian bank files (CNAB 240/400, OFX), on self-managed infrastructure: Proxmox, Docker, nginx, Uptime Kuma, and weekly snapshot backups.",
         ],
       },
       {
@@ -53,21 +56,21 @@ export const cv = {
         when: "Sep 2024 – May 2026",
         where: "Remote",
         points: [
-          "Built and owned an internal Flask and SQL web app for about 32 daily campaign jobs, with automated QA fully covering 10 to 15.",
-          "Cut each campaign job from about 20 to 12 minutes (−40%) with the app's support tools, used on all 32.",
-          "Wrote and optimized complex SQL and stored procedures for high-volume extraction and segmentation in Adobe Campaign.",
+          "Built an internal Flask and SQL app of operator tools for 32 daily campaign jobs, cutting each from 20 to 12 min (−40%).",
+          "Built a FastAPI validator that checks Jira briefs against Adobe Campaign workflows over SOAP, automating QA on 10 to 15 daily jobs.",
+          "Wrote SQL, stored procedures, JavaScript, and workflow automations in Adobe Campaign for high-volume segmentation.",
           "Provided L3 support for production automation pipelines: log-based root-cause analysis, fixes, and follow-up.",
         ],
       },
       {
         role: "Backend Developer, Independent Consultant",
         org: "HG7 Group (Insurance Brokerages and a Clinic)",
-        when: "Feb 2024 – Aug 2024",
+        when: "Feb 2023 – Aug 2024",
         where: "Hybrid",
         points: [
-          "Built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the company's PHP ERP and feeding its income statement, replacing line-by-line spreadsheet reconciliation.",
-          "Built async ETL from RD Station CRM into MySQL for Power BI (10 parallel requests per batch, paced to the 120 requests/min rate limit) and from Exact Spotter into MongoDB.",
-          "Built a bot that reads answered calls from the 3CX phone system and creates RD Station leads assigned to the right salesperson.",
+          "Built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) in three iterations, feeding the monthly income statement, plus commission reconciliation against the brokerage ERP.",
+          "Built async ETL (aiohttp) from RD Station CRM and Exact Spotter into MySQL for Power BI, with retry on HTTP 429.",
+          "Built a bot that reads answered calls from the 3CX call panel and creates RD Station deals assigned to the right salesperson.",
         ],
       },
       {
@@ -76,9 +79,10 @@ export const cv = {
         when: "Aug 2022 – Feb 2024",
         where: "São Paulo",
         points: [
-          "Built and maintained 15 production bots (Python, Selenium) processing hundreds of beneficiary changes a month across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
-          "For ExportSul, a client brokerage, built bots on the Akad, Sompo, and Tokio Marine portals that register export shipments and download invoices, with per-record status in MySQL so runs resume where they stopped.",
+          "Built and maintained 15 production bots (Python, Selenium) entering hundreds of beneficiary changes a month into 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
+          "For ExportSul, a client brokerage, built bots on the Akad, Sompo, and Tokio Marine portals that register export shipments and download invoices, resuming where a run stopped.",
           "Packaged shared code (browser setup, audio-based reCAPTCHA solving, FTP upload) into an internal Python wheel, later reused across other client projects.",
+          "Set up the company's Ubuntu server, replacing Windows Server: Samba file shares, Windows and macOS printing, bot runtime.",
         ],
       },
       {
@@ -92,11 +96,11 @@ export const cv = {
     projects: [
       [
         "MaxTools Radio",
-        "Python bot streaming 48 kHz PCM through a real-time DSP chain, Flask API with SSE and OAuth accounts (Google, Discord, Spotify), web app, and Kotlin / Jetpack Compose Android app. 1,264 Python tests and 472 Android unit tests.",
+        "Python bot streaming 48 kHz PCM through a real-time DSP chain, Flask API with SSE and OAuth2 / PKCE sign-in, web app, and Kotlin / Jetpack Compose Android app. 1,268 Python tests (271 end-to-end in Playwright) and 472 Android tests.",
       ],
       [
         "MaxTools",
-        "FastAPI plugin platform where a registry auto-discovers tool modules and a Next.js dashboard renders from their manifest. Async jobs with progress, API-key auth, TTL cleanup, and frame-accurate video trimming over HTTP Range.",
+        "FastAPI plugin platform where a registry auto-discovers tool modules and a Next.js dashboard renders from their manifest. Background jobs with progress and cancellation, API-key auth, TTL cleanup, and frame-accurate video trimming over HTTP Range.",
       ],
     ],
     languages: "Portuguese (native), English (advanced: reading, writing, technical documentation)",
@@ -118,13 +122,13 @@ export const cv = {
       languages: "Idiomas",
     },
     summary:
-      "Engenheiro backend Python com 4 anos de experiência em produção construindo APIs REST, automações de navegador que rodam sem supervisão e pipelines de dados com SQL avançado. Cuido dos sistemas de ponta a ponta: desenho, implementação, testes e deploy com Docker em Linux.",
+      "Engenheiro backend Python com 4 anos de experiência em produção construindo integrações REST e SOAP, automações de navegador que rodam sem supervisão e pipelines de dados com SQL avançado. Cuido dos sistemas de ponta a ponta: desenho, implementação, testes e deploy com Docker em Linux.",
     skills: [
-      ["Backend", "Python, Flask, FastAPI, APIs REST, asyncio / aiohttp, OAuth2 / PKCE, Server-Sent Events"],
-      ["Dados", "MySQL, SQLite, MongoDB, SQL avançado, stored procedures, ETL"],
-      ["Infra", "Docker / Compose, Linux, systemd, nginx, Proxmox / LXC, GitHub Actions, Uptime Kuma, backups agendados"],
-      ["Qualidade", "pytest, testes ponta a ponta, type hints, suporte de produção (L3), análise de logs"],
-      ["Também", "TypeScript / Next.js, Vue 3, Kotlin / Jetpack Compose, Selenium / Playwright, FFmpeg"],
+      ["Backend", "Python, Flask, FastAPI, APIs REST e SOAP, asyncio / aiohttp, OAuth2 / PKCE, Server-Sent Events"],
+      ["Dados", "MySQL, SQLite, SQL avançado, stored procedures, ETL, Power BI, Adobe Campaign"],
+      ["Infra", "Linux (Ubuntu Server, Samba), Docker / Compose, nginx, Proxmox / LXC, GitHub Actions, Uptime Kuma, backups agendados"],
+      ["Qualidade", "pytest, testes ponta a ponta com Playwright, type hints, suporte de produção (L3), análise de logs"],
+      ["Também", "TypeScript / Next.js, Vue 3, Kotlin / Jetpack Compose, Selenium, FFmpeg, API do Jira"],
     ],
     jobs: [
       {
@@ -133,7 +137,7 @@ export const cv = {
         when: "jul 2026 – hoje",
         where: "Remoto",
         points: [
-          "Desenvolvo o MaxTools Radio e o cnabkit, biblioteca Python de código aberto para arquivos de banco brasileiros (CNAB 240/400, OFX), numa infraestrutura que eu mesmo mantenho: Proxmox, Docker, nginx, Uptime Kuma e backups semanais.",
+          "Desenvolvo o MaxTools Radio e o cnabkit, biblioteca Python de código aberto para arquivos de banco brasileiros (CNAB 240/400, OFX), numa infraestrutura que eu mesmo mantenho: Proxmox, Docker, nginx, Uptime Kuma e backups semanais por snapshot.",
         ],
       },
       {
@@ -142,21 +146,21 @@ export const cv = {
         when: "set 2024 – mai 2026",
         where: "Remoto",
         points: [
-          "Criei e mantive uma aplicação web interna (Flask + SQL) para cerca de 32 jobs de campanha por dia, com QA automático que cobria de 10 a 15 deles.",
-          "Reduzi cada job de cerca de 20 para 12 minutos (−40%) com as ferramentas de apoio da aplicação, usadas nos 32.",
-          "Escrevi e otimizei consultas SQL complexas e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
+          "Criei e mantive uma aplicação interna (Flask + SQL) com ferramentas para os operadores em 32 jobs de campanha por dia, reduzindo cada um de 20 para 12 minutos (−40%).",
+          "Criei um validador em FastAPI que confere o briefing do Jira contra os workflows do Adobe Campaign via SOAP, automatizando o QA de 10 a 15 jobs por dia.",
+          "Escrevi SQL, stored procedures, JavaScript e automações de workflow no Adobe Campaign para segmentar grandes volumes.",
           "Prestei suporte L3 a pipelines de automação em produção: análise de logs, causa raiz, correção e acompanhamento.",
         ],
       },
       {
         role: "Desenvolvedor Backend, Consultor Independente",
         org: "Grupo HG7 (corretoras de seguros e uma clínica)",
-        when: "fev 2024 – ago 2024",
+        when: "fev 2023 – ago 2024",
         where: "Híbrido",
         points: [
-          "Criei o sistema de importação e conciliação de extratos bancários OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP da empresa e alimentando a DRE, substituindo a conciliação linha a linha em planilha.",
-          "Criei ETLs assíncronos do CRM RD Station para MySQL, alimentando o Power BI (10 requisições paralelas por lote, no ritmo do limite de 120 por minuto), e do Exact Spotter para MongoDB.",
-          "Criei um robô que lê as chamadas atendidas na central 3CX e cadastra cada lead no RD Station com o vendedor certo.",
+          "Criei o sistema de importação e conciliação de extratos bancários OFX (Python, Flask, MySQL) em três versões, alimentando a DRE mensal, além da conciliação de comissões contra o ERP da corretora.",
+          "Criei ETLs assíncronos (aiohttp) do RD Station e do Exact Spotter para MySQL, alimentando o Power BI, com retentativa em HTTP 429.",
+          "Criei um robô que lê as chamadas atendidas no painel da 3CX e cria cada oportunidade no RD Station com o vendedor certo.",
         ],
       },
       {
@@ -165,9 +169,10 @@ export const cv = {
         when: "ago 2022 – fev 2024",
         where: "São Paulo",
         points: [
-          "Criei e mantive 15 robôs em produção (Python, Selenium) que processavam centenas de movimentações de beneficiários por mês em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
-          "Para a ExportSul, corretora cliente, criei robôs nos portais da Akad, Sompo e Tokio Marine que registram averbações de exportação e baixam faturas, com status por registro no MySQL para retomar de onde pararam.",
+          "Criei e mantive 15 robôs em produção (Python, Selenium) que lançavam centenas de movimentações de beneficiários por mês em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
+          "Para a ExportSul, corretora cliente, criei robôs nos portais da Akad, Sompo e Tokio Marine que registram averbações de exportação e baixam faturas, retomando de onde a execução parou.",
           "Reuni o código comum (inicialização do navegador, reCAPTCHA resolvido por áudio, envio por FTP) numa biblioteca Python interna (wheel), depois reaproveitada em outros clientes.",
+          "Montei o servidor Ubuntu da empresa no lugar do Windows Server: arquivos via Samba, impressão Windows/macOS e os robôs.",
         ],
       },
       {
@@ -181,11 +186,11 @@ export const cv = {
     projects: [
       [
         "MaxTools Radio",
-        "Bot em Python com PCM 48 kHz e DSP em tempo real, API Flask com SSE e contas OAuth (Google, Discord, Spotify), site e app Android em Kotlin / Jetpack Compose. 1.264 testes Python e 472 testes Android.",
+        "Bot em Python com PCM 48 kHz e DSP em tempo real, API Flask com SSE e login OAuth2 / PKCE, site e app Android em Kotlin / Jetpack Compose. 1.268 testes Python (271 ponta a ponta com Playwright) e 472 testes Android.",
       ],
       [
         "MaxTools",
-        "Plataforma de plugins em FastAPI em que um registry descobre os módulos e um painel Next.js é montado a partir do manifesto. Jobs assíncronos com progresso, autenticação por API key, limpeza por TTL e corte de vídeo quadro a quadro via HTTP Range.",
+        "Plataforma de plugins em FastAPI em que um registry descobre os módulos e um painel Next.js é montado a partir do manifesto. Jobs em segundo plano com progresso e cancelamento, autenticação por API key, limpeza por TTL e corte de vídeo quadro a quadro via HTTP Range.",
       ],
     ],
     languages: "Português (nativo), Inglês (avançado: leitura, escrita e documentação técnica)",

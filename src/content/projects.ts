@@ -79,8 +79,8 @@ export const projects: Project[] = [
     origin: "own",
     visibility: "private",
     start: "2026-08",
-    end: "2026-10",
-    commits: 328,
+    end: "2026-11",
+    commits: 439,
     tier: 1,
     stack: ["Python", "discord.py", "Flask", "SQLite", "FFmpeg", "OAuth2", "Kotlin", "Jetpack Compose", "Media3", "Docker"],
     links: [
@@ -99,10 +99,10 @@ export const projects: Project[] = [
       en: "A shared radio that started as a Discord bot and grew into a product: a website, an Android app, one account per email and music that moves between devices.",
     },
     metrics: [
-      { value: "328", label: { pt: "commits em 8 semanas", en: "commits in 8 weeks" } },
-      { value: { pt: "1.264", en: "1,264" }, label: { pt: "testes automatizados em Python", en: "automated Python tests" } },
-      { value: "472", label: { pt: "testes unitários no Android", en: "Android unit tests" } },
-      { value: "3", label: { pt: "idiomas: português, inglês e espanhol", en: "languages: Portuguese, English, Spanish" } },
+      { value: "439", label: { pt: "commits em 10 semanas", en: "commits in 10 weeks" } },
+      { value: { pt: "1.268", en: "1,268" }, label: { pt: "testes automatizados em Python", en: "automated Python tests" } },
+      { value: "472", label: { pt: "testes no Android (JUnit e Robolectric)", en: "Android tests (JUnit and Robolectric)" } },
+      { value: "271", label: { pt: "testes ponta a ponta no navegador (Playwright)", en: "end-to-end browser tests (Playwright)" } },
     ],
     caseStudy: {
       problem: {
@@ -127,8 +127,8 @@ export const projects: Project[] = [
         {
           title: { pt: "Uma conta, qualquer aparelho", en: "One account, any device" },
           body: {
-            pt: "Cada pessoa tem uma conta só, identificada pelo e-mail; Google, Discord e Spotify se vinculam a ela por OAuth. Curtidas, playlists e o que está tocando passam do celular para o navegador. Um link compartilhado abre direto no app (App Links), e o site, o app e o bot falam português, inglês e espanhol.",
-            en: "Each person has a single account keyed by email; Google, Discord and Spotify link to it over OAuth. Likes, playlists and what's playing move between phone and browser. A shared link opens straight in the app (App Links), and the site, the app and the bot speak Portuguese, English and Spanish.",
+            pt: "Cada pessoa tem uma conta só, identificada pelo e-mail, com senha em scrypt ou login por OAuth2 com PKCE (Google, Microsoft, Facebook, Discord e Spotify). Curtidas, playlists e o que está tocando passam do celular para o navegador. Um link compartilhado abre direto no app (App Links), e o site e o app falam português e inglês, com o espanhol atrás de uma chave.",
+            en: "Each person has a single account keyed by email, with a scrypt-hashed password or OAuth2 with PKCE (Google, Microsoft, Facebook, Discord and Spotify). Likes, playlists and what's playing move between phone and browser. A shared link opens straight in the app (App Links), and the site and app speak Portuguese and English, with Spanish behind a flag.",
           },
         },
         {
@@ -141,8 +141,8 @@ export const projects: Project[] = [
         {
           title: { pt: "Recursos atrás de chaves", en: "Features behind flags" },
           body: {
-            pt: "Todo recurso novo nasce desligado, atrás de uma chave que o admin liga sem deploy; até os comandos do bot aparecem sozinhos quando a chave liga. Doações do Ko-fi e do Mercado Pago chegam por webhook e ligam o selo de apoiador na conta certa pelo e-mail.",
-            en: "Every new feature ships switched off, behind a flag the admin turns on without a deploy; even the bot's commands appear on their own when their flag goes on. Ko-fi and Mercado Pago donations arrive by webhook and switch on the supporter badge on the right account by email.",
+            pt: "Todo recurso novo nasce desligado, atrás de uma chave que o admin liga sem deploy; até os comandos do bot aparecem sozinhos quando a chave liga. Doações do Ko-fi e do Mercado Pago chegam por webhook (com assinatura HMAC no Mercado Pago) e ligam o selo de apoiador na conta certa.",
+            en: "Every new feature ships switched off, behind a flag the admin turns on without a deploy; even the bot's commands appear on their own when their flag goes on. Ko-fi and Mercado Pago donations arrive by webhook (HMAC-signed for Mercado Pago) and switch on the supporter badge on the right account.",
           },
         },
         {
@@ -155,8 +155,8 @@ export const projects: Project[] = [
         {
           title: { pt: "Feito para ficar no ar", en: "Built to stay up" },
           body: {
-            pt: "Fila e posição são gravadas a cada 5 s em SQLite, e depois de um deploy o bot volta ao canal de onde parou. Uma auditoria de segurança passou pelo sistema inteiro: sessões guardadas como hash, IP do cliente aceito só do proxy, proteção contra SSRF e CSP no site.",
-            en: "Queue and position are saved every 5 s to SQLite, and after a deploy the bot rejoins the channel where it stopped. A security audit went through the whole system: sessions stored as hashes, client IP trusted only from the proxy, SSRF protection and a CSP on the site.",
+            pt: "Fila e posição são gravadas a cada 5 s em SQLite, e depois de um deploy o bot volta ao canal de onde parou. Uma auditoria de segurança passou pelo sistema inteiro: sessões guardadas como hash, limite de requisições por IP, IP do cliente aceito só do proxy, proteção contra SSRF, CSP no site e consultas do admin numa conexão só de leitura.",
+            en: "Queue and position are saved every 5 s to SQLite, and after a deploy the bot rejoins the channel where it stopped. A security audit went through the whole system: sessions stored as hashes, per-IP rate limiting, client IP trusted only from the proxy, SSRF protection, a CSP on the site and admin queries on a read-only connection.",
           },
         },
       ],
@@ -183,7 +183,7 @@ export const projects: Project[] = [
     end: "2026-08",
     commits: 33,
     tier: 2,
-    stack: ["Python", "Flask", "C (Oodle)", "JavaScript", "Leaflet", "Docker"],
+    stack: ["Python", "Flask", "palsav", "JavaScript", "Leaflet", "Docker"],
     image: {
       src: "/img/pallab.webp",
       alt: {
@@ -210,8 +210,8 @@ export const projects: Project[] = [
         {
           title: { pt: "Ler o save do jogo", en: "Reading the game save" },
           body: {
-            pt: "Parser baseado no palsav com a extensão Oodle em C compilada dentro da imagem Docker. O Level.sav é relido por mtime a cada autosave, então os dados acompanham o jogo sem reiniciar nada.",
-            en: "A parser built on palsav with the Oodle C extension compiled inside the Docker image. Level.sav is re-read by mtime on every autosave, so data follows the game without restarting anything.",
+            pt: "Uma camada de leitura e escrita sobre o palsav, biblioteca da comunidade cuja descompressão Oodle em C é compilada dentro da imagem Docker. O Level.sav é relido por mtime a cada autosave, então os dados acompanham o jogo sem reiniciar nada.",
+            en: "A read and write layer over palsav, a community library whose Oodle C decompressor is compiled inside the Docker image. Level.sav is re-read by mtime on every autosave, so data follows the game without restarting anything.",
           },
         },
         {
@@ -245,14 +245,14 @@ export const projects: Project[] = [
       ],
       chain: [
         { name: "Level.sav", detail: { pt: "binário PlM / Oodle", en: "PlM / Oodle binary" } },
-        { name: "palsav (C)", detail: { pt: "descompacta e decodifica", en: "decompress and decode" } },
+        { name: "palsav", detail: { pt: "biblioteca da comunidade: descompacta e decodifica", en: "community library: decompress and decode" } },
         { name: "Flask API", detail: { pt: "breeding, dex, mapa, admin", en: "breeding, dex, map, admin" } },
         { name: { pt: "REST do servidor", en: "Server REST API" }, detail: { pt: "jogadores online, cache 3 s", en: "online players, 3 s cache" } },
         { name: { pt: "Front sem framework", en: "Framework-free UI" }, detail: { pt: "sem build step", en: "no build step" } },
       ],
       learned: {
-        pt: "Fórmula da comunidade não é fórmula do jogo. As exceções só apareceram quando validei contra a tabela inteira, e não contra uns casos de exemplo. Hoje um caso-teste trava cada uma delas.",
-        en: "The community's formula isn't the game's formula. The exceptions only showed up when I validated against the whole table instead of a few examples. Today a test case pins each of them down.",
+        pt: "Fórmula da comunidade não é fórmula do jogo. As exceções só apareceram quando validei contra a tabela inteira, e não contra uns casos de exemplo. Hoje cada uma delas está documentada no código, junto da regra que corrige.",
+        en: "The community's formula isn't the game's formula. The exceptions only showed up when I validated against the whole table instead of a few examples. Each one is now documented in the code, next to the rule that fixes it.",
       },
     },
   },
@@ -266,7 +266,7 @@ export const projects: Project[] = [
     end: "2026-07",
     commits: 33,
     tier: 1,
-    stack: ["FastAPI", "Python", "Next.js", "React", "TypeScript", "Tailwind CSS", "yt-dlp", "FFmpeg", "nginx"],
+    stack: ["FastAPI", "Python", "Next.js", "React", "TypeScript", "Tailwind CSS", "yt-dlp", "FFmpeg", "Caddy"],
     tagline: {
       pt: "Plataforma modular em que cada ferramenta é um plugin: o backend descobre sozinho e o front monta o painel a partir do manifesto.",
       en: "A modular platform where each tool is a plugin: the backend discovers it and the frontend builds the dashboard from its manifest.",
@@ -306,8 +306,8 @@ export const projects: Project[] = [
         {
           title: { pt: "Plataforma, não só interface", en: "A platform, not just a UI" },
           body: {
-            pt: "Jobs assíncronos com progresso, autenticação opcional por API key e um janitor que apaga arquivos por TTL. Os mesmos plugins servem de backend de áudio para o MaxTools Radio.",
-            en: "Async jobs with progress, optional API-key auth and a janitor that deletes files by TTL. The same plugins act as the audio backend for MaxTools Radio.",
+            pt: "Jobs em segundo plano com progresso e cancelamento, autenticação opcional por API key e um janitor que apaga arquivos por TTL. Os mesmos plugins servem de backend de áudio para o MaxTools Radio.",
+            en: "Background jobs with progress and cancellation, optional API-key auth and a janitor that deletes files by TTL. The same plugins act as the audio backend for MaxTools Radio.",
           },
         },
       ],
@@ -335,7 +335,7 @@ export const projects: Project[] = [
     end: "2023-11",
     commits: 193,
     tier: 1,
-    stack: ["Python", "Selenium", "MySQL", "SpeechRecognition", "FTP", "Excel"],
+    stack: ["Python", "Selenium", "MySQL", "SpeechRecognition", "FTP", "Excel", "PyPDF2", "Ubuntu Server", "Samba"],
     context: {
       pt: "Plug Benefícios (corretora de benefícios) e clientes dela, como a ExportSul, como estagiário de desenvolvimento Python. Credenciais e dados de beneficiários omitidos.",
       en: "Plug Benefícios (benefits brokerage) and its clients, such as ExportSul, as a Python development intern. Credentials and beneficiary data omitted.",
@@ -358,8 +358,8 @@ export const projects: Project[] = [
         {
           title: { pt: "Fila no banco, um módulo por operadora", en: "A database queue, one module per insurer" },
           body: {
-            pt: "O robô principal lê os chamados pendentes no MySQL do sistema da corretora e despacha cada um para o módulo da operadora certa, que preenche o portal e grava o status de volta. Foram 80 commits só nele.",
-            en: "The main bot reads pending tickets from the brokerage system's MySQL and dispatches each one to the right insurer module, which fills the portal and writes the status back. That one alone took 80 commits.",
+            pt: "O robô principal lê os chamados pendentes no MySQL do sistema da corretora e despacha cada um para o módulo da operadora certa, que preenche o portal, tira um screenshot e devolve o chamado para conferência humana. Foram 80 commits só nele.",
+            en: "The main bot reads pending tickets from the brokerage system's MySQL and dispatches each one to the right insurer module, which fills in the portal, takes a screenshot and hands the ticket back for human review. That one alone took 80 commits.",
           },
         },
         {
@@ -379,8 +379,8 @@ export const projects: Project[] = [
         {
           title: { pt: "Averbações para uma corretora cliente", en: "Export filings for a client brokerage" },
           body: {
-            pt: "Para a ExportSul, robôs nos portais da Akad, Sompo e Tokio Marine registram averbações de embarques de exportação e baixam faturas. Cada registro tem status no MySQL (a fazer, averbado, certificado, erro), então uma execução interrompida retoma de onde parou.",
-            en: "For ExportSul, bots on the Akad, Sompo and Tokio Marine portals register export shipments and download invoices. Each record has a status in MySQL (to do, filed, certified, error), so an interrupted run resumes where it stopped.",
+            pt: "Para a ExportSul, robôs nos portais da Akad, Sompo e Tokio Marine registram averbações de embarques de exportação e baixam faturas. Na Akad cada registro tem status no MySQL (a fazer, averbado, certificado, erro); nos outros portais, um checkpoint em arquivo. Uma execução interrompida retoma de onde parou.",
+            en: "For ExportSul, bots on the Akad, Sompo and Tokio Marine portals register export shipments and download invoices. On Akad each record has a status in MySQL (to do, filed, certified, error); on the other portals, a file checkpoint. An interrupted run resumes where it stopped.",
           },
         },
       ],
@@ -469,22 +469,22 @@ export const projects: Project[] = [
     origin: "client",
     org: "HG7",
     visibility: "private",
-    start: "2023-08",
-    end: "2025-01",
+    start: "2023-02",
+    end: "2024-08",
     commits: 70,
     tier: 1,
-    stack: ["Python", "Flask", "MySQL", "PHP", "asyncio", "MongoDB", "Plotly", "Selenium", "REST APIs"],
+    stack: ["Python", "Flask", "MySQL", "asyncio", "aiohttp", "Selenium", "Power BI", "REST APIs"],
     context: {
       pt: "Cliente HG7 (corretora de seguros) e empresas do mesmo dono, outra corretora e uma clínica: meio período a partir de 2023, em paralelo ao estágio, e consultoria de backend em 2024. Credenciais e dados financeiros omitidos.",
       en: "Client HG7 (insurance brokerage) and two companies with the same owner, another brokerage and a clinic: part-time from 2023, alongside the internship, then backend consulting in 2024. Credentials and financial data omitted.",
     },
     tagline: {
-      pt: "Importação e conciliação de extratos bancários OFX em três gerações, mais integrações entre CRM, telefonia e o ERP.",
-      en: "Bank statement (OFX) import and reconciliation across three generations, plus integrations between CRM, telephony and the ERP.",
+      pt: "Importação e conciliação de extratos bancários OFX em três gerações, conciliação de comissões contra o ERP da corretora e integrações entre CRM, telefonia e Power BI.",
+      en: "Bank statement (OFX) import and reconciliation across three generations, commission reconciliation against the brokerage ERP, and integrations between CRM, telephony and Power BI.",
     },
     metrics: [
-      { value: "18", label: { pt: "meses em uso diário", en: "months in daily use" } },
-      { value: "3", label: { pt: "gerações, a última dentro do ERP", en: "generations, the last inside the ERP" } },
+      { value: "448", label: { pt: "regras de classificação de históricos (eram 89 na 2ª geração)", en: "memo classification rules (up from 89 in the 2nd generation)" } },
+      { value: "3", label: { pt: "gerações do sistema de conciliação", en: "generations of the reconciliation system" } },
       { value: "3", label: { pt: "sistemas conectados: CRM, telefonia, ERP", en: "systems connected: CRM, phone, ERP" } },
     ],
     caseStudy: {
@@ -501,17 +501,17 @@ export const projects: Project[] = [
           },
         },
         {
-          title: { pt: "Dentro do ERP existente", en: "Inside the existing ERP" },
+          title: { pt: "Comissões e DRE", en: "Commissions and income statement" },
           body: {
-            pt: "Na terceira geração, as telas de edição e transferência de agrupamentos passaram a viver dentro do ERP em PHP que a empresa já usava, com um fluxo de promoção de dev para prod.",
-            en: "In the third generation, the editing and regrouping screens moved inside the PHP ERP the company already used, with a dev-to-prod promotion flow.",
+            pt: "Na segunda geração, as comissões do extrato passaram a ser casadas com o relatório do ERP da corretora por data e valor líquido; sem par, o sistema recalcula o bruto com IRRF e ISS e fecha o mês contra o total do ERP. A terceira geração trouxe a DRE mensal com exportação para Excel e um fluxo de promoção de dev para prod.",
+            en: "In the second generation, commissions on the statement were matched against the brokerage ERP report by date and net amount; with no match, the system grosses up for income and service tax and closes the month against the ERP total. The third generation added the monthly income statement with Excel export and a dev-to-prod promotion flow.",
           },
         },
         {
           title: { pt: "CRM, telefonia e dados", en: "CRM, telephony and data" },
           body: {
-            pt: "ETL assíncrono da API do CRM para as tabelas do Power BI no MySQL (10 requisições por lote, no ritmo do limite de 120 por minuto), um robô que transforma chamadas atendidas na central 3CX em leads no CRM, e painéis com Plotly sobre dados consolidados em MongoDB.",
-            en: "Async ETL from the CRM API into the Power BI tables in MySQL (10 requests per batch, paced to the 120 per minute limit), a bot that turns answered 3CX calls into CRM leads, and Plotly dashboards over data consolidated in MongoDB.",
+            pt: "ETL assíncrono (asyncio, aiohttp) do RD Station e do Exact Spotter para as tabelas do Power BI no MySQL, com limite de concorrência, nova tentativa no HTTP 429 e sincronização incremental em horário comercial. Um robô lê as chamadas atendidas no painel da central 3CX e cria a oportunidade no CRM com o vendedor certo pelo ramal.",
+            en: "Async ETL (asyncio, aiohttp) from RD Station and Exact Spotter into the Power BI tables in MySQL, with a concurrency cap, retry on HTTP 429 and incremental sync during business hours. A bot reads answered calls from the 3CX call panel and creates the CRM deal for the right salesperson by extension.",
           },
         },
       ],
@@ -519,11 +519,11 @@ export const projects: Project[] = [
         { name: { pt: "Extrato OFX", en: "OFX statement" }, detail: { pt: "upload", en: "upload" } },
         { name: { pt: "Normalização", en: "Normalisation" }, detail: { pt: "mapa de históricos", en: "memo mapping" } },
         { name: "MySQL", detail: { pt: "lançamentos", en: "ledger" } },
-        { name: "ERP (PHP)", detail: { pt: "revisão e agrupamento", en: "review and grouping" } },
+        { name: { pt: "DRE · Power BI", en: "Income statement · Power BI" }, detail: { pt: "relatórios", en: "reports" } },
       ],
       learned: {
-        pt: "Encontrar o usuário onde ele já trabalha. A adoção só decolou quando a ferramenta passou a morar dentro do ERP em vez de ser mais uma aba aberta.",
-        en: "Meet users where they already work. Adoption only took off once the tool lived inside the ERP instead of being yet another open tab.",
+        pt: "Conciliar é casar com tolerância, não com igualdade. A comissão chega líquida de impostos, então a comparação exata falhava; recalcular o bruto e fechar o mês contra o total do ERP, com tolerância de centavos, foi o que deixou o processo confiável.",
+        en: "Reconciling means matching within a tolerance, not exact equality. Commissions arrive net of tax, so exact matching failed; grossing up and closing the month against the ERP total, within a few cents, is what made the process reliable.",
       },
     },
   },
@@ -721,21 +721,6 @@ export const projects: Project[] = [
     tagline: {
       pt: "Painel e API REST mínimos para disparar e acompanhar scripts pela web.",
       en: "A minimal panel and REST API to trigger and follow scripts over the web.",
-    },
-  },
-  {
-    slug: "landing-page",
-    title: "Landing page",
-    category: "study",
-    visibility: "public",
-    repo: `${GH}/responsive-landing-page`,
-    start: "2022-04",
-    end: "2022-04",
-    commits: 2,
-    stack: ["HTML", "CSS", "JavaScript"],
-    tagline: {
-      pt: "Meu primeiro exercício de landing page, de 2022.",
-      en: "My first landing page exercise, from 2022.",
     },
   },
 ];

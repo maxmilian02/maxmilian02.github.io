@@ -45,16 +45,16 @@ export const experience: Job[] = [
     where: { pt: "Remoto", en: "Remote" },
     points: [
       {
-        pt: "MaxTools Radio: site, app Android e bot de Discord com uma conta por e-mail (OAuth com Google, Discord e Spotify), recursos ligados por chave sem deploy e doações por webhook; 1.264 testes Python e 472 testes Android.",
-        en: "MaxTools Radio: website, Android app and Discord bot with one account per email (OAuth with Google, Discord and Spotify), feature flags switched on without a deploy and donations by webhook; 1,264 Python tests and 472 Android tests.",
+        pt: "MaxTools Radio: site, app Android e bot de Discord com uma conta por e-mail (OAuth2 com PKCE: Google, Microsoft, Facebook, Discord e Spotify), recursos ligados por chave sem deploy e doações por webhook; 1.268 testes Python (271 ponta a ponta com Playwright) e 472 testes Android.",
+        en: "MaxTools Radio: website, Android app and Discord bot with one account per email (OAuth2 with PKCE: Google, Microsoft, Facebook, Discord and Spotify), feature flags switched on without a deploy and donations by webhook; 1,268 Python tests (271 end-to-end in Playwright) and 472 Android tests.",
       },
       {
         pt: "cnabkit: biblioteca Python de código aberto que lê arquivos de banco brasileiros (CNAB 240, CNAB 400 e OFX), com testes, tipagem estrita e CI.",
         en: "cnabkit: open-source Python library that reads Brazilian bank files (CNAB 240, CNAB 400 and OFX), with tests, strict typing and CI.",
       },
       {
-        pt: "Infraestrutura própria em produção: Proxmox, Docker, nginx com HTTPS, monitoramento com Uptime Kuma e backups semanais.",
-        en: "Own production infrastructure: Proxmox, Docker, nginx with HTTPS, Uptime Kuma monitoring and weekly backups.",
+        pt: "Infraestrutura própria em produção: Proxmox, Docker, nginx com HTTPS, monitoramento com Uptime Kuma e backups semanais por snapshot.",
+        en: "Own production infrastructure: Proxmox, Docker, nginx with HTTPS, Uptime Kuma monitoring and weekly snapshot backups.",
       },
     ],
     slugs: ["maxtools-radio", "cnabkit"],
@@ -69,16 +69,16 @@ export const experience: Job[] = [
     where: { pt: "Remoto", en: "Remote" },
     points: [
       {
-        pt: "Criei e mantive uma aplicação web interna (Flask + SQL) para a operação de campanhas (cerca de 32 por dia), com QA automático que cobria de 10 a 15 delas.",
-        en: "Built and owned an internal Flask + SQL web application for campaign operations (~32 campaigns a day), with automated QA that fully covered 10 to 15 of them.",
+        pt: "Criei e mantive uma aplicação web interna (Flask + SQL) com ferramentas para os operadores (geração de scripts e segmentos, limpeza de listas, checagens no Jira) usadas em cerca de 32 campanhas por dia, reduzindo cada uma de ~20 para ~12 minutos (−40%).",
+        en: "Built and owned an internal Flask + SQL web app of operator tools (script and segment generation, list cleaning, Jira checks) used on ~32 campaigns a day, cutting each from ~20 to ~12 minutes (−40%).",
       },
       {
-        pt: "Reduzi cada campanha de ~20 para ~12 minutos (−40%) com as ferramentas de apoio da aplicação, usadas nas 32.",
-        en: "Cut each campaign from ~20 to ~12 minutes (−40%) with the app's support tools, used on all 32.",
+        pt: "Criei um validador em FastAPI que lê o briefing pela API do Jira e os workflows e entregas do Adobe Campaign via SOAP, automatizando o QA de 10 a 15 campanhas por dia.",
+        en: "Built a FastAPI validator that reads the brief through the Jira API and the workflows and deliveries from Adobe Campaign over SOAP, automating QA on 10 to 15 campaigns a day.",
       },
       {
-        pt: "Escrevi e otimizei consultas SQL complexas e stored procedures para extração e segmentação de grandes volumes de dados no Adobe Campaign.",
-        en: "Wrote and optimized complex SQL queries and stored procedures for high-volume data extraction and audience segmentation in Adobe Campaign.",
+        pt: "Escrevi SQL, stored procedures, JavaScript e automações de workflow dentro do Adobe Campaign para extração e segmentação de grandes volumes de dados.",
+        en: "Wrote SQL, stored procedures, JavaScript and workflow automations inside Adobe Campaign for high-volume data extraction and audience segmentation.",
       },
       {
         pt: "Suporte L3 a pipelines de automação em produção: análise de logs, causa raiz, correção e acompanhamento.",
@@ -91,21 +91,21 @@ export const experience: Job[] = [
     id: "consulting",
     org: { pt: "Consultoria independente (grupo HG7)", en: "Independent consulting (HG7 group)" },
     role: { pt: "Desenvolvedor Backend", en: "Backend Developer" },
-    from: "2024-02",
+    from: "2023-02",
     to: "2024-08",
     where: { pt: "Híbrido", en: "Hybrid" },
     points: [
       {
-        pt: "HG7 (corretora de seguros) e empresas do mesmo dono, outra corretora e uma clínica: criei o sistema de importação e conciliação de extratos OFX (Python, Flask, MySQL) em três versões, integrado ao ERP em PHP e alimentando a DRE, no lugar da conciliação em planilha.",
-        en: "HG7 (insurance brokerage) and two companies with the same owner, another brokerage and a clinic: built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, embedded in the PHP ERP and feeding the income statement, replacing spreadsheet reconciliation.",
+        pt: "HG7 (corretora de seguros) e empresas do mesmo dono, outra corretora e uma clínica: criei o sistema de importação e conciliação de extratos OFX (Python, Flask, MySQL) em três versões, alimentando a DRE mensal, e a conciliação de comissões contra o ERP da corretora, com IRRF e ISS e fechamento do mês.",
+        en: "HG7 (insurance brokerage) and two companies with the same owner, another brokerage and a clinic: built an OFX bank-statement import and reconciliation system (Python, Flask, MySQL) across three iterations, feeding the monthly income statement, plus commission reconciliation against the brokerage ERP with tax withholdings and month-end close.",
       },
       {
-        pt: "Criei ETLs assíncronos do CRM RD Station para MySQL, alimentando o Power BI (10 requisições paralelas por lote, no ritmo do limite de 120 por minuto), e do Exact Spotter para MongoDB.",
-        en: "Built async ETL from RD Station CRM into MySQL for Power BI (10 parallel requests per batch, paced to the 120 requests/min rate limit) and from Exact Spotter into MongoDB.",
+        pt: "Criei ETLs assíncronos (asyncio, aiohttp) do CRM RD Station e do Exact Spotter para MySQL, alimentando o Power BI, com limite de concorrência, nova tentativa em HTTP 429 e sincronização incremental em horário comercial.",
+        en: "Built async ETL (asyncio, aiohttp) from RD Station CRM and Exact Spotter into MySQL for Power BI, with a concurrency cap, retry on HTTP 429 and incremental sync during business hours.",
       },
       {
-        pt: "Criei um robô que lê as chamadas atendidas na central 3CX e cadastra cada lead no RD Station com o vendedor certo.",
-        en: "Built a bot that reads answered calls from the 3CX phone system and creates RD Station leads assigned to the right salesperson.",
+        pt: "Criei um robô que lê as chamadas atendidas no painel da central 3CX e cria cada oportunidade no RD Station com o vendedor certo, além de RPA no ERP da corretora para extratos e relatórios de comissão.",
+        en: "Built a bot that reads answered calls from the 3CX call panel and creates RD Station deals assigned to the right salesperson, plus RPA on the brokerage ERP for statements and commission reports.",
       },
     ],
     slugs: ["conciliacao-financeira"],
@@ -123,16 +123,20 @@ export const experience: Job[] = [
     where: { pt: "São Paulo", en: "São Paulo" },
     points: [
       {
-        pt: "Criei e mantive 15 robôs em produção (Python, Selenium) que processavam centenas de movimentações de beneficiários por mês em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
-        en: "Built and maintained 15 production bots (Python, Selenium) processing hundreds of beneficiary changes a month across 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
+        pt: "Criei e mantive 15 robôs em produção (Python, Selenium) que lançavam centenas de movimentações de beneficiários por mês em 4 portais de operadoras de saúde a partir de uma fila de chamados no MySQL, além de faturas, boletos e holerites.",
+        en: "Built and maintained 15 production bots (Python, Selenium) entering hundreds of beneficiary changes a month into 4 health-insurer portals from a MySQL ticket queue, plus invoices, slips, and payslips.",
       },
       {
-        pt: "Para a ExportSul, corretora cliente, criei robôs nos portais da Akad, Sompo e Tokio Marine que registram averbações de exportação e baixam faturas, com status por registro no MySQL para retomar de onde pararam.",
-        en: "For ExportSul, a client brokerage, built bots on the Akad, Sompo, and Tokio Marine portals that register export shipments and download invoices, with per-record status in MySQL so runs resume where they stopped.",
+        pt: "Para a ExportSul, corretora cliente, criei robôs nos portais da Akad, Sompo e Tokio Marine que registram averbações de exportação e baixam faturas, retomando de onde a execução parou.",
+        en: "For ExportSul, a client brokerage, built bots on the Akad, Sompo, and Tokio Marine portals that register export shipments and download invoices, resuming where a run stopped.",
       },
       {
         pt: "Reuni o código comum (inicialização do navegador, reCAPTCHA resolvido por áudio, envio por FTP) numa biblioteca Python interna (wheel), depois reaproveitada em outros clientes.",
         en: "Packaged shared code (browser setup, audio-based reCAPTCHA solving, FTP upload) into an internal Python wheel, later reused across other client projects.",
+      },
+      {
+        pt: "Montei o servidor Ubuntu da empresa no lugar de um Windows Server instável: compartilhamento de arquivos com Samba para todo o escritório, impressoras para Windows e macOS e o ambiente onde os robôs rodavam.",
+        en: "Set up the company's Ubuntu server in place of an unstable Windows Server: Samba file shares for the whole office, printer sharing for Windows and macOS, and the runtime for the bots.",
       },
     ],
     slugs: ["automacao-rpa"],
@@ -189,9 +193,8 @@ export const stack: StackGroup[] = [
       { name: "SQLite", slugs: ["maxtools-radio", "campaign-qa"] },
       { name: "MySQL", slugs: ["automacao-rpa", "conciliacao-financeira"] },
       { name: { pt: "SQL avançado · stored procedures", en: "Advanced SQL · stored procedures" }, slugs: ["campaign-qa"], jobs: ["netbiis"] },
-      { name: "MongoDB", slugs: ["conciliacao-financeira"], jobs: ["consulting"] },
       { name: "ETL · Power BI", slugs: [], jobs: ["consulting"] },
-      { name: { pt: "Formatos binários (Oodle, OFX)", en: "Binary formats (Oodle, OFX)" }, slugs: ["pallab", "conciliacao-financeira"] },
+      { name: { pt: "Formatos de arquivo (CNAB, OFX, save GVAS)", en: "File formats (CNAB, OFX, GVAS saves)" }, slugs: ["cnabkit", "conciliacao-financeira", "pallab"] },
     ],
   },
   {
@@ -215,7 +218,7 @@ export const stack: StackGroup[] = [
     title: { pt: "Automação", en: "Automation" },
     items: [
       { name: "Selenium", slugs: ["automacao-rpa", "conciliacao-financeira", "localiza-api"] },
-      { name: "Playwright", slugs: ["maxtools-radio"] },
+      { name: "Playwright (E2E)", slugs: ["maxtools-radio"] },
       { name: "Scraping", slugs: ["localiza-api", "techpowerup-news"] },
     ],
   },
@@ -231,9 +234,9 @@ export const stack: StackGroup[] = [
     items: [
       { name: "Docker · Compose", slugs: ["maxtools-radio", "pallab", "meus-contatos-ms"] },
       { name: "Proxmox · LXC", slugs: ["maxtools-radio", "pallab", "maxtools"] },
-      { name: "nginx · HTTPS", slugs: ["maxtools", "maxtools-radio"] },
-      { name: "Linux · systemd", slugs: ["maxtools"] },
-      { name: { pt: "Monitoramento (Uptime Kuma) · backups agendados", en: "Monitoring (Uptime Kuma) · scheduled backups" }, slugs: ["maxtools-radio", "pallab", "maxtools"] },
+      { name: "nginx · Caddy · HTTPS", slugs: ["maxtools-radio", "maxtools"] },
+      { name: "Linux · Ubuntu Server · Samba", slugs: ["automacao-rpa"], jobs: ["plug"] },
+      { name: { pt: "Monitoramento (Uptime Kuma) · backups semanais (vzdump)", en: "Monitoring (Uptime Kuma) · weekly backups (vzdump)" }, slugs: [], jobs: ["independent"] },
     ],
   },
 ];
@@ -283,13 +286,13 @@ export const proof: Proof[] = [
     slug: "automacao-rpa",
   },
   {
-    value: "18",
-    label: { pt: "meses de conciliação bancária em uso diário, dentro do ERP", en: "months of bank reconciliation in daily use, inside the ERP" },
+    value: "3",
+    label: { pt: "gerações do sistema de conciliação OFX, alimentando a DRE mensal", en: "generations of the OFX reconciliation system, feeding the monthly income statement" },
     where: "HG7",
     slug: "conciliacao-financeira",
   },
   {
-    value: { pt: "1.264", en: "1,264" },
+    value: { pt: "1.268", en: "1,268" },
     label: { pt: "testes automatizados num produto com site, app Android e bot", en: "automated tests on a product with a website, an Android app and a bot" },
     where: "MaxTools Radio",
     slug: "maxtools-radio",
