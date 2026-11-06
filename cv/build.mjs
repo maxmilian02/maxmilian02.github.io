@@ -1,19 +1,27 @@
 // Gera os currículos em PDF (PT e EN) a partir de cv/content.mjs.
 // Uso: npm run cv   (CHROME_PATH aponta para o Chrome se não estiver no caminho padrão do Windows)
+// Variante sob medida (fora do site): CV_VARIANT=<arquivo .mjs> CV_VARIANT_OUT=<pasta> node cv/build.mjs
+// O módulo exporta default (cv) => ({ lang, ...conteúdo }); sai um PDF só, na pasta indicada.
 import { mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import puppeteer from "puppeteer-core";
 import { contact, cv } from "./content.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const outDirs = [join(here, "..", "public", "cv"), ...(process.env.CV_EXTRA_OUT ? [process.env.CV_EXTRA_OUT] : [])];
+const variant = process.env.CV_VARIANT
+  ? (await import(pathToFileURL(process.env.CV_VARIANT).href)).default(cv)
+  : null;
+if (variant && !process.env.CV_VARIANT_OUT) throw new Error("CV_VARIANT_OUT é obrigatório com CV_VARIANT");
+const outDirs = variant
+  ? [process.env.CV_VARIANT_OUT]
+  : [join(here, "..", "public", "cv"), ...(process.env.CV_EXTRA_OUT ? [process.env.CV_EXTRA_OUT] : [])];
+const builds = variant ? [[variant.lang, variant]] : [["en", cv.en], ["pt", cv.pt]];
 const chrome = process.env.CHROME_PATH ?? "C:/Program Files/Google/Chrome/Application/chrome.exe";
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-function html(lang) {
-  const c = cv[lang];
+function html(lang, c) {
   const link = (href, text) => `<a href="${href}">${esc(text)}</a>`;
   return `<!doctype html>
 <html lang="${lang === "pt" ? "pt-BR" : "en"}">
@@ -97,11 +105,10 @@ ${c.projects.map(([n, d]) => `<p class="proj"><b>${esc(n)}</b>: ${esc(d)}</p>`).
 
 const browser = await puppeteer.launch({ executablePath: chrome, headless: true });
 try {
-  for (const lang of ["en", "pt"]) {
-    const c = cv[lang];
+  for (const [lang, c] of builds) {
     const page = await browser.newPage();
     await page.setViewport({ width: c.paper === "A4" ? 794 : 816, height: 1200 });
-    await page.setContent(html(lang), { waitUntil: "networkidle0" });
+    await page.setContent(html(lang, c), { waitUntil: "networkidle0" });
     await page.evaluate(() => document.fonts.ready);
     const pdf = await page.pdf({ format: c.paper, printBackground: true, preferCSSPageSize: false });
     if (process.env.CV_PNG) await page.screenshot({ path: join(process.env.CV_PNG, `${lang}.png`), fullPage: true });
