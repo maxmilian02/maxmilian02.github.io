@@ -190,7 +190,7 @@ export const cv = {
       ],
       [
         "MaxTools",
-        "Plataforma de plugins em FastAPI em que um registry descobre os módulos e um painel Next.js é montado a partir do manifesto. Jobs em segundo plano com progresso e cancelamento, autenticação por API key, limpeza por TTL e corte de vídeo quadro a quadro via HTTP Range.",
+        "Plataforma de plugins em FastAPI em que um registry descobre os módulos e o painel Next.js nasce do manifesto. Jobs em segundo plano com cancelamento, API key, limpeza por TTL e corte de vídeo quadro a quadro via HTTP Range.",
       ],
     ],
     languages: "Português (nativo), Inglês (avançado: leitura, escrita e documentação técnica)",

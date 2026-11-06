@@ -45,9 +45,11 @@ function html(lang, c) {
   h2 small { font-weight: 500; text-transform: none; }
   /* competências em linhas simples "Rótulo: itens" (sem grade), mais seguro para ATS */
   .skill + .skill { margin-top: 1.5pt; }
-  .job { margin-top: 4.5pt; break-inside: avoid; }
+  .job { margin-top: 3.5pt; break-inside: avoid; }
   .job:first-of-type { margin-top: 0; }
   .job-head { display: flex; justify-content: space-between; gap: 12pt; }
+  /* espaço entre as duas linhas do cabeçalho: sem ele, extratores de texto leem por coluna e afastam a data do cargo */
+  .job-head + .job-head { margin-top: 1.5pt; }
   .org { font-weight: 700; font-size: 10.2pt; }
   .when { font-size: 8.8pt; white-space: nowrap; }
   .role { font-weight: 500; }
